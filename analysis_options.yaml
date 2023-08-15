@@ -6,7 +6,7 @@ analyzer:
       - dart_code_metrics
   exclude:
     - lib/main.dart
-    - lob/core/**
+    - lib/core/**
     - lib/**.config.dart
     - lib/**.freezed.dart
     - lib/**.g.dart
@@ -21,12 +21,11 @@ dart_code_metrics:
     maximum-nesting-level: 5
   metrics-exclude:
     - lib/main.dart
-    - lob/core/**
+    - lib/core/**
     - lib/**.config.dart
     - lib/**.freezed.dart
     - lib/**.g.dart
     - build/**
-    - test/**
   rules:
     - avoid-dynamic
     - avoid-passing-async-when-sync-expected
