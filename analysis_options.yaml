@@ -26,7 +26,6 @@ dart_code_metrics:
     - lib/**.freezed.dart
     - lib/**.g.dart
     - build/**
-    - test/**
   rules:
     - avoid-dynamic
     - avoid-passing-async-when-sync-expected
