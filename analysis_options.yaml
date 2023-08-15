@@ -1,1 +1,49 @@
-include: package:flutter_lints/flutter.yaml
+analyzer:
+  errors:
+    invalid_annotation_target: ignore
+    prefer_const_constructors: ignore
+  plugins:
+      - dart_code_metrics
+  exclude:
+    - lib/main.dart
+    - lob/core/**
+    - lib/**.config.dart
+    - lib/**.freezed.dart
+    - lib/**.g.dart
+    - build/**
+
+dart_code_metrics:
+  extends:
+    - package:dart_code_metrics_presets/all.yaml
+  metrics:
+    cyclomatic-complexity: 20
+    number-of-parameters: 4
+    maximum-nesting-level: 5
+  metrics-exclude:
+    - lib/main.dart
+    - lob/core/**
+    - lib/**.config.dart
+    - lib/**.freezed.dart
+    - lib/**.g.dart
+    - build/**
+    - test/**
+  rules:
+    - avoid-dynamic
+    - avoid-passing-async-when-sync-expected
+    - avoid-redundant-async
+    - avoid-unnecessary-type-assertions
+    - avoid-unnecessary-type-casts
+    - avoid-unrelated-type-assertions
+    - avoid-unused-parameters
+    - avoid-nested-conditional-expressions
+    - newline-before-return
+    - no-boolean-literal-compare
+    - no-empty-block
+    - prefer-trailing-comma
+    - prefer-conditional-expressions
+    - no-equal-then-else
+    - prefer-moving-to-variable
+    - prefer-match-file-name
+    - arguments-ordering: false
+    - avoid-late-keyword: false
+    - prefer-correct-identifier-length: false
