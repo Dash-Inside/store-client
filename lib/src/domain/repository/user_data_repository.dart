@@ -17,7 +17,14 @@ abstract class UserDataRepository {
     required String newAvatarUrl,
   });
 
-  /// [getUserDataById] returns Either [Failure] if there is some errors or [UserData] if there is no errors.
-  /// [getUserDataById] takes [id] that used for get [UserData] by id.
-  Future<Either<Failure, UserData>> getUserDataById({required int id});
+  /// [loginUser] returns Either [Failure] if there is some errors or [UserData] if there is no errors.
+  /// [loginUser] takes [email], [password] that used for login to account and get [UserData].
+  Future<Either<Failure, UserData>> loginUser({
+    required String email,
+    required String password,
+  });
+
+  /// [restorePasswordUser] returns Either [Failure] if there is some errors or [UserData] if there is no errors.
+  /// [restorePasswordUser] takes [restoreCode] that used for restore account password.
+  Future<Either<Failure, UserData>> restorePasswordUser({required String restoreCode});
 }
