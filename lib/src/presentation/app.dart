@@ -9,13 +9,12 @@ class App extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         colorScheme: const ColorScheme.light(
-          primary: Color.fromRGBO(255, 97, 47, 1),
+          primary: Color(0xFFFF612F),
           surface: Colors.white,
           secondary: Colors.black,
-          tertiary: Color.fromRGBO(0, 0, 0, 0),
+          tertiary: Color(0x00000000),
         ),
       ),
-      home: LogInPage(),
     );
   }
 }
