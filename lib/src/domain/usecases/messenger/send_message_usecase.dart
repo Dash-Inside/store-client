@@ -12,7 +12,7 @@ class SendMessageUsecase extends UseCase<Unit, Message> {
   final MessengerRepository messengerRepository = services.get<MessengerServerRepository>();
 
   @override
-  FutureOr<Either<Failure, Unit>> call(Message params) {
-    return messengerRepository.sendMessage(message: params);
+  FutureOr<Either<Failure, Unit>> call(Message message) {
+    return messengerRepository.sendMessage(message: message);
   }
 }
