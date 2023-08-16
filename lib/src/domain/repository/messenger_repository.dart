@@ -7,6 +7,6 @@ abstract class MessengerRepository {
   /// [sendMessage] takes [Message] which will be sent to the server.
   Future<Either<Failure, Unit>> sendMessage({required Message message});
 
-  /// [featchMessages] return  Either [Failure] is there is some errors or [List<Message>] is all is ok.
-  Future<Either<Failure, List<Message>>> featchMessages();
+  /// [fetchMessages] return  Either [Failure] is there is some errors or [List<Message>] is all is ok.
+  Future<Either<Failure, List<Message>>> fetchMessages();
 }
