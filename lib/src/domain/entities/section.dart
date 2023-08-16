@@ -1,8 +1,12 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-class Section {
+import 'package:equatable/equatable.dart';
+
+class Section extends Equatable {
   final int id;
   final String title;
   final int? topicId;
+
+  @override
+  List<Object?> get props => [id, title];
 
   Section({
     required this.id,
