@@ -10,13 +10,16 @@ class TextButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () {},
-      child: Text(
-        hintText,
-        style: TextStyle(
-          fontSize: fontSize,
-          fontWeight: FontWeight.w300,
+    return SizedBox(
+      width: double.infinity,
+      child: TextButton(
+        onPressed: () {},
+        child: Text(
+          hintText,
+          style: TextStyle(
+            fontSize: fontSize,
+            fontWeight: FontWeight.w300,
+          ),
         ),
       ),
     );
