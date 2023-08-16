@@ -3,16 +3,16 @@ import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/src/domain/entities/user_data.dart';
 
 abstract class UserDataRepository {
-  /// [changeUserNameUserData] returns Either [Failure] if there is some errors or [UserData] if there is no errors.
-  /// [changeUserNameUserData] takes [userData], [newUserName] that used for change userName by [userData] and get [UserData].
-  Future<Either<Failure, UserData>> changeUserNameUserData({
+  /// [changeUserName] returns Either [Failure] if there is some errors or [UserData] if there is no errors.
+  /// [changeUserName] takes [userData], [newUserName] that used for change userName by [userData] and get [UserData].
+  Future<Either<Failure, UserData>> changeUserName({
     required UserData userData,
     required String newUserName,
   });
 
-  /// [changeAvatarUrlByUserData] returns Either [Failure] if there is some errors or [UserData] if there is no errors.
-  /// [changeAvatarUrlByUserData] takes [userData], [newAvatarUrl] that used for change avatarUrl by [userData] and get [UserData].
-  Future<Either<Failure, UserData>> changeAvatarUrlByUserData({
+  /// [changeAvatarUrl] returns Either [Failure] if there is some errors or [UserData] if there is no errors.
+  /// [changeAvatarUrl] takes [userData], [newAvatarUrl] that used for change avatarUrl by [userData] and get [UserData].
+  Future<Either<Failure, UserData>> changeAvatarUrl({
     required UserData userData,
     required String newAvatarUrl,
   });
