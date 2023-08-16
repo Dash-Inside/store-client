@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class TextFieldWidget extends StatelessWidget {
+  static const contentPadding = 8.0;
+  static const double cirRad = 8.0;
+
   final String text;
   TextFieldWidget({
     super.key,
@@ -9,9 +12,8 @@ class TextFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double contentPadding = 8.0;
-    double cirRad = 8.0;
-    Color colorPr = Theme.of(context).colorScheme.primary;
+    final Color colorPr = Theme.of(context).colorScheme.primary;
+
     OutlineInputBorder outlineBord = OutlineInputBorder(
       borderRadius: BorderRadius.circular(cirRad),
       borderSide: BorderSide(
