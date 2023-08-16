@@ -13,17 +13,20 @@ abstract class LibraryRepository {
   /// [removeFavoriteTopic] takes [id] remove favourite [Topic]
   Future<Either<Failure, Unit>> removeFavoriteTopic({required int id});
 
-  /// Takes [title],[data],[links] to add new [Topic]
+  /// [addTopic] takes [title],[data],[links] to add new [Topic]
+  /// [addTopic] add new [Topic]
   Future<Either<Failure, Unit>> addTopic({
     required String title,
     required String data,
     required List<String> links,
   });
 
-  /// Show all [Section]
+  /// [getAllSections] returns Either [Failure] if there is some errors or [List<Section>] if there is no errors
+  /// [getAllSections] return all Sections
   Future<Either<Failure, List<Section>>> getAllSections();
 
-  /// Show all [Topic]
+  /// [addFavoriteTopic] returns Either [Failure] if there is some errors or [List<Topic>] if there is no errors
+  /// [addFavoriteTopic] return all Topics
   Future<Either<Failure, List<Topic>>> getAllTopic();
 
   /// [getTopicDataByID] returns Either [Failure] if there is some errors or [Topic] if there is no errors
