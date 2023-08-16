@@ -1,13 +1,16 @@
-class Topic {
+import 'package:equatable/equatable.dart';
+
+class Topic extends Equatable {
   final int id;
   final String title;
   final String data;
   final List<String?> links;
-
-  Topic(
-    this.id,
-    this.title,
-    this.data,
-    this.links,
-  );
+  @override
+  List<Object?> get props => [id];
+  Topic({
+    required this.id,
+    required this.title,
+    required this.data,
+    required this.links,
+  });
 }
