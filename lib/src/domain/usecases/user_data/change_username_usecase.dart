@@ -13,7 +13,7 @@ class ChangeUserNameUseCase extends UseCase<UserData, ChangeUserNameUseCaseParam
 
   @override
   FutureOr<Either<Failure, UserData>> call(ChangeUserNameUseCaseParams params) {
-    return userDataRepository.changeUserNameUserData(
+    return userDataRepository.changeUserName(
       userData: params.userData,
       newUserName: params.newUserName,
     );
