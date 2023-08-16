@@ -14,7 +14,11 @@ abstract class LibraryRepository {
   Future<Either<Failure, Unit>> removeFavoriteTopic({required int id});
 
   /// Takes [title],[data],[links] to add new [Topic]
-  Future<Either<Failure, Unit>> addTopic({required String title, required String data, required List<String> links});
+  Future<Either<Failure, Unit>> addTopic({
+    required String title,
+    required String data,
+    required List<String> links,
+  });
 
   /// Show all [Section]
   Future<List<Section>> getAllSections();
