@@ -21,10 +21,10 @@ abstract class LibraryRepository {
   });
 
   /// Show all [Section]
-  Future<List<Section>> getAllSections();
+  Future<Either<Failure, List<Section>>> getAllSections();
 
   /// Show all [Topic]
-  Future<List<Topic>> getAllTopic();
+  Future<Either<Failure, List<Topic>>> getAllTopic();
 
   /// [getTopicDataByID] returns Either [Failure] if there is some errors or [Topic] if there is no errors
   /// [getTopicDataByID] takes [id] to return the [Topic]
