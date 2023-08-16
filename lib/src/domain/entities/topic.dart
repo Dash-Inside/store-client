@@ -2,7 +2,7 @@ class Topic {
   final int id;
   final String title;
   final String data;
-  final List<String> links;
+  final List<String?> links;
 
   Topic(
     this.id,
