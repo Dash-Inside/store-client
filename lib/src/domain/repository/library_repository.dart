@@ -1,8 +1,7 @@
 import 'package:dartz/dartz.dart';
+import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/src/domain/entities/section.dart';
 import 'package:store_client/src/domain/entities/topic.dart';
-
-import '../../../core/failure/failure.dart';
 
 abstract class LibraryRepository {
   /// [addFavoriteTopic] returns Either [Failure] if there is some errors or [Topic] if there is no errors
@@ -27,7 +26,7 @@ abstract class LibraryRepository {
 
   /// [addFavoriteTopic] returns Either [Failure] if there is some errors or [List<Topic>] if there is no errors
   /// [addFavoriteTopic] return all Topics
-  Future<Either<Failure, List<Topic>>> getAllTopic();
+  Future<Either<Failure, List<Topic>>> getAllTopicsBySectionID({required int id});
 
   /// [getTopicDataByID] returns Either [Failure] if there is some errors or [Topic] if there is no errors
   /// [getTopicDataByID] takes [id] to return the [Topic]
