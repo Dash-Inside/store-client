@@ -4,7 +4,7 @@ class Topic extends Equatable {
   final int id;
   final String title;
   final String data;
-  final List<String?> links;
+  final List<String>? links;
   @override
   List<Object?> get props => [id];
   Topic({
