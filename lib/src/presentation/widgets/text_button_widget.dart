@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class TextButtonWidget extends StatelessWidget {
-  static const double fontsize = 16.0;
-  final String text;
+  static const double fontSize = 16.0;
+  final String hintText;
   const TextButtonWidget({
     super.key,
-    required this.text,
+    required this.hintText,
   });
 
   @override
@@ -14,9 +14,9 @@ class TextButtonWidget extends StatelessWidget {
       child: TextButton(
         onPressed: () {},
         child: Text(
-          text,
+          hintText,
           style: TextStyle(
-            fontSize: fontsize,
+            fontSize: fontSize,
             fontWeight: FontWeight.w300,
           ),
         ),
