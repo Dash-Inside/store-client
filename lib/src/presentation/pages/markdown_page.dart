@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class MarkdownPage extends StatelessWidget {
-  static const double fontSize2 = 20.0;
-  static const double margin = 16.0;
+  static const double fontSizeLight = 20.0;
+  static const double marginContainer = 16.0;
   static const double fontSize = 28.0;
-  static const int shadowColor = 0x00000000;
+
   const MarkdownPage({super.key});
 
   @override
@@ -16,7 +16,7 @@ class MarkdownPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: colorSurface,
       appBar: AppBar(
-        shadowColor: Color(shadowColor),
+        elevation: 0,
         backgroundColor: colorSurface,
         leading: IconButton(
           onPressed: () {
@@ -45,11 +45,11 @@ class MarkdownPage extends StatelessWidget {
         ],
       ),
       body: Container(
-        margin: EdgeInsets.all(margin),
+        margin: EdgeInsets.all(marginContainer),
         child: Text(
           'Markdown article',
           style: TextStyle(
-            fontSize: fontSize2,
+            fontSize: fontSizeLight,
             fontWeight: FontWeight.w300,
           ),
         ),
