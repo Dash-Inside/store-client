@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
 class NavigationBarWidget extends StatelessWidget {
+  static const double iconSize = 24.0;
+  static const double fontSize = 10.0;
+  static const double paddingSymmetric = 10.0;
+  static const double fontLetterSpacing = 0.5;
+
   const NavigationBarWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    double iconSize = 24.0;
-    double fontSize = 10.0;
-    double paddingSymmetric = 10.0;
-    double fontLetterSpacing = 0.5;
-    ColorScheme colorScheme = Theme.of(context).colorScheme;
-    Color colorSec = colorScheme.secondary;
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final Color colorSec = colorScheme.secondary;
 
     return Container(
       padding: EdgeInsets.symmetric(
