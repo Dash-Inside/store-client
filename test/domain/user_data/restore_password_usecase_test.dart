@@ -46,12 +46,12 @@ void main() {
     final FutureOr<Either<Failure, UserData>> result = restorePasswordUseCase.call(restorePasswordUseCaseParams);
 
     // Accert.
-    verifyNoMoreInteractions(UserDataServerRepository);
     verify(userDataServerRepository.restorePasswordUser(
       restoreCode: restoreCode,
       password: password,
       comfirmedPassword: comfirmedPassword,
     )).called(1);
+    verifyNoMoreInteractions(UserDataServerRepository);
     expect(result, Right(userData));
   });
 }
