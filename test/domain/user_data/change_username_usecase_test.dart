@@ -21,12 +21,18 @@ void main() {
 
   final String newUserName = 'newUserName';
 
-  final ChangeUserNameUseCaseParams changeUserNameUseCaseParams = ChangeUserNameUseCaseParams(userData, newUserName);
+  final ChangeUserNameUseCaseParams changeUserNameUseCaseParams = ChangeUserNameUseCaseParams(
+    userData,
+    newUserName,
+  );
 
   test('change_username_usecase_test', () async {
     // Act.
     final UserDataServerRepository userDataServerRepository = MockUserDataServerRepository();
-    when(userDataServerRepository.changeUserName(userData: userData, newUserName: newUserName)).thenAnswer((_) async {
+    when(userDataServerRepository.changeUserName(
+      userData: userData,
+      newUserName: newUserName,
+    )).thenAnswer((_) async {
       return Right(userData);
     });
 
@@ -35,7 +41,10 @@ void main() {
     final Either<Failure, UserData> result = await changeUserName.call(changeUserNameUseCaseParams);
     // Accert.
     verifyNoMoreInteractions(UserDataServerRepository);
-    verify(userDataServerRepository.changeUserName(userData: userData, newUserName: newUserName)).called(1);
+    verify(userDataServerRepository.changeUserName(
+      userData: userData,
+      newUserName: newUserName,
+    )).called(1);
     expect(result, Right(userData));
   });
 }

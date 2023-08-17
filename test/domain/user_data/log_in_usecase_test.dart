@@ -24,12 +24,18 @@ void main() {
   final String email = 'email';
   final String password = 'password';
 
-  final LogInUseCaseParams logInUseCaseParams = LogInUseCaseParams(email, password);
+  final LogInUseCaseParams logInUseCaseParams = LogInUseCaseParams(
+    email,
+    password,
+  );
 
   test('log_in_usecase_test', () async {
     // Act.
     final UserDataServerRepository userDataServerRepository = MockUserDataServerRepository();
-    when(userDataServerRepository.loginUser(email: email, password: password)).thenAnswer((_) async {
+    when(userDataServerRepository.loginUser(
+      email: email,
+      password: password,
+    )).thenAnswer((_) async {
       return Right(userData);
     });
 
@@ -39,7 +45,10 @@ void main() {
 
     // Accert.
     verifyNoMoreInteractions(UserDataServerRepository);
-    verify(userDataServerRepository.loginUser(email: email, password: password)).called(1);
+    verify(userDataServerRepository.loginUser(
+      email: email,
+      password: password,
+    )).called(1);
     expect(result, Right(userData));
   });
 }

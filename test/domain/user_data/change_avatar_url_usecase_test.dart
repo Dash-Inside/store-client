@@ -21,12 +21,18 @@ void main() {
 
   final String newAvatarUrl = 'newAvatarUrl';
 
-  final ChangeAvatarUrlUseCaseParams changeAvatarUrlUseCaseParams = ChangeAvatarUrlUseCaseParams(userData, newAvatarUrl);
+  final ChangeAvatarUrlUseCaseParams changeAvatarUrlUseCaseParams = ChangeAvatarUrlUseCaseParams(
+    userData,
+    newAvatarUrl,
+  );
 
   test('change_avatar_url_usecase_test', () async {
     // Act.
     final UserDataServerRepository userDataServerRepository = MockUserDataServerRepository();
-    when(userDataServerRepository.changeAvatarUrl(userData: userData, newAvatarUrl: newAvatarUrl)).thenAnswer((_) async {
+    when(userDataServerRepository.changeAvatarUrl(
+      userData: userData,
+      newAvatarUrl: newAvatarUrl,
+    )).thenAnswer((_) async {
       return Right(userData);
     });
 
@@ -35,7 +41,10 @@ void main() {
     final Either<Failure, UserData> result = await changeAvatarUrl.call(changeAvatarUrlUseCaseParams);
 
     // Accert.
-    verify(userDataServerRepository.changeAvatarUrl(userData: userData, newAvatarUrl: newAvatarUrl)).called(1);
+    verify(userDataServerRepository.changeAvatarUrl(
+      userData: userData,
+      newAvatarUrl: newAvatarUrl,
+    )).called(1);
     verifyNoMoreInteractions(userDataServerRepository);
     expect(result, Right(userData));
   });
