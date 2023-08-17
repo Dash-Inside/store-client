@@ -1,10 +1,90 @@
 import 'package:flutter/material.dart';
+import 'package:store_client/src/presentation/widgets/incoming_message_widget.dart';
+import 'package:store_client/src/presentation/widgets/outcoming_message_widget.dart';
+import 'package:store_client/src/presentation/widgets/text_field_widget.dart';
 
 class ChatPage extends StatelessWidget {
+  static const double fontSize = 28.0;
+  static const double fontLetterSpacing = 0.5;
+  static const double iconSize = 24.0;
+  static const double textFieldPadding = 8.0;
+
   const ChatPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final Color colorSurf = colorScheme.surface;
+    final Color colorSec = colorScheme.secondary;
+    final Color colorTet = colorScheme.tertiary;
+    final Color colorPr = colorScheme.primary;
+
+    return Scaffold(
+      backgroundColor: colorSurf,
+      appBar: AppBar(
+        backgroundColor: colorSurf,
+        shadowColor: colorTet,
+        centerTitle: false,
+        title: Text(
+          'Chat',
+          style: TextStyle(
+            height: 1.0,
+            fontSize: fontSize,
+            letterSpacing: fontLetterSpacing,
+            fontWeight: FontWeight.w500,
+            color: colorSec,
+          ),
+        ),
+        leading: IconButton(
+          onPressed: () {},
+          icon: Icon(
+            Icons.arrow_back_ios_new_sharp,
+            color: colorSec,
+            size: iconSize,
+          ),
+        ),
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView(
+                reverse: true,
+                children: [
+                  IncomingMessageWidget(text: 'Sheeeeeeeeeeeeeeeeesh'),
+                  OutcomingMessageWidget(text: 'Sheeeeeeeesh'),
+                  IncomingMessageWidget(text: 'Sheeeeeeeeeeeeeeeeesh'),
+                  OutcomingMessageWidget(text: 'Sheeeeeeeesh'),
+                  IncomingMessageWidget(text: 'Sheeeeeeeeeeeeeeeeesh'),
+                  OutcomingMessageWidget(text: 'Sheeeeeeeesh'),
+                  IncomingMessageWidget(text: 'Sheeeeeeeeeeeeeeeeesh'),
+                  OutcomingMessageWidget(text: 'Sheeeeeeeesh'),
+                  IncomingMessageWidget(text: 'Sheeeeeeeeeeeeeeeeesh'),
+                  OutcomingMessageWidget(text: 'Sheeeeeeeesh'),
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.all(textFieldPadding),
+              width: double.infinity,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextFieldWidget(text: 'Message'),
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.send,
+                      color: colorPr,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
