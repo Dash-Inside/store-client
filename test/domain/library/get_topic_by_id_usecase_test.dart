@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/src/domain/entities/topic.dart';
 import 'package:store_client/src/domain/repository/library_repository.dart';
 import 'package:store_client/src/domain/usecases/library/get_topic_by_id_usecase.dart';
@@ -29,7 +30,7 @@ void main() {
 
     // Arrange.
     final GetTopicByIDUseCase getTopicByIDUseCase = GetTopicByIDUseCase();
-    final result = await getTopicByIDUseCase.call(id);
+    final Either<Failure, Topic> result = await getTopicByIDUseCase.call(id);
 
     // Accert.
     verify(libraryRepository.getAllTopicsBySectionID(id: id)).called(1);
