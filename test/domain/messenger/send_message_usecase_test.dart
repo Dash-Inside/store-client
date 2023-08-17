@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/src/data/repositories/remote/messenger_server_repository.dart';
 import 'package:store_client/src/domain/entities/message.dart';
 import 'package:store_client/src/domain/usecases/messenger/send_message_usecase.dart';
@@ -24,7 +25,7 @@ void main() {
 
       // Arrange.
       final SendMessageUsecase sendMessageUsecase = SendMessageUsecase();
-      final result = await sendMessageUsecase.call(message);
+      final Either<Failure, Unit> result = await sendMessageUsecase.call(message);
 
       // Assert.
       verify(messengerServerRepository.sendMessage(message: message)).called(1);
