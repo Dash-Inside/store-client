@@ -27,9 +27,9 @@ class LibraryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final colorSurf = colorScheme.surface;
-    final colorSec = colorScheme.secondary;
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final Color colorSurf = colorScheme.surface;
+    final Color colorSec = colorScheme.secondary;
 
     return Scaffold(
       backgroundColor: colorSurf,
