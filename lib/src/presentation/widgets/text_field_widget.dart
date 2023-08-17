@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class TextFieldWidget extends StatelessWidget {
   static const double fontSizeThin = 16.0;
-  static const contentPadding = 8.0;
+  static const double contentPadding = 8.0;
   static const double cirRad = 8.0;
 
   final String text;
