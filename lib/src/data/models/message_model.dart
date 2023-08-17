@@ -14,8 +14,8 @@ class MessageModel extends Message {
   factory MessageModel.fromMap(Map<String, dynamic> map) {
     return MessageModel(
       id: map['id'] as int,
-      data: map['data'] as String,
-      senderId: map['senderId'] as int,
+      data: map['attributes']['data'] as String,
+      senderId: map['attributes']['senderID'] as int,
     );
   }
 
@@ -45,9 +45,10 @@ class MessageModel extends Message {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
-      'data': data,
-      'senderId': senderId,
+      'data': {
+        'data': data,
+        'senderID': senderId,
+      },
     };
   }
 
