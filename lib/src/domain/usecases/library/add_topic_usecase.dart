@@ -13,8 +13,8 @@ class AddTopicUseCase extends UseCase<Unit, AddTopicUseCaseParams> {
   @override
   FutureOr<Either<Failure, Unit>> call(AddTopicUseCaseParams params) async {
     return libraryRepository.addTopic(
-      title: params.title.toString(),
-      data: params.data.toString(),
+      title: params.title,
+      data: params.data,
       links: params.links,
     );
   }
