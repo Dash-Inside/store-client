@@ -15,6 +15,13 @@ class LibraryPage extends StatelessWidget {
     'Section 4',
     'Section 5',
   ];
+  final List<String> topicList = [
+    'Topic #1',
+    'Topic #2',
+    'Topic #3',
+    'Topic #4',
+    'Topic #5',
+  ];
 
   LibraryPage({super.key});
 
@@ -59,13 +66,7 @@ class LibraryPage extends StatelessWidget {
               itemBuilder: (context, index) {
                 return ExpantionTileWidget(
                   title: sectionList[index],
-                  topicList: [
-                    'Topic #1',
-                    'Topic #2',
-                    'Topic #3',
-                    'Topic #4',
-                    'Topic #5',
-                  ],
+                  topicList: topicList,
                 );
               },
             ),
