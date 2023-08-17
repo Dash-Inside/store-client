@@ -10,4 +10,7 @@ FutureOr<void> initServices() {
 
   final UserDataServerRepository userDataServerRepository = UserDataServerRepository();
   services.registerLazySingleton<UserDataServerRepository>(() => userDataServerRepository);
+
+  final LibraryServerRepository libraryServerRepository = LibraryServerRepository();
+  services.registerLazySingleton<LibraryServerRepository>(() => libraryServerRepository);
 }
