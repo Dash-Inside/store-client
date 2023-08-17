@@ -27,7 +27,7 @@ class LoginPage extends StatelessWidget {
           children: [
             Spacer(),
             Text(
-              'Dash-Inside',
+              'Dash Inside',
               style: TextStyle(
                 fontSize: fontSizeHeaders,
                 fontWeight: FontWeight.w500,
@@ -48,7 +48,7 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: sizedBoxHeight),
             TextFieldWidget(text: 'Password'),
             Spacer(),
-            TextButtonWidget(text: 'Restore code'),
+            TextButtonWidget(text: 'Restore Account'),
             SizedBox(
               height: sizedBoxHeight,
             ),
