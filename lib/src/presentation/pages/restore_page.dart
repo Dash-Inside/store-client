@@ -6,6 +6,7 @@ class RestorePage extends StatelessWidget {
   static const double sizedboxHeight = 8.0;
   static const double edgeInsetsContainer = 16.0;
   static const double fontSizeHeaders = 28.0;
+  static const int flex = 2;
   RestorePage({super.key});
 
   @override
@@ -48,8 +49,7 @@ class RestorePage extends StatelessWidget {
                 TextFieldWidget(text: 'New password'),
               ],
             ),
-            Spacer(),
-            Spacer(),
+            Spacer(flex: flex),
             FilledButtonWidget(hintText: 'Restore'),
           ],
         ),
