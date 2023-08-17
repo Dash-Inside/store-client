@@ -4,12 +4,14 @@ class MarkdownPage extends StatelessWidget {
   static const double fontSizeLight = 20.0;
   static const double marginContainer = 16.0;
   static const double fontSize = 28.0;
+  leadingOnTap() {}
+  actionOnTapBookMark() {}
 
   const MarkdownPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final Color colorSecondary = colorScheme.secondary;
     final Color colorSurface = colorScheme.surface;
 
@@ -19,9 +21,7 @@ class MarkdownPage extends StatelessWidget {
         elevation: 0,
         backgroundColor: colorSurface,
         leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
+          onPressed: leadingOnTap,
           icon: Icon(
             Icons.arrow_back_ios_new_sharp,
             color: colorSecondary,
@@ -36,7 +36,7 @@ class MarkdownPage extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: actionOnTapBookMark,
             icon: Icon(
               Icons.bookmark_border_outlined,
               color: colorSecondary,
