@@ -7,19 +7,13 @@ import 'package:store_client/core/usecases/usecases.dart';
 import 'package:store_client/src/data/repositories/remote/library_server_repository.dart';
 import 'package:store_client/src/domain/repository/library_repository.dart';
 
-class AddFavoriteTopicUseCase extends UseCase<Unit, GetFavouriteTopicID> {
+class AddFavoriteTopicUseCase extends UseCase<Unit, int> {
   final LibraryRepository libraryRepository = services.get<LibraryServerRepository>();
 
   @override
-  FutureOr<Either<Failure, Unit>> call(GetFavouriteTopicID id) {
+  FutureOr<Either<Failure, Unit>> call(int id) {
     return libraryRepository.addFavoriteTopic(
-      id: id.id,
+      id: id,
     );
   }
-}
-
-class GetFavouriteTopicID {
-  final int id;
-
-  GetFavouriteTopicID(this.id);
 }
