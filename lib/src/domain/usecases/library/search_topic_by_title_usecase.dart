@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/core/services/services.dart';
@@ -10,7 +12,7 @@ class SearchTopicByTitleUseCase extends UseCase<Topic, String> {
   final LibraryRepository libraryRepository = services.get<LibraryServerRepository>();
 
   @override
-  Future<Either<Failure, Topic>> call(title) {
+  FutureOr<Either<Failure, Topic>> call(String title) {
     return libraryRepository.searchTopicByTitle(
       title: title,
     );
