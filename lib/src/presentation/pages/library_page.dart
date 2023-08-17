@@ -5,7 +5,6 @@ import 'package:store_client/src/presentation/widgets/navigation_bar_widget.dart
 class LibraryPage extends StatelessWidget {
   static const double fontSize = 28.0;
   static const double fontLetterSpacing = 0.5;
-  static const int shadowColor = 0x00000000;
   static const double iconSize = 24.0;
   const LibraryPage({super.key});
 
@@ -14,11 +13,12 @@ class LibraryPage extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final colorSurf = colorScheme.surface;
     final colorSec = colorScheme.secondary;
+    final colorTet = colorScheme.tertiary;
 
     return Scaffold(
       backgroundColor: colorSurf,
       appBar: AppBar(
-        shadowColor: Color(shadowColor),
+        shadowColor: colorTet,
         backgroundColor: colorSurf,
         automaticallyImplyLeading: false,
         title: Text(
@@ -60,7 +60,6 @@ class LibraryPage extends StatelessWidget {
               ],
             ),
           ),
-          Divider(),
           NavigationBarWidget(),
         ],
       ),

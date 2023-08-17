@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:store_client/src/presentation/widgets/topic_widget.dart';
 
 class ExpantionTileWidget extends StatelessWidget {
   static const double fontSizeMain = 24.0;
@@ -25,6 +26,8 @@ class ExpantionTileWidget extends StatelessWidget {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final Color colorSec = colorScheme.secondary;
     final Color colorPr = colorScheme.primary;
+    final ThemeData theme =
+        Theme.of(context).copyWith(dividerColor: Colors.transparent);
 
     return Container(
       margin: EdgeInsets.only(
@@ -32,48 +35,46 @@ class ExpantionTileWidget extends StatelessWidget {
         right: marginEdgeInsetsOnlyRight,
         top: marginEdgeInsetsOnlyTop,
       ),
-      decoration: BoxDecoration(
-        border: Border.all(color: colorPr),
-        borderRadius: BorderRadius.all(
-          Radius.circular(borderRadCir),
-        ),
-      ),
-      child: ExpansionTile(
-        tilePadding: EdgeInsets.symmetric(
-          horizontal: edgeInsetsSym,
-        ),
-        childrenPadding: EdgeInsets.only(
-          left: edgeInsetsOnlyLeft,
-          top: edgeInsetsOnlyTop,
-          bottom: edgeInsetsOnlyBottom,
-        ),
-        title: Text(
-          title,
-          style: TextStyle(
-            height: 1.0,
-            fontSize: fontSizeMain,
-            fontWeight: FontWeight.w400,
-            letterSpacing: fontLetterSpacing,
-            color: colorSec,
+      child: ListTileTheme(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(borderRadCir),
+          ),
+          side: BorderSide(
+            color: colorPr,
           ),
         ),
-        children: [
-          Row(
-            children: [
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  'Topic #1',
-                  style: TextStyle(
-                    color: colorSec,
-                    fontSize: fontSizeSec,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
+        child: Theme(
+          data: theme,
+          child: ExpansionTile(
+            tilePadding: EdgeInsets.symmetric(
+              horizontal: edgeInsetsSym,
+            ),
+            childrenPadding: EdgeInsets.only(
+              left: edgeInsetsOnlyLeft,
+              top: edgeInsetsOnlyTop,
+              bottom: edgeInsetsOnlyBottom,
+            ),
+            title: Text(
+              title,
+              style: TextStyle(
+                height: 1.0,
+                fontSize: fontSizeMain,
+                fontWeight: FontWeight.w400,
+                letterSpacing: fontLetterSpacing,
+                color: colorSec,
               ),
+            ),
+            children: [
+              TopicWidget(text: 'Topic #1'),
+              TopicWidget(text: 'Topic #2'),
+              TopicWidget(text: 'Topic #3'),
+              TopicWidget(text: 'Topic #4'),
+              TopicWidget(text: 'Topic #5'),
+              TopicWidget(text: 'Topic #6'),
             ],
           ),
-        ],
+        ),
       ),
     );
   }
