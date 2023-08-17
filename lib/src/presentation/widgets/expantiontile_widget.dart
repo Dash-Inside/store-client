@@ -15,10 +15,12 @@ class ExpantionTileWidget extends StatelessWidget {
   static const double borderRadCir = 8.0;
   static const double edgeInsetsSym = 16.0;
   final String title;
+  final List<String> topicList;
 
   const ExpantionTileWidget({
     super.key,
     required this.title,
+    required this.topicList,
   });
 
   @override
@@ -65,7 +67,12 @@ class ExpantionTileWidget extends StatelessWidget {
                 color: colorSec,
               ),
             ),
-            children: ,
+            children: List.generate(
+              topicList.length,
+              (index) => TopicWidget(
+                text: topicList[index],
+              ),
+            ),
           ),
         ),
       ),
