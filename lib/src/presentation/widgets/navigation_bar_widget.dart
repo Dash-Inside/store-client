@@ -5,11 +5,13 @@ class NavigationBarWidget extends StatelessWidget {
   static const double fontSize = 10.0;
   static const double paddingSymmetric = 10.0;
   static const double fontLetterSpacing = 0.5;
-  void chatOnTap() {
-    // TODO: implement chatOnTap
-  }
+  void chatOnTap() {}
+  void libraryOnTap() {}
+  void accountOnTap() {}
 
-  const NavigationBarWidget({super.key});
+  const NavigationBarWidget({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,7 @@ class NavigationBarWidget extends StatelessWidget {
         children: [
           Expanded(
             child: InkWell(
+              onTap: chatOnTap,
               child: Column(
                 children: [
                   Icon(
@@ -46,6 +49,7 @@ class NavigationBarWidget extends StatelessWidget {
           ),
           Expanded(
             child: InkWell(
+              onTap: libraryOnTap,
               child: Column(
                 children: [
                   Icon(
@@ -68,6 +72,7 @@ class NavigationBarWidget extends StatelessWidget {
           ),
           Expanded(
             child: InkWell(
+              onTap: accountOnTap,
               child: Column(
                 children: [
                   Icon(
