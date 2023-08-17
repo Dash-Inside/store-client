@@ -40,11 +40,11 @@ void main() {
     final changeUserName = ChangeUserNameUseCase();
     final Either<Failure, UserData> result = await changeUserName.call(changeUserNameUseCaseParams);
     // Accert.
-    verifyNoMoreInteractions(UserDataServerRepository);
     verify(userDataServerRepository.changeUserName(
       userData: userData,
       newUserName: newUserName,
     )).called(1);
+    verifyNoMoreInteractions(UserDataServerRepository);
     expect(result, Right(userData));
   });
 }
