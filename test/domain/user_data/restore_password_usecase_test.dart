@@ -42,16 +42,16 @@ void main() {
     });
 
     // Arrange.
-    final restorePasswordUseCase = RestorePasswordUseCase();
-    final FutureOr<Either<Failure, UserData>> result = restorePasswordUseCase.call(restorePasswordUseCaseParams);
+    final RestorePasswordUseCase restorePasswordUseCase = RestorePasswordUseCase();
+    final FutureOr<Either<Failure, UserData>> result = await restorePasswordUseCase.call(restorePasswordUseCaseParams);
 
     // Accert.
-    verifyNoMoreInteractions(UserDataServerRepository);
     verify(userDataServerRepository.restorePasswordUser(
       restoreCode: restoreCode,
       password: password,
       comfirmedPassword: comfirmedPassword,
     )).called(1);
+    verifyNoMoreInteractions(UserDataServerRepository);
     expect(result, Right(userData));
   });
 }

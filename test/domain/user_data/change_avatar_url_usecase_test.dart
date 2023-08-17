@@ -37,7 +37,7 @@ void main() {
     });
 
     // Arrange.
-    final changeAvatarUrl = ChangeAvatarUrlUseCase();
+    final ChangeAvatarUrlUseCase changeAvatarUrl = ChangeAvatarUrlUseCase();
     final Either<Failure, UserData> result = await changeAvatarUrl.call(changeAvatarUrlUseCaseParams);
 
     // Accert.

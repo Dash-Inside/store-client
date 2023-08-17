@@ -40,15 +40,15 @@ void main() {
     });
 
     // Arrange.
-    final logInUseCase = LogInUseCase();
+    final LogInUseCase logInUseCase = LogInUseCase();
     final FutureOr<Either<Failure, UserData>> result = await logInUseCase.call(logInUseCaseParams);
 
     // Accert.
-    verifyNoMoreInteractions(UserDataServerRepository);
     verify(userDataServerRepository.loginUser(
       email: email,
       password: password,
     )).called(1);
+    verifyNoMoreInteractions(UserDataServerRepository);
     expect(result, Right(userData));
   });
 }
