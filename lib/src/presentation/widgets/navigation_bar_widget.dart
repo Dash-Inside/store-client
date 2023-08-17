@@ -5,6 +5,9 @@ class NavigationBarWidget extends StatelessWidget {
   static const double fontSize = 10.0;
   static const double paddingSymmetric = 10.0;
   static const double fontLetterSpacing = 0.5;
+  void chatOnTap() {
+    // TODO: implement chatOnTap
+  }
 
   const NavigationBarWidget({super.key});
 
