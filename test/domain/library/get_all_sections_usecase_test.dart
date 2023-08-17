@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/src/domain/entities/section.dart';
 import 'package:store_client/src/domain/repository/library_repository.dart';
 import 'package:store_client/src/domain/usecases/library/get_all_sections_usecase.dart';
@@ -21,13 +22,13 @@ void main() {
     () async {
       // Act.
       final LibraryRepository libraryRepository = MockLibraryRepository();
-      when(libraryRepository.getAllSections()).thenAnswer((realInvocation) async {
+      when(libraryRepository.getAllSections()).thenAnswer((_) async {
         return Right(listSection);
       });
 
       // Arrange.
       final GetAllSectionsUseCase getAllSectionsUseCase = GetAllSectionsUseCase();
-      final result = await getAllSectionsUseCase.call(unit);
+      final Either<Failure, List<Section>> result = await getAllSectionsUseCase.call(unit);
 
       // Assert.
       verify(libraryRepository.getAllSections()).called(1);

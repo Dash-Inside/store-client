@@ -17,7 +17,7 @@ void main() {
       // Act.
       final LibraryRepository libraryRepository = MockLibraryRepository();
       when(libraryRepository.addFavoriteTopic(id: id)).thenAnswer(
-        (realInvocation) async {
+        (_) async {
           return Right(unit);
         },
       );
@@ -29,10 +29,7 @@ void main() {
       // Assert.
       verify(libraryRepository.addFavoriteTopic(id: id)).called(1);
       verifyNoMoreInteractions(libraryRepository);
-      expect(
-        result,
-        Right(unit),
-      );
+      expect(result, Right(unit));
     },
   );
 }
