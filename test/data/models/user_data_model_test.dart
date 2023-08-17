@@ -31,7 +31,7 @@ void main() {
     });
 
     test('factory_from_Json', () {
-      const String userDataJson = '{"id": 1,"attributes":{"username": "test1","role": "admin","createdAt": "2023-08-16T12:51:18.834Z","updatedAt": "2023-08-16T12:52:13.231Z","publishedAt": "2023-08-16T12:51:57.388Z","avatarUrl": "URL",},};';
+      const String userDataJson = '{"id": 1,"attributes":{"username": "test1","role": "admin","createdAt": "2023-08-16T12:51:18.834Z","updatedAt": "2023-08-16T12:52:13.231Z","publishedAt": "2023-08-16T12:51:57.388Z","avatarUrl": "URL"}}';
 
       final UserDataModel userDataModel = UserDataModel(
         id: 1,
