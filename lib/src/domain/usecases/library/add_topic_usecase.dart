@@ -1,23 +1,33 @@
+import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 import 'package:store_client/core/failure/failure.dart';
+import 'package:store_client/core/services/services.dart';
 import 'package:store_client/core/usecases/usecases.dart';
 import 'package:store_client/src/domain/entities/topic.dart';
 import 'package:store_client/src/domain/repository/library_repository.dart';
 
-class AddTopicUseCase extends UseCase<Topic, Topic> {
-  final LibraryRepository libraryRepository;
+class AddTopicUseCase extends UseCase<Unit, AddTopicUseCaseParams> {
+  final LibraryRepository libraryRepository = services.get<LibraryRepository>();
 
-  AddTopicUseCase({
-    required this.libraryRepository,
-  });
   @override
-  Future<Either<Failure, Topic>> call(Topic params) async {
-    Either<Failure, Unit> newTopic = await libraryRepository.addTopic(
-      title: params.title,
-      data: params.data,
+  FutureOr<Either<Failure, Unit>> call(AddTopicUseCaseParams params) async {
+    return libraryRepository.addTopic(
+      title: params.title.toString(),
+      data: params.data.toString(),
       links: params.links,
     );
-
-    return right(newTopic as Topic);
   }
+}
+
+class AddTopicUseCaseParams {
+  final Topic title;
+  final Topic data;
+  final List<String> links;
+
+  AddTopicUseCaseParams(
+    this.title,
+    this.data,
+    this.links,
+  );
 }
