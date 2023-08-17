@@ -8,32 +8,7 @@ class LibraryPage extends StatelessWidget {
   static const double fontLetterSpacing = 0.5;
   static const int shadowColor = 0x00000000;
   static const double iconSize = 24.0;
-  final List<Section> sectionList = [
-    Section(title: 'Section', topics: [
-      'Topic #1',
-      'Topic #2',
-      'Topic #3',
-    ]),
-    Section(title: 'Section', topics: [
-      'Topic #1',
-      'Topic #2',
-    ]),
-    Section(title: 'Section', topics: [
-      'Topic #1',
-      'Topic #2',
-      'Topic #3',
-    ]),
-    Section(title: 'Section', topics: [
-      'Topic #1',
-      'Topic #2',
-      'Topic #3',
-    ]),
-    Section(title: 'Section', topics: [
-      'Topic #1',
-      'Topic #2',
-      'Topic #3',
-    ]),
-  ];
+
 
   LibraryPage({super.key});
 
@@ -73,15 +48,7 @@ class LibraryPage extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: ListView.builder(
-              itemCount: sectionList.length,
-              itemBuilder: (context, index) {
-                return ExpantionTileWidget(
-                  title: sectionList[index].title,
-                  topicList: sectionList[index].topics,
-                );
-              },
-            ),
+            child: ,
           ),
           NavigationBarWidget(),
         ],
