@@ -12,7 +12,7 @@ import 'package:store_client/src/domain/usecases/user_data/change_username_useca
 import 'change_username_usecase_test.mocks.dart';
 
 void main() {
-  UserData userData = UserData(
+  final UserData userData = UserData(
     id: 1,
     username: 'Pencil',
     avatarUrl: 'avatarUrl',
@@ -21,11 +21,11 @@ void main() {
 
   final String newUserName = 'newUserName';
 
-  ChangeUserNameUseCaseParams changeUserNameUseCaseParams = ChangeUserNameUseCaseParams(userData, newUserName);
+  final ChangeUserNameUseCaseParams changeUserNameUseCaseParams = ChangeUserNameUseCaseParams(userData, newUserName);
 
   test('change_username_usecase_test', () async {
     // Act.
-    UserDataServerRepository userDataServerRepository = MockUserDataServerRepository();
+    final UserDataServerRepository userDataServerRepository = MockUserDataServerRepository();
     when(userDataServerRepository.changeUserName(userData: userData, newUserName: newUserName)).thenAnswer((_) async {
       return Right(userData);
     });

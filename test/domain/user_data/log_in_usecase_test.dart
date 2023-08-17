@@ -14,7 +14,7 @@ import 'package:store_client/src/domain/usecases/user_data/log_in_usecase.dart';
 import 'log_in_usecase_test.mocks.dart';
 
 void main() {
-  UserData userData = UserData(
+  final UserData userData = UserData(
     id: 1,
     username: 'username',
     avatarUrl: 'url',
@@ -24,22 +24,22 @@ void main() {
   final String email = 'email';
   final String password = 'password';
 
-  LogInUseCaseParams logInUseCaseParams = LogInUseCaseParams(email, password);
+  final LogInUseCaseParams logInUseCaseParams = LogInUseCaseParams(email, password);
 
   test('log_in_usecase_test', () async {
     // Act.
-    UserDataServerRepository userDataServerRepository = MockUserDataServerRepository();
+    final UserDataServerRepository userDataServerRepository = MockUserDataServerRepository();
     when(userDataServerRepository.loginUser(email: email, password: password)).thenAnswer((_) async {
       return Right(userData);
     });
 
     // Arrange.
     final logInUseCase = LogInUseCase();
-    final FutureOr<Either<Failure, UserData>> result = logInUseCase.call(logInUseCaseParams);
+    final FutureOr<Either<Failure, UserData>> result = await logInUseCase.call(logInUseCaseParams);
 
     // Accert.
     verifyNoMoreInteractions(UserDataServerRepository);
     verify(userDataServerRepository.loginUser(email: email, password: password)).called(1);
-    expect(result, Right(UserData));
+    expect(result, Right(userData));
   });
 }

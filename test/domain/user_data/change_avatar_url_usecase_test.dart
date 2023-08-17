@@ -12,7 +12,7 @@ import 'package:store_client/src/domain/usecases/user_data/change_avatar_url_use
 import 'change_avatar_url_usecase_test.mocks.dart';
 
 void main() {
-  UserData userData = UserData(
+  final UserData userData = UserData(
     id: 1,
     username: 'Pencil',
     avatarUrl: 'avatarUrl',
@@ -21,7 +21,7 @@ void main() {
 
   final String newAvatarUrl = 'newAvatarUrl';
 
-  ChangeAvatarUrlUseCaseParams changeAvatarUrlUseCaseParams = ChangeAvatarUrlUseCaseParams(userData, newAvatarUrl);
+  final ChangeAvatarUrlUseCaseParams changeAvatarUrlUseCaseParams = ChangeAvatarUrlUseCaseParams(userData, newAvatarUrl);
 
   test('change_avatar_url_usecase_test', () async {
     // Act.
