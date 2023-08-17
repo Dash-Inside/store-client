@@ -11,8 +11,8 @@ class UserDataServerRepository implements UserDataRepository {
   }
 
   @override
-  Future<Either<Failure, UserData>> changeUserNameById({required UserData userData, required String newUserName}) {
-    // TODO: implement changeUserNameById
+  Future<Either<Failure, UserData>> changeUserName({required UserData userData, required String newUserName}) {
+    // TODO: implement changeUserName
     throw UnimplementedError();
   }
 
