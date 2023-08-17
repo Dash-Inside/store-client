@@ -6,6 +6,7 @@ class RestorePage extends StatelessWidget {
   static const double sizedboxHeight = 8.0;
   static const double edgeInsetsContainer = 16.0;
   static const double fontSizeHeaders = 28.0;
+  static const int flex = 2;
   RestorePage({super.key});
 
   @override
@@ -16,29 +17,28 @@ class RestorePage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: colorSurface,
+      appBar: AppBar(
+        backgroundColor: colorSurface,
+        elevation: 0.0,
+        leading: IconButton(
+          onPressed: () {},
+          icon: Icon(
+            Icons.arrow_back_ios_new_sharp,
+            color: colorSecondary,
+          ),
+        ),
+        title: Text('Restore'),
+        titleTextStyle: TextStyle(
+          height: 1.0,
+          color: colorSecondary,
+          fontSize: fontSizeHeaders,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
       body: Container(
         margin: EdgeInsets.all(edgeInsetsContainer),
         child: Column(
           children: [
-            AppBar(
-              backgroundColor: colorSurface,
-              elevation: 0.0,
-              leading: IconButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                icon: Icon(
-                  Icons.arrow_back_ios_new_rounded,
-                  color: colorSecondary,
-                ),
-              ),
-              title: Text('Restore'),
-              titleTextStyle: TextStyle(
-                color: colorSecondary,
-                fontSize: fontSizeHeaders,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
             Spacer(),
             Column(
               children: [
@@ -49,8 +49,7 @@ class RestorePage extends StatelessWidget {
                 TextFieldWidget(text: 'New password'),
               ],
             ),
-            Spacer(),
-            Spacer(),
+            Spacer(flex: flex),
             FilledButtonWidget(hintText: 'Restore'),
           ],
         ),
