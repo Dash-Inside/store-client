@@ -8,7 +8,8 @@ import 'dart:async' as _i4;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:store_client/core/failure/failure.dart' as _i5;
-import 'package:store_client/src/data/repositories/remote/user_data_server_repository.dart' as _i3;
+import 'package:store_client/src/data/repositories/remote/user_data_server_repository.dart'
+    as _i3;
 import 'package:store_client/src/domain/entities/user_data.dart' as _i6;
 
 // ignore_for_file: type=lint
@@ -35,7 +36,8 @@ class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
 /// A class which mocks [UserDataServerRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserDataServerRepository extends _i1.Mock implements _i3.UserDataServerRepository {
+class MockUserDataServerRepository extends _i1.Mock
+    implements _i3.UserDataServerRepository {
   @override
   _i4.Future<_i2.Either<_i5.Failure, _i6.UserData>> loginUser({
     required String? email,
@@ -50,7 +52,8 @@ class MockUserDataServerRepository extends _i1.Mock implements _i3.UserDataServe
             #password: password,
           },
         ),
-        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i6.UserData>>.value(_FakeEither_0<_i5.Failure, _i6.UserData>(
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i6.UserData>>.value(
+            _FakeEither_0<_i5.Failure, _i6.UserData>(
           this,
           Invocation.method(
             #loginUser,
@@ -61,7 +64,9 @@ class MockUserDataServerRepository extends _i1.Mock implements _i3.UserDataServe
             },
           ),
         )),
-        returnValueForMissingStub: _i4.Future<_i2.Either<_i5.Failure, _i6.UserData>>.value(_FakeEither_0<_i5.Failure, _i6.UserData>(
+        returnValueForMissingStub:
+            _i4.Future<_i2.Either<_i5.Failure, _i6.UserData>>.value(
+                _FakeEither_0<_i5.Failure, _i6.UserData>(
           this,
           Invocation.method(
             #loginUser,
@@ -89,7 +94,8 @@ class MockUserDataServerRepository extends _i1.Mock implements _i3.UserDataServe
             #comfirmedPassword: comfirmedPassword,
           },
         ),
-        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i6.UserData>>.value(_FakeEither_0<_i5.Failure, _i6.UserData>(
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i6.UserData>>.value(
+            _FakeEither_0<_i5.Failure, _i6.UserData>(
           this,
           Invocation.method(
             #restorePasswordUser,
@@ -101,7 +107,9 @@ class MockUserDataServerRepository extends _i1.Mock implements _i3.UserDataServe
             },
           ),
         )),
-        returnValueForMissingStub: _i4.Future<_i2.Either<_i5.Failure, _i6.UserData>>.value(_FakeEither_0<_i5.Failure, _i6.UserData>(
+        returnValueForMissingStub:
+            _i4.Future<_i2.Either<_i5.Failure, _i6.UserData>>.value(
+                _FakeEither_0<_i5.Failure, _i6.UserData>(
           this,
           Invocation.method(
             #restorePasswordUser,
@@ -128,7 +136,8 @@ class MockUserDataServerRepository extends _i1.Mock implements _i3.UserDataServe
             #newAvatarUrl: newAvatarUrl,
           },
         ),
-        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i6.UserData>>.value(_FakeEither_0<_i5.Failure, _i6.UserData>(
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i6.UserData>>.value(
+            _FakeEither_0<_i5.Failure, _i6.UserData>(
           this,
           Invocation.method(
             #changeAvatarUrl,
@@ -139,7 +148,9 @@ class MockUserDataServerRepository extends _i1.Mock implements _i3.UserDataServe
             },
           ),
         )),
-        returnValueForMissingStub: _i4.Future<_i2.Either<_i5.Failure, _i6.UserData>>.value(_FakeEither_0<_i5.Failure, _i6.UserData>(
+        returnValueForMissingStub:
+            _i4.Future<_i2.Either<_i5.Failure, _i6.UserData>>.value(
+                _FakeEither_0<_i5.Failure, _i6.UserData>(
           this,
           Invocation.method(
             #changeAvatarUrl,
@@ -165,7 +176,8 @@ class MockUserDataServerRepository extends _i1.Mock implements _i3.UserDataServe
             #newUserName: newUserName,
           },
         ),
-        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i6.UserData>>.value(_FakeEither_0<_i5.Failure, _i6.UserData>(
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i6.UserData>>.value(
+            _FakeEither_0<_i5.Failure, _i6.UserData>(
           this,
           Invocation.method(
             #changeUserName,
@@ -176,7 +188,9 @@ class MockUserDataServerRepository extends _i1.Mock implements _i3.UserDataServe
             },
           ),
         )),
-        returnValueForMissingStub: _i4.Future<_i2.Either<_i5.Failure, _i6.UserData>>.value(_FakeEither_0<_i5.Failure, _i6.UserData>(
+        returnValueForMissingStub:
+            _i4.Future<_i2.Either<_i5.Failure, _i6.UserData>>.value(
+                _FakeEither_0<_i5.Failure, _i6.UserData>(
           this,
           Invocation.method(
             #changeUserName,
