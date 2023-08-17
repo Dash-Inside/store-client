@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 class Section extends Equatable {
   final int id;
   final String title;
-  final int? topicId;
+  final int topicId;
 
   @override
   List<Object?> get props => [id, title];
@@ -11,6 +11,6 @@ class Section extends Equatable {
   Section({
     required this.id,
     required this.title,
-    this.topicId,
+    required this.topicId,
   });
 }
