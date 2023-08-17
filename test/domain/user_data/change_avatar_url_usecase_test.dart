@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
+import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/src/data/repositories/remote/user_data_server_repository.dart';
 import 'package:store_client/src/domain/entities/role.dart';
 import 'package:store_client/src/domain/entities/user_data.dart';
@@ -31,7 +32,7 @@ void main() {
 
     // Arrange.
     final changeAvatarUrl = ChangeAvatarUrlUseCase();
-    final result = await changeAvatarUrl.call(changeAvatarUrlUseCaseParams);
+    final Either<Failure, UserData> result = await changeAvatarUrl.call(changeAvatarUrlUseCaseParams);
 
     // Accert.
     verify(userDataServerRepository.changeAvatarUrl(userData: userData, newAvatarUrl: newAvatarUrl)).called(1);
