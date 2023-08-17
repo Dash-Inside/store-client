@@ -4,7 +4,6 @@ import 'package:dartz/dartz.dart';
 import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/core/services/services.dart';
 import 'package:store_client/core/usecases/usecases.dart';
-import 'package:store_client/src/domain/entities/topic.dart';
 import 'package:store_client/src/domain/repository/library_repository.dart';
 
 class AddTopicUseCase extends UseCase<Unit, AddTopicUseCaseParams> {
@@ -21,8 +20,8 @@ class AddTopicUseCase extends UseCase<Unit, AddTopicUseCaseParams> {
 }
 
 class AddTopicUseCaseParams {
-  final Topic title;
-  final Topic data;
+  final String title;
+  final String data;
   final List<String> links;
 
   AddTopicUseCaseParams(
