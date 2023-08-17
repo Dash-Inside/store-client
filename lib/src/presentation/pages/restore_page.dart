@@ -24,9 +24,7 @@ class RestorePage extends StatelessWidget {
               backgroundColor: colorSurface,
               elevation: 0.0,
               leading: IconButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
+                onPressed: () {},
                 icon: Icon(
                   Icons.arrow_back_ios_new_rounded,
                   color: colorSecondary,
