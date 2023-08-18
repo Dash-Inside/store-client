@@ -8,9 +8,10 @@ import 'package:store_client/src/domain/entities/user_data.dart';
 import 'package:store_client/src/domain/repository/user_data_repository.dart';
 import 'package:store_client/src/domain/usecases/user_data/change_username_usecase.dart';
 
-import '../test_repositories.mocks.dart';
+import '../../injector/services.dart';
 
-void main() {
+Future<void> main() async {
+  await initTestServices();
   final UserData userData = UserData(
     id: 1,
     username: 'Pencil',
@@ -20,17 +21,15 @@ void main() {
 
   final String newUserName = 'newUserName';
 
-  final ChangeUserNameUseCaseParams changeUserNameUseCaseParams =
-      ChangeUserNameUseCaseParams(
+  final ChangeUserNameUseCaseParams changeUserNameUseCaseParams = ChangeUserNameUseCaseParams(
     userData,
     newUserName,
   );
 
   test('change_username_usecase_test', () async {
     // Act.
-    final UserDataRepository userDataServerRepository =
-        MockUserDataRepository();
-    when(userDataServerRepository.changeUserName(
+    final UserDataRepository userDataRepository = testServices.get<UserDataRepository>();
+    when(userDataRepository.changeUserName(
       userData: userData,
       newUserName: newUserName,
     )).thenAnswer((_) async {
@@ -39,11 +38,10 @@ void main() {
 
     // Arrange.
     final ChangeUserNameUseCase changeUserName = ChangeUserNameUseCase();
-    final Either<Failure, UserData> result =
-        await changeUserName.call(changeUserNameUseCaseParams);
+    final Either<Failure, UserData> result = await changeUserName.call(changeUserNameUseCaseParams);
 
     // Accert.
-    verify(userDataServerRepository.changeUserName(
+    verify(userDataRepository.changeUserName(
       userData: userData,
       newUserName: newUserName,
     )).called(1);
