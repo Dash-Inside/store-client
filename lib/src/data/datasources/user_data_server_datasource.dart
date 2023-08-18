@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/core/services/services.dart';
 import 'package:store_client/src/data/data_failures/data_failure.dart';
@@ -12,10 +12,13 @@ import 'package:store_client/src/domain/entities/role.dart';
 
 class UserDataServerDatasource {
   final client = Dio();
+
+  static const String _jwtKey = 'JWT';
+
   Future<Either<Failure, List<UserDataModel>>> getAllUserDataAllRequest() async {
     try {
       final Response response = await client.get('http://127.0.0.1:1337/api/user-data/');
-      final List<dynamic> listMapAllRequest = response.data['data'];
+      final List<Object> listMapAllRequest = response.data['data'];
       final List<UserDataModel> result = [];
       listMapAllRequest.forEach((element) {
         result.add(UserDataModel.fromMap(element as Map<String, dynamic>));
@@ -68,7 +71,7 @@ class UserDataServerDatasource {
     required String password,
   }) async {
     try {
-      final SharedPreferences sharedPreferences = services.get<SharedPreferences>();
+      final FlutterSecureStorage flutterSecureStorage = services.get<FlutterSecureStorage>();
       final Response response = await client.post(
         'http://127.0.0.1:1337/api/auth/local',
         data: <String, dynamic>{
@@ -76,7 +79,7 @@ class UserDataServerDatasource {
           "password": password,
         },
       );
-      await sharedPreferences.setString('JWT', response.data['jwt']);
+      await flutterSecureStorage.write(key: _jwtKey, value: response.data['jwt']);
 
       return Right(UserModel.fromMap(response.data['user']));
     } catch (e, stackTrace) {
@@ -90,10 +93,10 @@ class UserDataServerDatasource {
     required String newPasswordConfirmation,
   }) async {
     try {
-      final SharedPreferences sharedPreferences = services.get<SharedPreferences>();
+      final FlutterSecureStorage flutterSecureStorage = services.get<FlutterSecureStorage>();
       final Response response = await client.post(
         'http://127.0.0.1:1337/api/auth/change-password',
-        options: Options(headers: {'Authorization': 'Bearer ${sharedPreferences.getString('JWT')}'}),
+        options: Options(headers: {'Authorization': 'Bearer ${await flutterSecureStorage.read(key: _jwtKey)}'}),
         data: jsonEncode(
           <String, dynamic>{
             "currentPassword": currentPassword,
@@ -102,8 +105,8 @@ class UserDataServerDatasource {
           },
         ),
       );
-      await sharedPreferences.remove('JWT');
-      await sharedPreferences.setString('JWT', response.data['jwt']);
+      await flutterSecureStorage.delete(key: _jwtKey);
+      await flutterSecureStorage.write(key: _jwtKey, value: response.data['jwt']);
 
       return Right(UserModel.fromMap(response.data['user']));
     } catch (e, stackTrace) {
