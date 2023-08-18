@@ -8,7 +8,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 final GetIt services = GetIt.I;
 
-FutureOr<void> initServices() async {
+FutureOr<void> initServices() {
   final FlutterSecureStorage flutterSecureStorage = FlutterSecureStorage();
   services.registerLazySingleton<FlutterSecureStorage>(() => flutterSecureStorage);
 
