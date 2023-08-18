@@ -69,9 +69,6 @@ void main() {
             data: 'data',
             links: ['abc'],
           );
-          print(topicModelResult.hashCode);
-          print(topicModel.hashCode);
-          print(result.hashCode);
           expect(topicModelResult, topicModel);
         },
       );
