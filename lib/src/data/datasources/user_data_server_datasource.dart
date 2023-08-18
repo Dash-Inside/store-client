@@ -26,7 +26,7 @@ class UserDataServerDatasource {
 
       return Right(result);
     } catch (e, stackTrace) {
-      return Left(DataFailure(message: 'Failure $e', stackTrace: stackTrace));
+      return Left(DataFailure(message: '$e', stackTrace: stackTrace));
     }
   }
 
@@ -38,7 +38,7 @@ class UserDataServerDatasource {
 
       return Right(UserDataModel.fromMap(response.data['data']));
     } catch (e, stackTrace) {
-      return Left(DataFailure(message: 'Failure $e', stackTrace: stackTrace));
+      return Left(DataFailure(message: '$e', stackTrace: stackTrace));
     }
   }
 
@@ -68,7 +68,7 @@ class UserDataServerDatasource {
 
       return Right(UserDataModel.fromMap(response.data['data']));
     } catch (e, stackTrace) {
-      return Left(DataFailure(message: 'Failure $e', stackTrace: stackTrace));
+      return Left(DataFailure(message: '$e', stackTrace: stackTrace));
     }
   }
 
@@ -89,7 +89,7 @@ class UserDataServerDatasource {
 
       return Right(UserModel.fromMap(response.data['user']));
     } catch (e, stackTrace) {
-      return Left(DataFailure(message: 'Failure $e', stackTrace: stackTrace));
+      return Left(DataFailure(message: '$e', stackTrace: stackTrace));
     }
   }
 
@@ -115,7 +115,7 @@ class UserDataServerDatasource {
 
       return Right(UserModel.fromMap(response.data['user']));
     } catch (e, stackTrace) {
-      return Left(DataFailure(message: 'Failure $e', stackTrace: stackTrace));
+      return Left(DataFailure(message: '$e', stackTrace: stackTrace));
     }
   }
 }
