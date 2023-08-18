@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class OutcommingMessageWidget extends StatelessWidget {
+class OutcomingMessageWidget extends StatelessWidget {
   static const double containerMarginLeft = 44.0;
   static const double containerMarginRight = 8.0;
   static const double containerMarginBottom = 8.0;
@@ -13,7 +13,7 @@ class OutcommingMessageWidget extends StatelessWidget {
   static const double fontSizeMessage = 14.0;
   final String text;
 
-  const OutcommingMessageWidget({
+  const OutcomingMessageWidget({
     super.key,
     required this.text,
   });

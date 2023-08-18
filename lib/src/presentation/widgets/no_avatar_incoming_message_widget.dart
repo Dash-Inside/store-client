@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class IncommingMessageWidget extends StatelessWidget {
+class NoAvatarIncomingMessageWidget extends StatelessWidget {
   static const double fontSizeMessage = 14.0;
   static const double messageBorderRadiusBottomLeft = 2.0;
   static const double messageBorderRadiusBottomRight = 8.0;
@@ -11,11 +11,10 @@ class IncommingMessageWidget extends StatelessWidget {
   static const double containerMarginLeft = 8.0;
   static const double containerMarginRight = 44.0;
   static const double containerMarginBottom = 8.0;
-  static const double avatarRad = 14.0;
-  static const double sizedBoxWidth = 8.0;
+  static const double sizedBoxWidth = 36.0;
   final String text;
 
-  const IncommingMessageWidget({
+  const NoAvatarIncomingMessageWidget({
     super.key,
     required this.text,
   });
@@ -35,10 +34,6 @@ class IncommingMessageWidget extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          CircleAvatar(
-            backgroundColor: colorPr,
-            radius: avatarRad,
-          ),
           SizedBox(
             width: sizedBoxWidth,
           ),
