@@ -10,9 +10,11 @@ import 'package:store_client/src/domain/entities/user_data.dart';
 import 'package:store_client/src/domain/repository/user_data_repository.dart';
 import 'package:store_client/src/domain/usecases/user_data/restore_password_usecase.dart';
 
-import '../test_repositories.mocks.dart';
+import '../../injector/services.dart';
 
-void main() {
+Future<void> main() async {
+  await initTestServices();
+
   final UserData userData = UserData(
     id: 1,
     username: 'username',
@@ -23,8 +25,7 @@ void main() {
   final String password = 'password';
   final String comfirmedPassword = 'comfirmedPassword';
 
-  final RestorePasswordUseCaseParams restorePasswordUseCaseParams =
-      RestorePasswordUseCaseParams(
+  final RestorePasswordUseCaseParams restorePasswordUseCaseParams = RestorePasswordUseCaseParams(
     restoreCode: restoreCode,
     password: password,
     comfirmedPassword: comfirmedPassword,
@@ -32,9 +33,8 @@ void main() {
 
   test('restore_password_usecase_test', () async {
     // Act.
-    final UserDataRepository userDataServerRepository =
-        MockUserDataRepository();
-    when(userDataServerRepository.restorePasswordUser(
+    final UserDataRepository userDataRepository = testServices.get<UserDataRepository>();
+    when(userDataRepository.restorePasswordUser(
       restoreCode: restoreCode,
       password: password,
       comfirmedPassword: comfirmedPassword,
@@ -43,13 +43,11 @@ void main() {
     });
 
     // Arrange.
-    final RestorePasswordUseCase restorePasswordUseCase =
-        RestorePasswordUseCase();
-    final FutureOr<Either<Failure, UserData>> result =
-        await restorePasswordUseCase.call(restorePasswordUseCaseParams);
+    final RestorePasswordUseCase restorePasswordUseCase = RestorePasswordUseCase();
+    final FutureOr<Either<Failure, UserData>> result = await restorePasswordUseCase.call(restorePasswordUseCaseParams);
 
     // Accert.
-    verify(userDataServerRepository.restorePasswordUser(
+    verify(userDataRepository.restorePasswordUser(
       restoreCode: restoreCode,
       password: password,
       comfirmedPassword: comfirmedPassword,
