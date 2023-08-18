@@ -1,14 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:store_client/core/failure/failure.dart';
-import 'package:store_client/src/data/repositories/remote/messenger_server_repository.dart';
 import 'package:store_client/src/domain/entities/message.dart';
+import 'package:store_client/src/domain/repository/messenger_repository.dart';
 import 'package:store_client/src/domain/usecases/messenger/fetch_messages_usecase.dart';
 
-@GenerateNiceMocks([MockSpec<MessengerServerRepository>()])
-import 'fetch_messages_usecase_test.mocks.dart';
+import '../test_repositories.mocks.dart';
 
 void main() {
   final Message message = Message(id: 2, data: "data", senderId: 4);
@@ -18,7 +16,8 @@ void main() {
     'fetch_messages_usecase_test',
     () async {
       // Act.
-      final MessengerServerRepository messengerServerRepository = MockMessengerServerRepository();
+      final MessengerRepository messengerServerRepository =
+          MockMessengerRepository();
       when(messengerServerRepository.fetchMessages()).thenAnswer(
         (_) async {
           return Right(listmess);
@@ -27,7 +26,8 @@ void main() {
 
       // Arrange.
       final FetchMessagesUseCase fetchMessagesUseCase = FetchMessagesUseCase();
-      final Either<Failure, List<Message>> result = await fetchMessagesUseCase.call(unit);
+      final Either<Failure, List<Message>> result =
+          await fetchMessagesUseCase.call(unit);
 
       // Assert.
       verify(messengerServerRepository.fetchMessages()).called(1);

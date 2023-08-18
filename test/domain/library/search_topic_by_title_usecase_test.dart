@@ -1,14 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/src/domain/entities/topic.dart';
 import 'package:store_client/src/domain/repository/library_repository.dart';
 import 'package:store_client/src/domain/usecases/library/search_topic_by_title_usecase.dart';
-
-@GenerateNiceMocks([MockSpec<LibraryRepository>()])
-import 'search_topic_by_title_usecase_test.mocks.dart';
+import '../test_repositories.mocks.dart';
 
 void main() {
   const String title = 'title';
@@ -29,8 +26,10 @@ void main() {
     );
 
     // Arrange.
-    final SearchTopicByTitleUseCase searchTopicByTitleUseCase = SearchTopicByTitleUseCase();
-    final Either<Failure, Topic> result = await searchTopicByTitleUseCase.call(title);
+    final SearchTopicByTitleUseCase searchTopicByTitleUseCase =
+        SearchTopicByTitleUseCase();
+    final Either<Failure, Topic> result =
+        await searchTopicByTitleUseCase.call(title);
 
     // Accert.
     verify(libraryRepository.searchTopicByTitle(title: title)).called(1);

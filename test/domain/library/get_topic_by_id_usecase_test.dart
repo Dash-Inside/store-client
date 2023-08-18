@@ -1,14 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/src/domain/entities/topic.dart';
 import 'package:store_client/src/domain/repository/library_repository.dart';
 import 'package:store_client/src/domain/usecases/library/get_topic_by_id_usecase.dart';
-
-@GenerateNiceMocks([MockSpec<LibraryRepository>()])
-import 'get_topic_by_id_usecase_test.mocks.dart';
+import '../test_repositories.mocks.dart';
 
 void main() {
   const int id = 1;

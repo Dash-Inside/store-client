@@ -1,13 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/src/domain/repository/library_repository.dart';
 import 'package:store_client/src/domain/usecases/library/remove_favorite_topic_usecase.dart';
-
-@GenerateNiceMocks([MockSpec<LibraryRepository>()])
-import 'remove_favorite_topic_usecase_test.mocks.dart';
+import '../test_repositories.mocks.dart';
 
 void main() {
   const int id = 1;
@@ -21,8 +18,10 @@ void main() {
     );
 
     // Arrange.
-    final RemoveFavoriteTopicUseCase removeFavoriteTopicUseCase = RemoveFavoriteTopicUseCase();
-    final Either<Failure, Unit> result = await removeFavoriteTopicUseCase.call(id);
+    final RemoveFavoriteTopicUseCase removeFavoriteTopicUseCase =
+        RemoveFavoriteTopicUseCase();
+    final Either<Failure, Unit> result =
+        await removeFavoriteTopicUseCase.call(id);
 
     // Accert.
     verify(libraryRepository.removeFavoriteTopic(id: id)).called(1);
