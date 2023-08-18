@@ -1,8 +1,13 @@
+import 'dart:convert';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:store_client/core/failure/failure.dart';
+import 'package:store_client/core/services/services.dart';
 import 'package:store_client/src/data/data_failures/data_failure.dart';
 import 'package:store_client/src/data/models/user_data_model.dart';
+import 'package:store_client/src/data/models/user_model.dart';
 import 'package:store_client/src/domain/entities/role.dart';
 
 class UserDataServerDatasource {
@@ -53,6 +58,54 @@ class UserDataServerDatasource {
       );
 
       return Right(UserDataModel.fromMap(response.data['data']));
+    } catch (e, stackTrace) {
+      return Left(DataFailure(message: 'Failure $e', stackTrace: stackTrace));
+    }
+  }
+
+  Future<Either<Failure, UserModel>> loginUserDataRequest({
+    required String login,
+    required String password,
+  }) async {
+    try {
+      final SharedPreferences sharedPreferences = services.get<SharedPreferences>();
+      final Response response = await client.post(
+        'http://127.0.0.1:1337/api/auth/local',
+        data: <String, dynamic>{
+          "identifier": login,
+          "password": password,
+        },
+      );
+      await sharedPreferences.setString('JWT', response.data['jwt']);
+
+      return Right(UserModel.fromMap(response.data['user']));
+    } catch (e, stackTrace) {
+      return Left(DataFailure(message: 'Failure $e', stackTrace: stackTrace));
+    }
+  }
+
+  Future<Either<Failure, UserModel>> changePasswordUserDataRequest({
+    required String currentPassword,
+    required String newPassword,
+    required String newPasswordConfirmation,
+  }) async {
+    try {
+      final SharedPreferences sharedPreferences = services.get<SharedPreferences>();
+      final Response response = await client.post(
+        'http://127.0.0.1:1337/api/auth/change-password',
+        options: Options(headers: {'Authorization': 'Bearer ${sharedPreferences.getString('JWT')}'}),
+        data: jsonEncode(
+          <String, dynamic>{
+            "currentPassword": currentPassword,
+            "password": newPassword,
+            "passwordConfirmation": newPasswordConfirmation,
+          },
+        ),
+      );
+      await sharedPreferences.remove('JWT');
+      await sharedPreferences.setString('JWT', response.data['jwt']);
+
+      return Right(UserModel.fromMap(response.data['user']));
     } catch (e, stackTrace) {
       return Left(DataFailure(message: 'Failure $e', stackTrace: stackTrace));
     }
