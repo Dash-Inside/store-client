@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:store_client/src/data/models/message_model.dart';
 
@@ -6,13 +8,13 @@ void main() {
   const String data = 'test_data';
   const int senderId = 3;
   const Map<String, dynamic> messageMap = {
-    "id": 1,
-    "attributes": {
-      "data": "test_data",
-      "createdAt": "2023-08-16T14:11:51.455Z",
-      "updatedAt": "2023-08-16T14:11:54.335Z",
-      "publishedAt": "2023-08-16T14:11:54.326Z",
-      "senderID": 3,
+    'id': 1,
+    'attributes': {
+      'data': 'test_data',
+      'createdAt': '2023-08-16T14:11:51.455Z',
+      'updatedAt': '2023-08-16T14:11:54.335Z',
+      'publishedAt': '2023-08-16T14:11:54.326Z',
+      'senderID': 3,
     },
   };
   final MessageModel messageModel = MessageModel(
@@ -20,6 +22,10 @@ void main() {
     data: data,
     senderId: senderId,
   );
+
+  const Map<String, dynamic> mapRes = {
+    'data': {'data': 'test_data', 'senderID': 3},
+  };
   group(
     "test for MessadgeModel",
     () {
@@ -47,7 +53,7 @@ void main() {
             'copyWith with paramas',
             () {
               MessageModel messageModelresult = messageModel.copyWith(id: 2, data: 'data', senderId: 3);
-              MessageModel result = MessageModel(id: 2, data: 'data', senderId: 4);
+              MessageModel result = MessageModel(id: 2, data: 'data', senderId: 3);
               expect(messageModelresult, result);
             },
           );
@@ -70,16 +76,18 @@ void main() {
         'test toMap',
         () {
           final Map<String, dynamic> result = messageModel.toMap();
-          expect(result, messageMap);
+          expect(result, mapRes);
         },
       );
 
       test(
         'toJson',
         () {
+          final Map<String, dynamic> map = messageModel.toMap();
+          final String messengeJson = json.encode(map);
           final String result = messageModel.toJson();
 
-          expect(result, messageMap);
+          expect(result, messengeJson);
         },
       );
     },
