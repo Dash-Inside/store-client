@@ -3,9 +3,6 @@ import 'dart:convert';
 import 'package:store_client/src/domain/entities/topic.dart';
 
 class TopicModel extends Topic {
-  @override
-  int get hashCode => id.hashCode ^ title.hashCode ^ data.hashCode ^ links.hashCode;
-
   TopicModel({
     required super.id,
     required super.title,
@@ -41,11 +38,18 @@ class TopicModel extends Topic {
   }
 
   Map<String, dynamic> toMap() {
+    String str = '';
+    if (links?.length == 1) {
+      str = links![0];
+    }
+    if (links!.length > 1) {
+      str = links!.join(';');
+    }
     return <String, dynamic>{
       'id': id,
       'title': title,
       'data': data,
-      'links': links,
+      'links': str,
     };
   }
 
@@ -53,13 +57,6 @@ class TopicModel extends Topic {
 
   @override
   String toString() {
-    return 'UserDataModel(id: $id, title : $title, data : $data, links: $links)';
-  }
-
-  @override
-  bool operator ==(covariant TopicModel other) {
-    if (identical(this, other)) return true;
-
-    return other.id == id && other.title == title && other.data == data && other.links == links;
+    return 'TopicModel(id: $id, title : $title, data : $data, links: $links)';
   }
 }
