@@ -1,17 +1,17 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/src/data/repositories/remote/user_data_server_repository.dart';
 import 'package:store_client/src/domain/entities/role.dart';
 import 'package:store_client/src/domain/entities/user_data.dart';
+import 'package:store_client/src/domain/repository/user_data_repository.dart';
 import 'package:store_client/src/domain/usecases/user_data/change_username_usecase.dart';
 
-@GenerateNiceMocks([MockSpec<UserDataServerRepository>()])
-import 'change_username_usecase_test.mocks.dart';
+import '../../injector/services.dart';
 
-void main() {
+Future<void> main() async {
+  await initTestServices();
   final UserData userData = UserData(
     id: 1,
     username: 'Pencil',
@@ -28,8 +28,8 @@ void main() {
 
   test('change_username_usecase_test', () async {
     // Act.
-    final UserDataServerRepository userDataServerRepository = MockUserDataServerRepository();
-    when(userDataServerRepository.changeUserName(
+    final UserDataRepository userDataRepository = testServices.get<UserDataRepository>();
+    when(userDataRepository.changeUserName(
       userData: userData,
       newUserName: newUserName,
     )).thenAnswer((_) async {
@@ -41,7 +41,7 @@ void main() {
     final Either<Failure, UserData> result = await changeUserName.call(changeUserNameUseCaseParams);
 
     // Accert.
-    verify(userDataServerRepository.changeUserName(
+    verify(userDataRepository.changeUserName(
       userData: userData,
       newUserName: newUserName,
     )).called(1);

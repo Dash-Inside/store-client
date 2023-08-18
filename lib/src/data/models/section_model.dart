@@ -38,7 +38,7 @@ class SectionModel extends Section {
     return <String, dynamic>{
       'id': id,
       'title': title,
-      'topicId': topicId,
+      'topicID': topicId,
     };
   }
 
