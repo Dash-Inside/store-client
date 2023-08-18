@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:store_client/src/data/models/topic_model.dart';
 
 void main() {
-  const id = 1;
+  const int id = 1;
   const String title = "title";
   const String data = "data";
   const List<String>? links = ['abc'];
