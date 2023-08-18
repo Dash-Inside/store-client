@@ -49,15 +49,21 @@ class UserDataServerDatasource {
     required String? avatarUrl,
   }) async {
     try {
+      final Map<String, dynamic> mapParams = {'data': {}};
+
+      if (userName != null && userName.length >= 1) {
+        mapParams['data']['username'] = userName;
+      }
+      if (role != null) {
+        mapParams['data']['role'] = role.toString().replaceFirst('Role.', '');
+      }
+      if (avatarUrl != null && avatarUrl.length >= 1) {
+        mapParams['data']['avatarUrl'] = avatarUrl;
+      }
+
       final Response response = await client.put(
         'http://127.0.0.1:1337/api/user-data/$id',
-        data: <String, dynamic>{
-          'data': {
-            'username': userName,
-            'role': role.toString().replaceFirst('Role.', ''),
-            'avatarUrl': avatarUrl,
-          },
-        },
+        data: mapParams,
       );
 
       return Right(UserDataModel.fromMap(response.data['data']));
@@ -105,7 +111,6 @@ class UserDataServerDatasource {
           },
         ),
       );
-      await flutterSecureStorage.delete(key: _jwtKey);
       await flutterSecureStorage.write(key: _jwtKey, value: response.data['jwt']);
 
       return Right(UserModel.fromMap(response.data['user']));
