@@ -8,12 +8,17 @@ import 'package:store_client/src/data/repositories/remote/library_server_reposit
 final GetIt services = GetIt.I;
 
 FutureOr<void> initServices() {
-  final MessengerServerRepository messengerServerRepository = MessengerServerRepository();
-  services.registerLazySingleton<MessengerServerRepository>(() => messengerServerRepository);
+  final MessengerRepository messengerServerRepository =
+      MessengerServerRepository();
+  services.registerLazySingleton<MessengerRepository>(
+      () => messengerServerRepository);
 
-  final UserDataServerRepository userDataServerRepository = UserDataServerRepository();
-  services.registerLazySingleton<UserDataServerRepository>(() => userDataServerRepository);
+  final UserDataRepository userDataServerRepository =
+      UserDataServerRepository();
+  services.registerLazySingleton<UserDataRepository>(
+      () => userDataServerRepository);
 
-  final LibraryServerRepository libraryServerRepository = LibraryServerRepository();
-  services.registerLazySingleton<LibraryServerRepository>(() => libraryServerRepository);
+  final LibraryRepository libraryServerRepository = LibraryServerRepository();
+  services
+      .registerLazySingleton<LibraryRepository>(() => libraryServerRepository);
 }

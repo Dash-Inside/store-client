@@ -2,16 +2,15 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/src/data/repositories/remote/user_data_server_repository.dart';
 import 'package:store_client/src/domain/entities/role.dart';
 import 'package:store_client/src/domain/entities/user_data.dart';
+import 'package:store_client/src/domain/repository/user_data_repository.dart';
 import 'package:store_client/src/domain/usecases/user_data/log_in_usecase.dart';
 
-@GenerateNiceMocks([MockSpec<UserDataServerRepository>()])
-import 'log_in_usecase_test.mocks.dart';
+import '../test_repositories.mocks.dart';
 
 void main() {
   final UserData userData = UserData(
@@ -31,7 +30,8 @@ void main() {
 
   test('log_in_usecase_test', () async {
     // Act.
-    final UserDataServerRepository userDataServerRepository = MockUserDataServerRepository();
+    final UserDataRepository userDataServerRepository =
+        MockUserDataRepository();
     when(userDataServerRepository.loginUser(
       email: email,
       password: password,
@@ -41,7 +41,8 @@ void main() {
 
     // Arrange.
     final LogInUseCase logInUseCase = LogInUseCase();
-    final FutureOr<Either<Failure, UserData>> result = await logInUseCase.call(logInUseCaseParams);
+    final FutureOr<Either<Failure, UserData>> result =
+        await logInUseCase.call(logInUseCaseParams);
 
     // Accert.
     verify(userDataServerRepository.loginUser(
