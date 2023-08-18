@@ -9,7 +9,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 final GetIt services = GetIt.I;
 
 FutureOr<void> initServices() async {
-  final FlutterSecureStorage flutterSecureStorage = new FlutterSecureStorage();
+  final FlutterSecureStorage flutterSecureStorage = FlutterSecureStorage();
   services.registerLazySingleton<FlutterSecureStorage>(() => flutterSecureStorage);
 
   final MessengerServerRepository messengerServerRepository = MessengerServerRepository();
