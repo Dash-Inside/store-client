@@ -23,7 +23,7 @@ class MarkdownPage extends StatelessWidget {
         leading: IconButton(
           onPressed: leadingOnTap,
           icon: Icon(
-            Icons.arrow_back_ios_new_sharp,
+            Icons.arrow_back_ios_sharp,
             color: colorSecondary,
           ),
         ),
