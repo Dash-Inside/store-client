@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:store_client/core/failure/failure.dart';
-import 'package:store_client/core/services/services.dart';
 import 'package:store_client/src/domain/entities/topic.dart';
 import 'package:store_client/src/domain/repository/library_repository.dart';
 import 'package:store_client/src/domain/usecases/library/search_topic_by_title_usecase.dart';
@@ -16,7 +15,7 @@ Future<void> main() async {
     data: "data",
     links: [],
   );
-  await initServices();
+  await initTestServices();
   test('search_topic_by_title_usecase_test', () async {
     // Act.
     final LibraryRepository libraryRepository = testServices.get<LibraryRepository>();
