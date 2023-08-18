@@ -11,7 +11,7 @@ import 'package:store_client/src/data/models/user_model.dart';
 import 'package:store_client/src/domain/entities/role.dart';
 
 class UserDataServerDatasource {
-  final client = Dio();
+  final Dio client = Dio();
 
   static const String _jwtKey = 'JWT';
 
