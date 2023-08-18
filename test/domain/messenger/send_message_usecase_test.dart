@@ -1,23 +1,21 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:store_client/core/failure/failure.dart';
-import 'package:store_client/src/data/repositories/remote/messenger_server_repository.dart';
 import 'package:store_client/src/domain/entities/message.dart';
+import 'package:store_client/src/domain/repository/messenger_repository.dart';
 import 'package:store_client/src/domain/usecases/messenger/send_message_usecase.dart';
+import '../../injector/services.dart';
 
-@GenerateNiceMocks([MockSpec<MessengerServerRepository>()])
-import 'send_message_usecase_test.mocks.dart';
-
-void main() {
+Future<void> main() async {
+  await initTestServices();
   final Message message = Message(id: 2, data: "data", senderId: 4);
   test(
     "sender_message_usecase_test",
     () async {
       // Act.
-      final MessengerServerRepository messengerServerRepository = MockMessengerServerRepository();
-      when(messengerServerRepository.sendMessage(message: message)).thenAnswer(
+      final MessengerRepository messengerRepository = testServices.get<MessengerRepository>();
+      when(messengerRepository.sendMessage(message: message)).thenAnswer(
         (realInvocation) async {
           return Right(unit);
         },
@@ -28,8 +26,8 @@ void main() {
       final Either<Failure, Unit> result = await sendMessageUsecase.call(message);
 
       // Assert.
-      verify(messengerServerRepository.sendMessage(message: message)).called(1);
-      verifyNoMoreInteractions(messengerServerRepository);
+      verify(messengerRepository.sendMessage(message: message)).called(1);
+      verifyNoMoreInteractions(messengerRepository);
       expect(result, Right(unit));
     },
   );

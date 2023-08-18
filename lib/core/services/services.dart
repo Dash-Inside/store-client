@@ -5,19 +5,27 @@ import 'package:store_client/src/data/repositories/remote/messenger_server_repos
 import 'package:store_client/src/data/repositories/remote/user_data_server_repository.dart';
 import 'package:store_client/src/data/repositories/remote/library_server_repository.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:store_client/src/domain/repository/library_repository.dart';
+import 'package:store_client/src/domain/repository/messenger_repository.dart';
+import 'package:store_client/src/domain/repository/user_data_repository.dart';
 
 final GetIt services = GetIt.I;
 
 FutureOr<void> initServices() {
   final FlutterSecureStorage flutterSecureStorage = FlutterSecureStorage();
   services.registerLazySingleton<FlutterSecureStorage>(() => flutterSecureStorage);
+  
+  final MessengerRepository messengerServerRepository =
+      MessengerServerRepository();
+  services.registerLazySingleton<MessengerRepository>(
+      () => messengerServerRepository);
 
-  final MessengerServerRepository messengerServerRepository = MessengerServerRepository();
-  services.registerLazySingleton<MessengerServerRepository>(() => messengerServerRepository);
+  final UserDataRepository userDataServerRepository =
+      UserDataServerRepository();
+  services.registerLazySingleton<UserDataRepository>(
+      () => userDataServerRepository);
 
-  final UserDataServerRepository userDataServerRepository = UserDataServerRepository();
-  services.registerLazySingleton<UserDataServerRepository>(() => userDataServerRepository);
-
-  final LibraryServerRepository libraryServerRepository = LibraryServerRepository();
-  services.registerLazySingleton<LibraryServerRepository>(() => libraryServerRepository);
+  final LibraryRepository libraryServerRepository = LibraryServerRepository();
+  services
+      .registerLazySingleton<LibraryRepository>(() => libraryServerRepository);
 }
