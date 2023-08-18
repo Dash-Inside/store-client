@@ -14,7 +14,7 @@ class TopicModel extends Topic {
   });
 
   factory TopicModel.fromMap(Map<String, dynamic> map) {
-    final listLinks = (map['attributes']['links'] as String).split(";");
+    final List<String> listLinks = (map['attributes']['links'] as String).split(";");
 
     return TopicModel(
       id: map['id'] as int,
