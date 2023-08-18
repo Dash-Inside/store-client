@@ -6,7 +6,7 @@ import 'package:store_client/src/data/models/message_model.dart';
 import 'package:store_client/src/domain/entities/message.dart';
 
 class MessengerServerDatasource {
-  final _client = Dio();
+  final Dio _client = Dio();
   static const String _baseUri = 'http://127.0.0.1:1337/api/message';
 
   Future<Either<Failure, List<Message>>> getAllMessages() async {
