@@ -5,9 +5,9 @@ import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/src/domain/entities/topic.dart';
 import 'package:store_client/src/domain/repository/library_repository.dart';
 import 'package:store_client/src/domain/usecases/library/search_topic_by_title_usecase.dart';
-import '../test_repositories.mocks.dart';
+import '../../injector/services.dart';
 
-void main() {
+Future<void> main() async {
   const String title = 'title';
   final Topic topic = Topic(
     id: 1,
@@ -15,10 +15,10 @@ void main() {
     data: "data",
     links: [],
   );
-
+  await initTestServices();
   test('search_topic_by_title_usecase_test', () async {
     // Act.
-    final LibraryRepository libraryRepository = MockLibraryRepository();
+    final LibraryRepository libraryRepository = testServices.get<LibraryRepository>();
     when(libraryRepository.searchTopicByTitle(title: title)).thenAnswer(
       (_) async {
         return Right(topic);
@@ -26,10 +26,8 @@ void main() {
     );
 
     // Arrange.
-    final SearchTopicByTitleUseCase searchTopicByTitleUseCase =
-        SearchTopicByTitleUseCase();
-    final Either<Failure, Topic> result =
-        await searchTopicByTitleUseCase.call(title);
+    final SearchTopicByTitleUseCase searchTopicByTitleUseCase = SearchTopicByTitleUseCase();
+    final Either<Failure, Topic> result = await searchTopicByTitleUseCase.call(title);
 
     // Accert.
     verify(libraryRepository.searchTopicByTitle(title: title)).called(1);

@@ -5,16 +5,18 @@ import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/src/domain/repository/library_repository.dart';
 import 'package:store_client/src/domain/usecases/library/add_favorite_topic_usecase.dart';
 
-import '../test_repositories.mocks.dart';
+import '../../injector/services.dart';
 
-void main() {
+Future<void> main() async {
   const int id = 1;
+  await initTestServices();
   test(
     'add_favorite_topic_usecase_test',
     () async {
       // Act.
 
-      final LibraryRepository libraryRepository = MockLibraryRepository();
+      final LibraryRepository libraryRepository =
+          testServices.get<LibraryRepository>();
       when(libraryRepository.addFavoriteTopic(id: id)).thenAnswer(
         (_) async {
           return Right(unit);

@@ -5,20 +5,20 @@ import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/src/domain/repository/library_repository.dart';
 import 'package:store_client/src/domain/usecases/library/add_topic_usecase.dart';
 
-import '../test_repositories.mocks.dart';
+import '../../injector/services.dart';
 
-void main() {
+Future<void> main() async {
   const String title = 'title';
   const String data = 'data';
   const List<String> links = ['links'];
-  final AddTopicUseCaseParams addTopicUseCaseParams =
-      AddTopicUseCaseParams(title, data, links);
+  final AddTopicUseCaseParams addTopicUseCaseParams = AddTopicUseCaseParams(title, data, links);
+  await initTestServices();
 
   test(
     "add_topic_usecase_test",
     () async {
       // Act.
-      final LibraryRepository libraryRepository = MockLibraryRepository();
+      final LibraryRepository libraryRepository = testServices.get<LibraryRepository>();
       when(libraryRepository.addTopic(
         title: title,
         data: data,
@@ -31,8 +31,7 @@ void main() {
 
       // Arrange.
       final AddTopicUseCase addTopicUseCase = AddTopicUseCase();
-      final Either<Failure, Unit> result =
-          await addTopicUseCase.call(addTopicUseCaseParams);
+      final Either<Failure, Unit> result = await addTopicUseCase.call(addTopicUseCaseParams);
 
       // Assert.
       verify(libraryRepository.addTopic(
