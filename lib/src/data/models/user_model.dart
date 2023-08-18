@@ -7,9 +7,6 @@ class UserModel extends Equatable {
   final String userName;
   final String email;
 
-  // @override
-  // bool get stringify => true;
-
   @override
   List<Object> get props => [id, userName, email];
 
