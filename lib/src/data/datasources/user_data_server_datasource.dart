@@ -15,7 +15,7 @@ class UserDataServerDatasource {
 
   static const String _jwtKey = 'JWT';
 
-  Future<Either<Failure, List<UserDataModel>>> getAllUserDataAllRequest() async {
+  Future<Either<Failure, List<UserDataModel>>> getAllUserDataRequest() async {
     try {
       final Response response = await client.get('http://127.0.0.1:1337/api/user-data/');
       final List<Object> listMapAllRequest = response.data['data'];
