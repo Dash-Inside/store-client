@@ -26,7 +26,7 @@ class UserDataServerDatasource {
 
       return Right(result);
     } catch (e, stackTrace) {
-      return Left(DataFailure(message: '$e', stackTrace: stackTrace));
+      return Left(DataFailure(message: e.toString(), stackTrace: stackTrace));
     }
   }
 
@@ -38,7 +38,7 @@ class UserDataServerDatasource {
 
       return Right(UserDataModel.fromMap(response.data['data']));
     } catch (e, stackTrace) {
-      return Left(DataFailure(message: '$e', stackTrace: stackTrace));
+      return Left(DataFailure(message: e.toString(), stackTrace: stackTrace));
     }
   }
 
@@ -68,7 +68,7 @@ class UserDataServerDatasource {
 
       return Right(UserDataModel.fromMap(response.data['data']));
     } catch (e, stackTrace) {
-      return Left(DataFailure(message: '$e', stackTrace: stackTrace));
+      return Left(DataFailure(message: e.toString(), stackTrace: stackTrace));
     }
   }
 
@@ -89,7 +89,7 @@ class UserDataServerDatasource {
 
       return Right(UserModel.fromMap(response.data['user']));
     } catch (e, stackTrace) {
-      return Left(DataFailure(message: '$e', stackTrace: stackTrace));
+      return Left(DataFailure(message: e.toString(), stackTrace: stackTrace));
     }
   }
 
@@ -102,7 +102,9 @@ class UserDataServerDatasource {
       final FlutterSecureStorage flutterSecureStorage = services.get<FlutterSecureStorage>();
       final Response response = await client.post(
         'http://127.0.0.1:1337/api/auth/change-password',
-        options: Options(headers: {'Authorization': 'Bearer ${await flutterSecureStorage.read(key: _jwtKey)}'}),
+        options: Options(
+          headers: {'Authorization': 'Bearer ${await flutterSecureStorage.read(key: _jwtKey)}'},
+        ),
         data: jsonEncode(
           <String, dynamic>{
             "currentPassword": currentPassword,
@@ -115,7 +117,7 @@ class UserDataServerDatasource {
 
       return Right(UserModel.fromMap(response.data['user']));
     } catch (e, stackTrace) {
-      return Left(DataFailure(message: '$e', stackTrace: stackTrace));
+      return Left(DataFailure(message: e.toString(), stackTrace: stackTrace));
     }
   }
 }
