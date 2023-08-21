@@ -66,32 +66,45 @@ class ChatPage extends StatelessWidget {
                 itemCount: messageList.length,
                 reverse: true,
                 itemBuilder: (context, index) {
+                  final int messageListIndex = messageList[index].senderId;
+
                   if (index == 0) {
-                    if (messageList[index].senderId == ourId) {
+                    if (messageListIndex == ourId) {
                       return OutcomingMessageWidget(
-                          text: messageList[index].data);
-                    } else {
+                        text: messageList[index].data,
+                      );
+                    }
+
+                    if (messageListIndex != ourId) {
                       return IncomingMessageWidget(
-                          text: messageList[index].data);
+                        text: messageList[index].data,
+                      );
                     }
                   } else {
-                    if (messageList[index].senderId !=
-                            messageList[index - 1].senderId &&
-                        messageList[index].senderId != ourId) {
+                    final int messageListIndexOne =
+                        messageList[index - 1].senderId;
+                    if (messageListIndex != messageListIndexOne &&
+                        messageListIndex != ourId) {
                       return IncomingMessageWidget(
-                          text: messageList[index].data);
+                        text: messageList[index].data,
+                      );
                     }
-                    if (messageList[index].senderId ==
-                            messageList[index - 1].senderId &&
-                        messageList[index].senderId != ourId) {
+                    if (messageListIndex == messageListIndexOne &&
+                        messageListIndex != ourId) {
                       return NoAvatarIncomingMessageWidget(
-                          text: messageList[index].data);
+                        text: messageList[index].data,
+                      );
                     }
-                    if (messageList[index].senderId == ourId) {
+                    if (messageListIndex == ourId) {
                       return OutcomingMessageWidget(
-                          text: messageList[index].data);
+                        text: messageList[index].data,
+                      );
                     }
                   }
+
+                  return Center(
+                    child: Text('Check internet connection'),
+                  );
                 },
               ),
             ),
