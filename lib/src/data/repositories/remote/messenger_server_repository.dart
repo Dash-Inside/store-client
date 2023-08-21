@@ -10,8 +10,8 @@ class MessengerServerRepository implements MessengerRepository {
   @override
   Future<Either<Failure, List<Message>>> fetchMessages() async {
     try {
-      MessengerServerDatasource _messengerServerDatasource = services.get<MessengerServerDatasource>();
-      Either<Failure, List<Message>> result = await _messengerServerDatasource.getAllMessages();
+      final MessengerServerDatasource _messengerServerDatasource = services.get<MessengerServerDatasource>();
+      final Either<Failure, List<Message>> result = await _messengerServerDatasource.getAllMessages();
 
       return result.fold(
         (failure) {
@@ -29,8 +29,8 @@ class MessengerServerRepository implements MessengerRepository {
   @override
   Future<Either<Failure, Unit>> sendMessage({required Message message}) async {
     try {
-      MessengerServerDatasource _messengerServerDatasource = services.get<MessengerServerDatasource>();
-      Either<Failure, Unit> result = await _messengerServerDatasource.sendMessage(message: message);
+      final MessengerServerDatasource _messengerServerDatasource = services.get<MessengerServerDatasource>();
+      final Either<Failure, Unit> result = await _messengerServerDatasource.sendMessage(message: message);
 
       return result.fold(
         (failure) {
