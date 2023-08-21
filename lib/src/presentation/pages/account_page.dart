@@ -12,11 +12,19 @@ class AccountPage extends StatelessWidget {
   static const double avatarRadius = 34.0;
   static const double edgeInsetsMargin = 16.0;
   static const double roleHeight = 0.8;
+  final List<String> listTopics = [
+    'Topic #1',
+    'Topic #2',
+    'Topic #3',
+    'Topic #4',
+    'Topic #5',
+    'Topic #6',
+  ];
 
   editOnTap() {}
   photoOnPressed() {}
 
-  const AccountPage({super.key});
+  AccountPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -123,51 +131,11 @@ class AccountPage extends StatelessWidget {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: ListView(
-                children: [
-                  TopicWidget(text: 'Topic #1'),
-                  TopicWidget(text: 'Topic #2'),
-                  TopicWidget(text: 'Topic #3'),
-                  TopicWidget(text: 'Topic #4'),
-                  TopicWidget(text: 'Topic #5'),
-                  TopicWidget(text: 'Topic #6'),
-                  TopicWidget(text: 'Topic #1'),
-                  TopicWidget(text: 'Topic #2'),
-                  TopicWidget(text: 'Topic #3'),
-                  TopicWidget(text: 'Topic #4'),
-                  TopicWidget(text: 'Topic #5'),
-                  TopicWidget(text: 'Topic #6'),
-                  TopicWidget(text: 'Topic #1'),
-                  TopicWidget(text: 'Topic #2'),
-                  TopicWidget(text: 'Topic #3'),
-                  TopicWidget(text: 'Topic #4'),
-                  TopicWidget(text: 'Topic #5'),
-                  TopicWidget(text: 'Topic #6'),
-                  TopicWidget(text: 'Topic #1'),
-                  TopicWidget(text: 'Topic #2'),
-                  TopicWidget(text: 'Topic #3'),
-                  TopicWidget(text: 'Topic #4'),
-                  TopicWidget(text: 'Topic #5'),
-                  TopicWidget(text: 'Topic #6'),
-                  TopicWidget(text: 'Topic #1'),
-                  TopicWidget(text: 'Topic #2'),
-                  TopicWidget(text: 'Topic #3'),
-                  TopicWidget(text: 'Topic #4'),
-                  TopicWidget(text: 'Topic #5'),
-                  TopicWidget(text: 'Topic #6'),
-                  TopicWidget(text: 'Topic #1'),
-                  TopicWidget(text: 'Topic #2'),
-                  TopicWidget(text: 'Topic #3'),
-                  TopicWidget(text: 'Topic #4'),
-                  TopicWidget(text: 'Topic #5'),
-                  TopicWidget(text: 'Topic #6'),
-                  TopicWidget(text: 'Topic #1'),
-                  TopicWidget(text: 'Topic #2'),
-                  TopicWidget(text: 'Topic #3'),
-                  TopicWidget(text: 'Topic #4'),
-                  TopicWidget(text: 'Topic #5'),
-                  TopicWidget(text: 'Topic #6'),
-                ],
+              child: ListView.builder(
+                itemCount: listTopics.length,
+                itemBuilder: (context, index) {
+                  return TopicWidget(text: listTopics[index]);
+                },
               ),
             ),
           ),
