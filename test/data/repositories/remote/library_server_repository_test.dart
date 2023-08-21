@@ -11,8 +11,6 @@ import '../../../injector/services.dart';
 
 Future<void> main() async {
   const int id = 1;
-  final Section section = Section(id: 1, title: "title", topicId: 3);
-  final List<Section> listSec = [section];
   await initTestServices();
   group(
     'group name',
