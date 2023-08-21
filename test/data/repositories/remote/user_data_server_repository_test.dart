@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
 import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/src/data/repositories/remote/user_data_server_repository.dart';
 import 'package:store_client/src/domain/entities/role.dart';
@@ -38,6 +39,11 @@ Future<void> main() async {
       );
 
       // Accert.
+      verify(userDataServerDatasource.loginUser(
+        email: email,
+        password: password,
+      )).called(1);
+      verifyNoMoreInteractions(userDataServerDatasource);
       expect(result.isRight(), true);
     });
 
@@ -53,6 +59,12 @@ Future<void> main() async {
       );
 
       // Accert.
+      verify(userDataServerDatasource.restorePasswordUser(
+        restoreCode: restoreCode,
+        password: password,
+        comfirmedPassword: comfirmedPassword,
+      )).called(1);
+      verifyNoMoreInteractions(userDataServerDatasource);
       expect(result.isRight(), true);
     });
 
@@ -71,6 +83,11 @@ Future<void> main() async {
       );
 
       // Accert.
+      verify(userDataServerRepository.changeAvatarUrl(
+        userData: userData,
+        newAvatarUrl: newAvatarUrl,
+      )).called(1);
+      verifyNoMoreInteractions(userDataServerRepository);
       expect(request.isRight(), true);
     });
 
@@ -89,6 +106,11 @@ Future<void> main() async {
       );
 
       // Accert.
+      verify(userDataServerRepository.changeUserName(
+        userData: userData,
+        newUserName: newUserName,
+      )).called(1);
+      verifyNoMoreInteractions(userDataServerRepository);
       expect(request.isRight(), true);
     });
   });
