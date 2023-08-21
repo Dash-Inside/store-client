@@ -18,7 +18,7 @@ class UserDataServerDatasource {
   Future<Either<Failure, List<UserDataModel>>> getAllUserDataRequest() async {
     try {
       final Response response = await client.get('http://127.0.0.1:1337/api/user-data/');
-      final List<dynamic> listMapAllRequest = response.data['data'];
+      final List<Object> listMapAllRequest = response.data['data'];
       final List<UserDataModel> result = [];
       listMapAllRequest.forEach((element) {
         result.add(UserDataModel.fromMap(element as Map<String, dynamic>));
