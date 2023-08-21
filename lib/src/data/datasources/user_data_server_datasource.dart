@@ -118,4 +118,20 @@ class UserDataServerDatasource {
       return Left(DataFailure(message: '$e', stackTrace: stackTrace));
     }
   }
+
+  Future<Either<Failure, UserModel>> authMeUserDataRequest() async {
+    try {
+      final FlutterSecureStorage flutterSecureStorage = services.get<FlutterSecureStorage>();
+      final Response response = await client.get(
+        'http://127.0.0.1:1337/api/users/me',
+        options: Options(
+          headers: {'Authorization': 'Bearer ${await flutterSecureStorage.read(key: _jwtKey)}'},
+        ),
+      );
+
+      return Right(UserModel.fromMap(response.data));
+    } catch (e, stackTrace) {
+      return Left(DataFailure(message: e.toString(), stackTrace: stackTrace));
+    }
+  }
 }
