@@ -39,48 +39,56 @@ class UserDataServerRepository implements UserDataRepository {
   @override
   Future<Either<Failure, UserData>> changeAvatarUrl({required UserData userData, required String newAvatarUrl}) async {
     try {
-      final Either<Failure, UserDataModel> userDataModel = await userDataServerDatasource.putUserDataRequest(
-        id: userData.id,
-        userName: userData.username,
-        role: userData.role,
-        avatarUrl: newAvatarUrl,
-      );
-      final int id = userDataModel.fold(
-        (l) {
-          throw l;
-        },
-        (r) {
-          return r.id;
-        },
-      );
+      if (newAvatarUrl != userData.avatarUrl) {
+        final Either<Failure, UserDataModel> userDataModel = await userDataServerDatasource.putUserDataRequest(
+          id: userData.id,
+          userName: userData.username,
+          role: userData.role,
+          avatarUrl: newAvatarUrl,
+        );
+        final int id = userDataModel.fold(
+          (l) {
+            throw l;
+          },
+          (r) {
+            return r.id;
+          },
+        );
 
-      return (await userDataServerDatasource.getConcreteUserDataRequest(id: id));
+        return (await userDataServerDatasource.getConcreteUserDataRequest(id: id));
+      } else {
+        return Right(userData);
+      }
     } catch (e, stackTrace) {
-      return left(DataFailure(message: e.toString(), stackTrace: stackTrace));
+      return Left(DataFailure(message: e.toString(), stackTrace: stackTrace));
     }
   }
 
   @override
   Future<Either<Failure, UserData>> changeUserName({required UserData userData, required String newUserName}) async {
     try {
-      final Either<Failure, UserDataModel> userDataModel = await userDataServerDatasource.putUserDataRequest(
-        id: userData.id,
-        userName: newUserName,
-        role: userData.role,
-        avatarUrl: userData.avatarUrl,
-      );
-      final int id = userDataModel.fold(
-        (l) {
-          throw l;
-        },
-        (r) {
-          return r.id;
-        },
-      );
+      if (newUserName != userData.username) {
+        final Either<Failure, UserDataModel> userDataModel = await userDataServerDatasource.putUserDataRequest(
+          id: userData.id,
+          userName: newUserName,
+          role: userData.role,
+          avatarUrl: userData.avatarUrl,
+        );
+        final int id = userDataModel.fold(
+          (l) {
+            throw l;
+          },
+          (r) {
+            return r.id;
+          },
+        );
 
-      return (await userDataServerDatasource.getConcreteUserDataRequest(id: id));
+        return (await userDataServerDatasource.getConcreteUserDataRequest(id: id));
+      }
+
+      return Right(userData);
     } catch (e, stackTrace) {
-      return left(DataFailure(message: e.toString(), stackTrace: stackTrace));
+      return Left(DataFailure(message: e.toString(), stackTrace: stackTrace));
     }
   }
 }
