@@ -14,15 +14,16 @@ class AccountPage extends StatelessWidget {
   static const double roleHeight = 0.8;
 
   editOnTap() {}
+  photoOnPressed() {}
 
   const AccountPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    ColorScheme colorScheme = Theme.of(context).colorScheme;
-    Color colorSurface = colorScheme.surface;
-    Color colorSecondary = colorScheme.secondary;
-    Color colorPrimary = colorScheme.primary;
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final Color colorSurface = colorScheme.surface;
+    final Color colorSecondary = colorScheme.secondary;
+    final Color colorPrimary = colorScheme.primary;
 
     return Scaffold(
       backgroundColor: colorSurface,
@@ -39,6 +40,7 @@ class AccountPage extends StatelessWidget {
         ),
       ),
       body: Column(
+        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
@@ -48,9 +50,12 @@ class AccountPage extends StatelessWidget {
                 CircleAvatar(
                   radius: avatarRadius,
                   backgroundColor: colorPrimary,
-                  child: Icon(
-                    Icons.camera_alt_outlined,
-                    color: colorSecondary,
+                  child: IconButton(
+                    onPressed: photoOnPressed,
+                    icon: Icon(
+                      Icons.camera_alt_outlined,
+                      color: colorSecondary,
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -115,21 +120,57 @@ class AccountPage extends StatelessWidget {
               ),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TopicWidget(text: 'Topic #1'),
-                TopicWidget(text: 'Topic #2'),
-                TopicWidget(text: 'Topic #3'),
-                TopicWidget(text: 'Topic #4'),
-                TopicWidget(text: 'Topic #5'),
-                TopicWidget(text: 'Topic #6'),
-              ],
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: ListView(
+                children: [
+                  TopicWidget(text: 'Topic #1'),
+                  TopicWidget(text: 'Topic #2'),
+                  TopicWidget(text: 'Topic #3'),
+                  TopicWidget(text: 'Topic #4'),
+                  TopicWidget(text: 'Topic #5'),
+                  TopicWidget(text: 'Topic #6'),
+                  TopicWidget(text: 'Topic #1'),
+                  TopicWidget(text: 'Topic #2'),
+                  TopicWidget(text: 'Topic #3'),
+                  TopicWidget(text: 'Topic #4'),
+                  TopicWidget(text: 'Topic #5'),
+                  TopicWidget(text: 'Topic #6'),
+                  TopicWidget(text: 'Topic #1'),
+                  TopicWidget(text: 'Topic #2'),
+                  TopicWidget(text: 'Topic #3'),
+                  TopicWidget(text: 'Topic #4'),
+                  TopicWidget(text: 'Topic #5'),
+                  TopicWidget(text: 'Topic #6'),
+                  TopicWidget(text: 'Topic #1'),
+                  TopicWidget(text: 'Topic #2'),
+                  TopicWidget(text: 'Topic #3'),
+                  TopicWidget(text: 'Topic #4'),
+                  TopicWidget(text: 'Topic #5'),
+                  TopicWidget(text: 'Topic #6'),
+                  TopicWidget(text: 'Topic #1'),
+                  TopicWidget(text: 'Topic #2'),
+                  TopicWidget(text: 'Topic #3'),
+                  TopicWidget(text: 'Topic #4'),
+                  TopicWidget(text: 'Topic #5'),
+                  TopicWidget(text: 'Topic #6'),
+                  TopicWidget(text: 'Topic #1'),
+                  TopicWidget(text: 'Topic #2'),
+                  TopicWidget(text: 'Topic #3'),
+                  TopicWidget(text: 'Topic #4'),
+                  TopicWidget(text: 'Topic #5'),
+                  TopicWidget(text: 'Topic #6'),
+                  TopicWidget(text: 'Topic #1'),
+                  TopicWidget(text: 'Topic #2'),
+                  TopicWidget(text: 'Topic #3'),
+                  TopicWidget(text: 'Topic #4'),
+                  TopicWidget(text: 'Topic #5'),
+                  TopicWidget(text: 'Topic #6'),
+                ],
+              ),
             ),
           ),
-          Spacer(),
           NavigationBarWidget(),
         ],
       ),
