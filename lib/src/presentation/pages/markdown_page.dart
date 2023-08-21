@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 
 class MarkdownPage extends StatelessWidget {
   static const double fontSizeLight = 20.0;
@@ -23,7 +24,7 @@ class MarkdownPage extends StatelessWidget {
         leading: IconButton(
           onPressed: leadingOnTap,
           icon: Icon(
-            Icons.arrow_back_ios_new_sharp,
+            Icons.arrow_back_ios_sharp,
             color: colorSecondary,
           ),
         ),
@@ -46,12 +47,8 @@ class MarkdownPage extends StatelessWidget {
       ),
       body: Container(
         margin: EdgeInsets.all(marginContainer),
-        child: Text(
-          'Markdown article',
-          style: TextStyle(
-            fontSize: fontSizeLight,
-            fontWeight: FontWeight.w300,
-          ),
+        child: Markdown(
+          data: '## Markdown article',
         ),
       ),
     );
