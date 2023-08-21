@@ -4,8 +4,8 @@ class TextFieldWidget extends StatelessWidget {
   static const double fontSizeThin = 16.0;
   static const double contentPadding = 8.0;
   static const double cirRad = 8.0;
-
   final String text;
+
   TextFieldWidget({
     super.key,
     required this.text,
@@ -16,14 +16,18 @@ class TextFieldWidget extends StatelessWidget {
     final Color colorPr = Theme.of(context).colorScheme.primary;
 
     OutlineInputBorder outlineBord = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(cirRad),
+      borderRadius: BorderRadius.all(
+        Radius.circular(cirRad),
+      ),
       borderSide: BorderSide(
         color: colorPr,
         width: 1.0,
       ),
     );
     OutlineInputBorder outlineBord1 = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(cirRad),
+      borderRadius: BorderRadius.all(
+        Radius.circular(cirRad),
+      ),
       borderSide: BorderSide(
         color: colorPr,
         width: 1.0,

@@ -13,11 +13,12 @@ class TopicWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final Color colorSec = colorScheme.secondary;
+    void topicOnPressed() => Navigator.of(context).pushNamed('/markdown');
 
     return Row(
       children: [
         TextButton(
-          onPressed: () {},
+          onPressed: topicOnPressed,
           child: Text(
             text,
             style: TextStyle(

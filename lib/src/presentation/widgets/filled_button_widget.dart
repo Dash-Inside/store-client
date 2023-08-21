@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 class FilledButtonWidget extends StatelessWidget {
   static const double circleBorder = 8.0;
   static const double fontSize = 20.0;
-
   final String hintText;
+  final Function() filledButtonOnPressed;
 
   const FilledButtonWidget({
     super.key,
     required this.hintText,
+    required this.filledButtonOnPressed,
   });
 
   @override
@@ -25,7 +26,7 @@ class FilledButtonWidget extends StatelessWidget {
             ),
           ),
         ),
-        onPressed: () {},
+        onPressed: filledButtonOnPressed,
         child: Text(
           hintText,
           style: TextStyle(

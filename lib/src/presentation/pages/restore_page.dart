@@ -7,13 +7,16 @@ class RestorePage extends StatelessWidget {
   static const double edgeInsetsContainer = 16.0;
   static const double fontSizeHeaders = 28.0;
   static const int flex = 2;
+
   RestorePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    ColorScheme colorScheme = Theme.of(context).colorScheme;
-    Color colorSurface = colorScheme.surface;
-    Color colorSecondary = colorScheme.secondary;
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final Color colorSurface = colorScheme.surface;
+    final Color colorSecondary = colorScheme.secondary;
+    void backOnPressed() => Navigator.of(context).pop();
+    void filledButtonOnPressed() {}
 
     return Scaffold(
       backgroundColor: colorSurface,
@@ -21,9 +24,9 @@ class RestorePage extends StatelessWidget {
         backgroundColor: colorSurface,
         elevation: 0.0,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: backOnPressed,
           icon: Icon(
-            Icons.arrow_back_ios_new_sharp,
+            Icons.arrow_back_ios_new_rounded,
             color: colorSecondary,
           ),
         ),
@@ -50,7 +53,10 @@ class RestorePage extends StatelessWidget {
               ],
             ),
             Spacer(flex: flex),
-            FilledButtonWidget(hintText: 'Restore'),
+            FilledButtonWidget(
+              hintText: 'Restore',
+              filledButtonOnPressed: filledButtonOnPressed,
+            ),
           ],
         ),
       ),

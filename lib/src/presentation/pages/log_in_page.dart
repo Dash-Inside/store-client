@@ -4,19 +4,21 @@ import 'package:store_client/src/presentation/widgets/text_button_widget.dart';
 import 'package:store_client/src/presentation/widgets/text_field_widget.dart';
 
 class LoginPage extends StatelessWidget {
-  static const flex = 3;
+  static const int flex = 3;
   static const double sizedBoxHeight = 8.0;
   static const double letterSpacing = 0.5;
-
   static const double edgeInsetsAll = 16.0;
   static const double fontSizeThin = 16.0;
   static const double fontSizeHeaders = 28.0;
-  LoginPage({super.key});
+
+  const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    ColorScheme colorScheme = Theme.of(context).colorScheme;
-    Color colorSurf = colorScheme.surface;
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final Color colorSurf = colorScheme.surface;
+    void textButtonOnPressed() => Navigator.of(context).pushNamed('/restore');
+    void filledButtonOnPressed() => Navigator.of(context).pushNamed('/library');
 
     return Scaffold(
       backgroundColor: colorSurf,
@@ -48,11 +50,17 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: sizedBoxHeight),
             TextFieldWidget(text: 'Password'),
             Spacer(),
-            TextButtonWidget(text: 'Restore Account'),
+            TextButtonWidget(
+              text: 'Restore Account',
+              textButtonOnPressed: textButtonOnPressed,
+            ),
             SizedBox(
               height: sizedBoxHeight,
             ),
-            FilledButtonWidget(hintText: 'Log in'),
+            FilledButtonWidget(
+              hintText: 'Log in',
+              filledButtonOnPressed: filledButtonOnPressed,
+            ),
           ],
         ),
       ),
