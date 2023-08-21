@@ -13,18 +13,13 @@ import 'package:store_client/src/domain/repository/user_data_repository.dart';
 final GetIt services = GetIt.I;
 
 FutureOr<void> initServices() {
-  final FlutterSecureStorage flutterSecureStorage = FlutterSecureStorage();
-  services.registerLazySingleton<FlutterSecureStorage>(() => flutterSecureStorage);
+  services.registerLazySingleton<FlutterSecureStorage>(() => FlutterSecureStorage());
 
-  final MessengerRepository messengerServerRepository = MessengerServerRepository();
-  services.registerLazySingleton<MessengerRepository>(() => messengerServerRepository);
+  services.registerLazySingleton<MessengerServerDatasource>(() => MessengerServerDatasource());
 
-  final UserDataRepository userDataServerRepository = UserDataServerRepository();
-  services.registerLazySingleton<UserDataRepository>(() => userDataServerRepository);
+  services.registerLazySingleton<MessengerRepository>(() => MessengerServerRepository());
 
-  final LibraryRepository libraryServerRepository = LibraryServerRepository();
-  services.registerLazySingleton<LibraryRepository>(() => libraryServerRepository);
+  services.registerLazySingleton<UserDataRepository>(() => UserDataServerRepository());
 
-  final MessengerServerDatasource messengerServerDatasource = MessengerServerDatasource();
-  services.registerLazySingleton<MessengerServerDatasource>(() => messengerServerDatasource);
+  services.registerLazySingleton<LibraryRepository>(() => LibraryServerRepository());
 }
