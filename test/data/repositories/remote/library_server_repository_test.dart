@@ -22,6 +22,8 @@ Future<void> main() async {
 
           final Either<Failure, Unit> result = await libraryServerRepository.addFavoriteTopic(id: id);
 
+          verify(libraryServerRepository.addFavoriteTopic(id: id)).called(1);
+          verifyNoMoreInteractions(libraryServerRepository);
           expect(result.isRight(), true);
         },
       );
@@ -36,7 +38,14 @@ Future<void> main() async {
             data: "data",
             links: [],
           );
-
+          verify(
+            libraryServerRepository.addTopic(
+              title: "title",
+              data: "data",
+              links: [],
+            ),
+          ).called(1);
+          verifyNoMoreInteractions(libraryServerRepository);
           expect(result.isRight(), true);
         },
       );
@@ -47,7 +56,8 @@ Future<void> main() async {
           final LibraryServerRepository libraryServerRepository = testServices.get<LibraryServerRepository>();
 
           final Either<Failure, List<Section>> result = await libraryServerRepository.getAllSections();
-
+          verify(libraryServerRepository.getAllSections()).called(1);
+          verifyNoMoreInteractions(libraryServerRepository);
           expect(result.isRight(), true);
         },
       );
@@ -58,7 +68,8 @@ Future<void> main() async {
           final LibraryServerRepository libraryServerRepository = testServices.get<LibraryServerRepository>();
 
           final Either<Failure, List<Topic>> result = await libraryServerRepository.getAllTopicsBySectionID(id: id);
-
+          verify(libraryServerRepository.getAllTopicsBySectionID(id: id)).called(1);
+          verifyNoMoreInteractions(libraryServerRepository);
           expect(result.isRight(), true);
         },
       );
@@ -69,7 +80,8 @@ Future<void> main() async {
           final LibraryServerRepository libraryServerRepository = testServices.get<LibraryServerRepository>();
 
           final Either<Failure, Topic> result = await libraryServerRepository.getTopicDataByID(id: id);
-
+          verify(libraryServerRepository.getTopicDataByID(id: id)).called(1);
+          verifyNoMoreInteractions(libraryServerRepository);
           expect(result.isRight(), true);
         },
       );
@@ -80,7 +92,8 @@ Future<void> main() async {
           final LibraryServerRepository libraryServerRepository = testServices.get<LibraryServerRepository>();
 
           final Either<Failure, Unit> result = await libraryServerRepository.removeFavoriteTopic(id: id);
-
+          verify(libraryServerRepository.removeFavoriteTopic(id: id)).called(1);
+          verifyNoMoreInteractions(libraryServerRepository);
           expect(result.isRight(), true);
         },
       );
@@ -91,7 +104,8 @@ Future<void> main() async {
           final LibraryServerRepository libraryServerRepository = testServices.get<LibraryServerRepository>();
 
           final Either<Failure, Topic> result = await libraryServerRepository.searchTopicByTitle(title: 'title');
-
+          verify(libraryServerRepository.searchTopicByTitle(title: 'title')).called(1);
+          verifyNoMoreInteractions(libraryServerRepository);
           expect(result.isRight(), true);
         },
       );
