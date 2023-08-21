@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:get_it/get_it.dart';
+import 'package:store_client/src/data/repositories/remote/library_server_repository.dart';
 import 'package:store_client/src/data/repositories/remote/user_data_server_repository.dart';
 import 'package:store_client/src/domain/repository/user_data_repository.dart';
 import 'package:store_client/src/domain/repository/library_repository.dart';
@@ -22,4 +23,7 @@ FutureOr<void> initTestServices() {
 
   final MessengerRepository messengerRepository = MockMessengerRepository();
   testServices.registerLazySingleton<MessengerRepository>(() => messengerRepository);
+
+  final LibraryServerRepository libraryServerRepository = LibraryServerRepository();
+  testServices.registerLazySingleton<LibraryServerRepository>(() => libraryServerRepository);
 }
