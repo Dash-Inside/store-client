@@ -29,10 +29,13 @@ Future<void> main() async {
   group('user_data_server_repository_test', () {
     test('method loginUser test', () async {
       // Act.
-      UserDataServerRepository userDataServerDatasource = testServices.get<UserDataServerRepository>();
+      final UserDataServerRepository userDataServerDatasource = testServices.get<UserDataServerRepository>();
 
       // Arrange.
-      final Either<Failure, UserData> result = await userDataServerDatasource.loginUser(email: email, password: password);
+      final Either<Failure, UserData> result = await userDataServerDatasource.loginUser(
+        email: email,
+        password: password,
+      );
 
       // Accert.
       expect(result.isRight(), true);
@@ -40,10 +43,14 @@ Future<void> main() async {
 
     test('method restorePasswordUser test', () async {
       // Act.
-      UserDataServerRepository userDataServerDatasource = testServices.get<UserDataServerRepository>();
+      final UserDataServerRepository userDataServerDatasource = testServices.get<UserDataServerRepository>();
 
       // Arrange.
-      final Either<Failure, UserData> result = await userDataServerDatasource.restorePasswordUser(restoreCode: restoreCode, password: password, comfirmedPassword: comfirmedPassword);
+      final Either<Failure, UserData> result = await userDataServerDatasource.restorePasswordUser(
+        restoreCode: restoreCode,
+        password: password,
+        comfirmedPassword: comfirmedPassword,
+      );
 
       // Accert.
       expect(result.isRight(), true);
@@ -51,11 +58,17 @@ Future<void> main() async {
 
     test('method changeAvatarUrl test', () async {
       // Act.
-      UserDataServerRepository userDataServerRepository = testServices.get<UserDataServerRepository>();
+      final UserDataServerRepository userDataServerRepository = testServices.get<UserDataServerRepository>();
 
       // Arrange.
-      final Either<Failure, UserData> request = await userDataServerRepository.changeAvatarUrl(userData: userData, newAvatarUrl: newAvatarUrl);
-      final result = request.fold((l) => l, (r) => expect(r.avatarUrl == newAvatarUrl, true));
+      final Either<Failure, UserData> request = await userDataServerRepository.changeAvatarUrl(
+        userData: userData,
+        newAvatarUrl: newAvatarUrl,
+      );
+      final result = request.fold(
+        (l) => l,
+        (r) => expect(r.avatarUrl == newAvatarUrl, true),
+      );
 
       // Accert.
       expect(request.isRight(), true);
@@ -63,11 +76,17 @@ Future<void> main() async {
 
     test('method changeUserName test', () async {
       // Act.
-      UserDataServerRepository userDataServerRepository = testServices.get<UserDataServerRepository>();
+      final UserDataServerRepository userDataServerRepository = testServices.get<UserDataServerRepository>();
 
       // Arrange.
-      final Either<Failure, UserData> request = await userDataServerRepository.changeUserName(userData: userData, newUserName: newUserName);
-      final result = request.fold((l) => l, (r) => expect(r.username == newUserName, true));
+      final Either<Failure, UserData> request = await userDataServerRepository.changeUserName(
+        userData: userData,
+        newUserName: newUserName,
+      );
+      final result = request.fold(
+        (l) => l,
+        (r) => expect(r.username == newUserName, true),
+      );
 
       // Accert.
       expect(request.isRight(), true);
