@@ -8,11 +8,11 @@ import 'package:store_client/src/domain/entities/message.dart';
 import 'package:store_client/src/domain/repository/messenger_repository.dart';
 
 class FetchMessagesUseCase extends UseCase<List<Message>, Unit> {
-  final MessengerRepository messengerRepository =
-      services.get<MessengerRepository>();
-
   @override
   FutureOr<Either<Failure, List<Message>>> call(Unit params) {
+    final MessengerRepository messengerRepository =
+        services.get<MessengerRepository>();
+
     return messengerRepository.fetchMessages();
   }
 }

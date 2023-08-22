@@ -9,12 +9,12 @@ import 'package:store_client/src/domain/repository/user_data_repository.dart';
 
 class RestorePasswordUseCase
     extends UseCase<UserData, RestorePasswordUseCaseParams> {
-  final UserDataRepository userDataRepository =
-      services.get<UserDataRepository>();
-
   @override
   FutureOr<Either<Failure, UserData>> call(
       RestorePasswordUseCaseParams params) {
+    final UserDataRepository userDataRepository =
+        services.get<UserDataRepository>();
+
     return userDataRepository.restorePasswordUser(
       restoreCode: params.restoreCode,
       password: params.password,

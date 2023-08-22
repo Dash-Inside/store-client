@@ -8,11 +8,11 @@ import 'package:store_client/src/domain/entities/message.dart';
 import 'package:store_client/src/domain/repository/messenger_repository.dart';
 
 class SendMessageUsecase extends UseCase<Unit, Message> {
-  final MessengerRepository messengerRepository =
-      services.get<MessengerRepository>();
-
   @override
   FutureOr<Either<Failure, Unit>> call(Message message) {
+    final MessengerRepository messengerRepository =
+        services.get<MessengerRepository>();
+
     return messengerRepository.sendMessage(message: message);
   }
 }
