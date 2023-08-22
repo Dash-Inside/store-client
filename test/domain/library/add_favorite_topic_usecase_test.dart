@@ -6,6 +6,7 @@ import 'package:store_client/src/domain/repository/library_repository.dart';
 import 'package:store_client/src/domain/usecases/library/add_favorite_topic_usecase.dart';
 
 import '../../injector/services.dart';
+import 'package:store_client/core/services/services.dart';
 
 Future<void> main() async {
   const int id = 1;
@@ -16,7 +17,7 @@ Future<void> main() async {
       // Act.
 
       final LibraryRepository libraryRepository =
-          testServices.get<LibraryRepository>();
+          services.get<LibraryRepository>();
       when(libraryRepository.addFavoriteTopic(id: id)).thenAnswer(
         (_) async {
           return Right(unit);

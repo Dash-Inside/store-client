@@ -8,10 +8,11 @@ import 'package:store_client/src/domain/entities/section.dart';
 import 'package:store_client/src/domain/repository/library_repository.dart';
 
 class GetAllSectionsUseCase extends UseCase<List<Section>, Unit> {
-  final LibraryRepository libraryRepository = services.get<LibraryRepository>();
-
   @override
   FutureOr<Either<Failure, List<Section>>> call(Unit) {
+    final LibraryRepository libraryRepository =
+        services.get<LibraryRepository>();
+
     return libraryRepository.getAllSections();
   }
 }

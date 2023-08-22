@@ -8,10 +8,11 @@ import 'package:store_client/src/domain/entities/topic.dart';
 import 'package:store_client/src/domain/repository/library_repository.dart';
 
 class GetTopicByIDUseCase extends UseCase<Topic, int> {
-  final LibraryRepository libraryRepository = services.get<LibraryRepository>();
-
   @override
   FutureOr<Either<Failure, Topic>> call(int id) {
+    final LibraryRepository libraryRepository =
+        services.get<LibraryRepository>();
+
     return libraryRepository.getTopicDataByID(
       id: id,
     );

@@ -63,20 +63,14 @@ void main() {
             data: 'data',
             links: ['abc'],
           );
-          final TopicModel result = TopicModel(
-            id: 1,
-            title: 'title',
-            data: 'data',
-            links: ['abc'],
-          );
+
           expect(topicModelResult, topicModel);
         },
       );
       test(
         'test for fromJson',
         () {
-          const String source =
-              '{"id": 1,"attributes": {"title" : "title","data" : "data","links" : "abc","createdAt" : "2023-08-16T13:35:55.840Z","updatedAt" : "2023-08-16T13:36:04.409Z","publishedAt" : "2023-08-16T13:36:04.407Z"}}';
+          const String source = '{"id": 1,"attributes": {"title" : "title","data" : "data","links" : "abc","createdAt" : "2023-08-16T13:35:55.840Z","updatedAt" : "2023-08-16T13:36:04.409Z","publishedAt" : "2023-08-16T13:36:04.407Z"}}';
           final TopicModel result = TopicModel.fromJson(source);
           expect(result, topicModel);
         },

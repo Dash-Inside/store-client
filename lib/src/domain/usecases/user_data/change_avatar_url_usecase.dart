@@ -9,12 +9,12 @@ import 'package:store_client/src/domain/repository/user_data_repository.dart';
 
 class ChangeAvatarUrlUseCase
     extends UseCase<UserData, ChangeAvatarUrlUseCaseParams> {
-  final UserDataRepository userDataRepository =
-      services.get<UserDataRepository>();
-
   @override
   FutureOr<Either<Failure, UserData>> call(
       ChangeAvatarUrlUseCaseParams params) {
+    final UserDataRepository userDataRepository =
+        services.get<UserDataRepository>();
+
     return userDataRepository.changeAvatarUrl(
       userData: params.userData,
       newAvatarUrl: params.newAvatarUrl,
