@@ -31,6 +31,7 @@ class AccountPage extends StatelessWidget {
     final Color colorPrimary = colorScheme.primary;
     void editOnPressed() {}
     void photoOnPressed() {}
+    void topicOnPressed() {}
 
     return Scaffold(
       backgroundColor: colorSurface,
@@ -134,7 +135,10 @@ class AccountPage extends StatelessWidget {
               child: ListView.builder(
                 itemCount: listTopics.length,
                 itemBuilder: (context, index) {
-                  return TopicWidget(text: listTopics[index]);
+                  return TopicWidget(
+                    text: listTopics[index],
+                    topicOnPressed: topicOnPressed,
+                  );
                 },
               ),
             ),

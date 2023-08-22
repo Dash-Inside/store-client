@@ -11,7 +11,7 @@ class ChatPage extends StatelessWidget {
   static const double iconSize = 24.0;
   static const double textFieldPadding = 8.0;
   final int ourId = 3;
-  List<Message> messageList = [
+  final List<Message> messageList = [
     Message(id: 1, data: "123", senderId: 4),
     Message(id: 2, data: "ghbgt", senderId: 4),
     Message(id: 3, data: "ytrt", senderId: 3),

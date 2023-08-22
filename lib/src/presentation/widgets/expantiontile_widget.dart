@@ -30,6 +30,7 @@ class ExpantionTileWidget extends StatelessWidget {
     final Color colorPr = colorScheme.primary;
     final ThemeData theme =
         Theme.of(context).copyWith(dividerColor: Colors.transparent);
+    void topicOnPressed() => Navigator.of(context).pushNamed('/markdown');
 
     return Container(
       margin: EdgeInsets.only(
@@ -70,6 +71,7 @@ class ExpantionTileWidget extends StatelessWidget {
             children: List.generate(
               topicList.length,
               (index) => TopicWidget(
+                topicOnPressed: topicOnPressed,
                 text: topicList[index],
               ),
             ),

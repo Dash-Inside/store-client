@@ -15,11 +15,18 @@ class NavigationBarWidget extends StatelessWidget {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final Color colorSec = colorScheme.secondary;
     final Color colorTet = colorScheme.tertiary;
+    final colorSurf = colorScheme.surface;
     void chatOnTap() => Navigator.of(context).pushNamed('/chat');
     void libraryOnTap() => Navigator.of(context).pushNamed('/library');
     void accountOnTap() => Navigator.of(context).pushNamed('/account');
 
     return Container(
+      decoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(color: Colors.black26),
+        ),
+        color: colorSurf,
+      ),
       padding: EdgeInsets.symmetric(
         vertical: paddingSymmetric,
       ),
@@ -32,7 +39,7 @@ class NavigationBarWidget extends StatelessWidget {
               child: Column(
                 children: [
                   Icon(
-                    Icons.chat_rounded,
+                    Icons.chat_outlined,
                     size: iconSize,
                     color: colorSec,
                   ),
@@ -56,7 +63,7 @@ class NavigationBarWidget extends StatelessWidget {
               child: Column(
                 children: [
                   Icon(
-                    Icons.menu_book_rounded,
+                    Icons.library_books_outlined,
                     size: iconSize,
                     color: colorSec,
                   ),
