@@ -6,6 +6,7 @@ import 'package:store_client/src/domain/entities/topic.dart';
 import 'package:store_client/src/domain/repository/library_repository.dart';
 import 'package:store_client/src/domain/usecases/library/get_topic_by_id_usecase.dart';
 import '../../injector/services.dart';
+import 'package:store_client/core/services/services.dart';
 
 Future<void> main() async {
   const int id = 1;
@@ -18,7 +19,8 @@ Future<void> main() async {
   await initTestServices();
   test('get_topic_by_id_usecase_test', () async {
     // Act.
-    final LibraryRepository libraryRepository = services.get<LibraryRepository>();
+    final LibraryRepository libraryRepository =
+        services.get<LibraryRepository>();
     when(libraryRepository.getTopicDataByID(id: id)).thenAnswer(
       (_) async {
         return Right(topic);

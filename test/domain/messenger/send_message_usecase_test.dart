@@ -6,6 +6,7 @@ import 'package:store_client/src/domain/entities/message.dart';
 import 'package:store_client/src/domain/repository/messenger_repository.dart';
 import 'package:store_client/src/domain/usecases/messenger/send_message_usecase.dart';
 import '../../injector/services.dart';
+import 'package:store_client/core/services/services.dart';
 
 Future<void> main() async {
   await initTestServices();
@@ -14,7 +15,8 @@ Future<void> main() async {
     "sender_message_usecase_test",
     () async {
       // Act.
-      final MessengerRepository messengerRepository = services.get<MessengerRepository>();
+      final MessengerRepository messengerRepository =
+          services.get<MessengerRepository>();
       when(messengerRepository.sendMessage(message: message)).thenAnswer(
         (realInvocation) async {
           return Right(unit);
@@ -23,7 +25,8 @@ Future<void> main() async {
 
       // Arrange.
       final SendMessageUsecase sendMessageUsecase = SendMessageUsecase();
-      final Either<Failure, Unit> result = await sendMessageUsecase.call(message);
+      final Either<Failure, Unit> result =
+          await sendMessageUsecase.call(message);
 
       // Assert.
       verify(messengerRepository.sendMessage(message: message)).called(1);

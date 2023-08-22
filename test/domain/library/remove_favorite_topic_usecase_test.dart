@@ -5,12 +5,14 @@ import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/src/domain/repository/library_repository.dart';
 import 'package:store_client/src/domain/usecases/library/remove_favorite_topic_usecase.dart';
 import '../../injector/services.dart';
+import 'package:store_client/core/services/services.dart';
 
 Future<void> main() async {
   const int id = 1;
   test('remove_favorite_topic_usecase_test', () async {
     // Act.
-    final LibraryRepository libraryRepository = services.get<LibraryRepository>();
+    final LibraryRepository libraryRepository =
+        services.get<LibraryRepository>();
     when(libraryRepository.removeFavoriteTopic(id: id)).thenAnswer(
       (_) async {
         return Right(unit);
@@ -18,8 +20,10 @@ Future<void> main() async {
     );
     await initTestServices();
     // Arrange.
-    final RemoveFavoriteTopicUseCase removeFavoriteTopicUseCase = RemoveFavoriteTopicUseCase();
-    final Either<Failure, Unit> result = await removeFavoriteTopicUseCase.call(id);
+    final RemoveFavoriteTopicUseCase removeFavoriteTopicUseCase =
+        RemoveFavoriteTopicUseCase();
+    final Either<Failure, Unit> result =
+        await removeFavoriteTopicUseCase.call(id);
 
     // Accert.
     verify(libraryRepository.removeFavoriteTopic(id: id)).called(1);

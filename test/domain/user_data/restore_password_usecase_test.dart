@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:store_client/core/failure/failure.dart';
+import 'package:store_client/core/services/services.dart';
 import 'package:store_client/src/data/repositories/remote/user_data_server_repository.dart';
 import 'package:store_client/src/domain/entities/role.dart';
 import 'package:store_client/src/domain/entities/user_data.dart';
@@ -25,7 +26,8 @@ Future<void> main() async {
   final String password = 'password';
   final String comfirmedPassword = 'comfirmedPassword';
 
-  final RestorePasswordUseCaseParams restorePasswordUseCaseParams = RestorePasswordUseCaseParams(
+  final RestorePasswordUseCaseParams restorePasswordUseCaseParams =
+      RestorePasswordUseCaseParams(
     restoreCode: restoreCode,
     password: password,
     comfirmedPassword: comfirmedPassword,
@@ -33,7 +35,8 @@ Future<void> main() async {
 
   test('restore_password_usecase_test', () async {
     // Act.
-    final UserDataRepository userDataRepository = services.get<UserDataRepository>();
+    final UserDataRepository userDataRepository =
+        services.get<UserDataRepository>();
     when(userDataRepository.restorePasswordUser(
       restoreCode: restoreCode,
       password: password,
@@ -43,8 +46,10 @@ Future<void> main() async {
     });
 
     // Arrange.
-    final RestorePasswordUseCase restorePasswordUseCase = RestorePasswordUseCase();
-    final FutureOr<Either<Failure, UserData>> result = await restorePasswordUseCase.call(restorePasswordUseCaseParams);
+    final RestorePasswordUseCase restorePasswordUseCase =
+        RestorePasswordUseCase();
+    final FutureOr<Either<Failure, UserData>> result =
+        await restorePasswordUseCase.call(restorePasswordUseCaseParams);
 
     // Accert.
     verify(userDataRepository.restorePasswordUser(

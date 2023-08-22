@@ -6,6 +6,7 @@ import 'package:store_client/src/domain/entities/topic.dart';
 import 'package:store_client/src/domain/repository/library_repository.dart';
 import 'package:store_client/src/domain/usecases/library/search_topic_by_title_usecase.dart';
 import '../../injector/services.dart';
+import 'package:store_client/core/services/services.dart';
 
 Future<void> main() async {
   const String title = 'title';
@@ -18,7 +19,8 @@ Future<void> main() async {
   await initTestServices();
   test('search_topic_by_title_usecase_test', () async {
     // Act.
-    final LibraryRepository libraryRepository = services.get<LibraryRepository>();
+    final LibraryRepository libraryRepository =
+        services.get<LibraryRepository>();
     when(libraryRepository.searchTopicByTitle(title: title)).thenAnswer(
       (_) async {
         return Right(topic);
@@ -26,8 +28,10 @@ Future<void> main() async {
     );
 
     // Arrange.
-    final SearchTopicByTitleUseCase searchTopicByTitleUseCase = SearchTopicByTitleUseCase();
-    final Either<Failure, Topic> result = await searchTopicByTitleUseCase.call(title);
+    final SearchTopicByTitleUseCase searchTopicByTitleUseCase =
+        SearchTopicByTitleUseCase();
+    final Either<Failure, Topic> result =
+        await searchTopicByTitleUseCase.call(title);
 
     // Accert.
     verify(libraryRepository.searchTopicByTitle(title: title)).called(1);
