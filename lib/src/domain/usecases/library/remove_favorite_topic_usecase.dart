@@ -7,10 +7,11 @@ import 'package:store_client/core/usecases/usecases.dart';
 import 'package:store_client/src/domain/repository/library_repository.dart';
 
 class RemoveFavoriteTopicUseCase extends UseCase<Unit, int> {
-  final LibraryRepository libraryRepository = services.get<LibraryRepository>();
-
   @override
   FutureOr<Either<Failure, Unit>> call(int id) {
+    final LibraryRepository libraryRepository =
+        services.get<LibraryRepository>();
+
     return libraryRepository.removeFavoriteTopic(
       id: id,
     );

@@ -9,11 +9,11 @@ import 'package:store_client/src/domain/repository/user_data_repository.dart';
 
 class ChangeUserNameUseCase
     extends UseCase<UserData, ChangeUserNameUseCaseParams> {
-  final UserDataRepository userDataRepository =
-      services.get<UserDataRepository>();
-
   @override
   FutureOr<Either<Failure, UserData>> call(ChangeUserNameUseCaseParams params) {
+    final UserDataRepository userDataRepository =
+        services.get<UserDataRepository>();
+
     return userDataRepository.changeUserName(
       userData: params.userData,
       newUserName: params.newUserName,

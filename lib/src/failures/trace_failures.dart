@@ -13,3 +13,11 @@ class ParamsFailure extends Failure {
           stackTrace: T,
         );
 }
+
+class ServerFailure extends Failure {
+  ServerFailure(StackTrace T)
+      : super(
+          message: 'Server failure',
+          stackTrace: T,
+        );
+}
