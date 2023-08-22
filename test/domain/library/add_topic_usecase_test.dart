@@ -18,7 +18,7 @@ Future<void> main() async {
     "add_topic_usecase_test",
     () async {
       // Act.
-      final LibraryRepository libraryRepository = testServices.get<LibraryRepository>();
+      final LibraryRepository libraryRepository = services.get<LibraryRepository>();
       when(libraryRepository.addTopic(
         title: title,
         data: data,

@@ -15,8 +15,7 @@ Future<void> main() async {
     () async {
       // Act.
 
-      final LibraryRepository libraryRepository =
-          testServices.get<LibraryRepository>();
+      final LibraryRepository libraryRepository = services.get<LibraryRepository>();
       when(libraryRepository.addFavoriteTopic(id: id)).thenAnswer(
         (_) async {
           return Right(unit);
@@ -24,10 +23,8 @@ Future<void> main() async {
       );
 
       // Arrange.
-      final AddFavoriteTopicUseCase addFavoriteTopicUseCase =
-          AddFavoriteTopicUseCase();
-      final Either<Failure, Unit> result =
-          await addFavoriteTopicUseCase.call(id);
+      final AddFavoriteTopicUseCase addFavoriteTopicUseCase = AddFavoriteTopicUseCase();
+      final Either<Failure, Unit> result = await addFavoriteTopicUseCase.call(id);
 
       // Assert.
       verify(libraryRepository.addFavoriteTopic(id: id)).called(1);

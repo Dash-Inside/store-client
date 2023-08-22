@@ -18,7 +18,7 @@ Future<void> main() async {
   await initTestServices();
   test('search_topic_by_title_usecase_test', () async {
     // Act.
-    final LibraryRepository libraryRepository = testServices.get<LibraryRepository>();
+    final LibraryRepository libraryRepository = services.get<LibraryRepository>();
     when(libraryRepository.searchTopicByTitle(title: title)).thenAnswer(
       (_) async {
         return Right(topic);

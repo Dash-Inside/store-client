@@ -28,7 +28,7 @@ Future<void> main() async {
 
   test('change_username_usecase_test', () async {
     // Act.
-    final UserDataRepository userDataRepository = testServices.get<UserDataRepository>();
+    final UserDataRepository userDataRepository = services.get<UserDataRepository>();
     when(userDataRepository.changeUserName(
       userData: userData,
       newUserName: newUserName,

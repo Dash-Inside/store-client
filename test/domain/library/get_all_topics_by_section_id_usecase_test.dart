@@ -22,7 +22,7 @@ Future<void> main() async {
     'get_all_topics_by_section_id_usecase_test',
     () async {
       // Act.
-      final LibraryRepository libraryRepository = testServices.get<LibraryRepository>();
+      final LibraryRepository libraryRepository = services.get<LibraryRepository>();
       when(libraryRepository.getAllTopicsBySectionID(id: id)).thenAnswer(
         (_) async {
           return Right(listTopic);

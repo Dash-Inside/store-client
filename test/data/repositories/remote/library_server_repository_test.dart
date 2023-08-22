@@ -17,7 +17,7 @@ Future<void> main() async {
       test(
         "addFavoriteTopic",
         () async {
-          final LibraryServerRepository libraryServerRepository = testServices.get<LibraryServerRepository>();
+          final LibraryServerRepository libraryServerRepository = services.get<LibraryServerRepository>();
 
           final Either<Failure, Unit> result = await libraryServerRepository.addFavoriteTopic(id: id);
 
@@ -30,7 +30,7 @@ Future<void> main() async {
       test(
         "addTopic",
         () async {
-          final LibraryServerRepository libraryServerRepository = testServices.get<LibraryServerRepository>();
+          final LibraryServerRepository libraryServerRepository = services.get<LibraryServerRepository>();
 
           final Either<Failure, Unit> result = await libraryServerRepository.addTopic(
             title: "title",
@@ -52,7 +52,7 @@ Future<void> main() async {
       test(
         "getAllSections",
         () async {
-          final LibraryServerRepository libraryServerRepository = testServices.get<LibraryServerRepository>();
+          final LibraryServerRepository libraryServerRepository = services.get<LibraryServerRepository>();
 
           final Either<Failure, List<Section>> result = await libraryServerRepository.getAllSections();
           verify(libraryServerRepository.getAllSections()).called(1);
@@ -64,7 +64,7 @@ Future<void> main() async {
       test(
         "getAllTopicsBySectionID",
         () async {
-          final LibraryServerRepository libraryServerRepository = testServices.get<LibraryServerRepository>();
+          final LibraryServerRepository libraryServerRepository = services.get<LibraryServerRepository>();
 
           final Either<Failure, List<Topic>> result = await libraryServerRepository.getAllTopicsBySectionID(id: id);
           verify(libraryServerRepository.getAllTopicsBySectionID(id: id)).called(1);
@@ -76,7 +76,7 @@ Future<void> main() async {
       test(
         "getTopicDataByID",
         () async {
-          final LibraryServerRepository libraryServerRepository = testServices.get<LibraryServerRepository>();
+          final LibraryServerRepository libraryServerRepository = services.get<LibraryServerRepository>();
 
           final Either<Failure, Topic> result = await libraryServerRepository.getTopicDataByID(id: id);
           verify(libraryServerRepository.getTopicDataByID(id: id)).called(1);
@@ -88,7 +88,7 @@ Future<void> main() async {
       test(
         "removeFavoriteTopic",
         () async {
-          final LibraryServerRepository libraryServerRepository = testServices.get<LibraryServerRepository>();
+          final LibraryServerRepository libraryServerRepository = services.get<LibraryServerRepository>();
 
           final Either<Failure, Unit> result = await libraryServerRepository.removeFavoriteTopic(id: id);
           verify(libraryServerRepository.removeFavoriteTopic(id: id)).called(1);
@@ -100,7 +100,7 @@ Future<void> main() async {
       test(
         "searchTopicByTitle",
         () async {
-          final LibraryServerRepository libraryServerRepository = testServices.get<LibraryServerRepository>();
+          final LibraryServerRepository libraryServerRepository = services.get<LibraryServerRepository>();
 
           final Either<Failure, Topic> result = await libraryServerRepository.searchTopicByTitle(title: 'title');
           verify(libraryServerRepository.searchTopicByTitle(title: 'title')).called(1);

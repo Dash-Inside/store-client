@@ -33,7 +33,7 @@ Future<void> main() async {
 
   test('restore_password_usecase_test', () async {
     // Act.
-    final UserDataRepository userDataRepository = testServices.get<UserDataRepository>();
+    final UserDataRepository userDataRepository = services.get<UserDataRepository>();
     when(userDataRepository.restorePasswordUser(
       restoreCode: restoreCode,
       password: password,

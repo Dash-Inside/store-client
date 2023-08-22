@@ -10,7 +10,7 @@ Future<void> main() async {
   const int id = 1;
   test('remove_favorite_topic_usecase_test', () async {
     // Act.
-    final LibraryRepository libraryRepository = testServices.get<LibraryRepository>();
+    final LibraryRepository libraryRepository = services.get<LibraryRepository>();
     when(libraryRepository.removeFavoriteTopic(id: id)).thenAnswer(
       (_) async {
         return Right(unit);

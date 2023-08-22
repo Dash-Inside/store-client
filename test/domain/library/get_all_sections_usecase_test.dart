@@ -19,7 +19,7 @@ Future<void> main() async {
     "get_all_sections_usecase_test",
     () async {
       // Act.
-      final LibraryRepository libraryRepository = testServices.get<LibraryRepository>();
+      final LibraryRepository libraryRepository = services.get<LibraryRepository>();
       when(libraryRepository.getAllSections()).thenAnswer((_) async {
         return Right(listSection);
       });

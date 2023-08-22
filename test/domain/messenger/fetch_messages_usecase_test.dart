@@ -19,7 +19,7 @@ Future<void> main() async {
     'fetch_messages_usecase_test',
     () async {
       // Act.
-      final MessengerRepository messengerRepository = testServices.get<MessengerRepository>();
+      final MessengerRepository messengerRepository = services.get<MessengerRepository>();
       when(messengerRepository.fetchMessages()).thenAnswer(
         (_) async {
           return Right(listmess);

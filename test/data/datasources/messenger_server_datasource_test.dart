@@ -17,7 +17,7 @@ void main() async {
 
   group('messenger_server_datasource_test', () {
     test('method_getAllMessages_test', () async {
-      final MessengerServerDatasource messengerServerDatasource = testServices.get<MessengerServerDatasource>();
+      final MessengerServerDatasource messengerServerDatasource = services.get<MessengerServerDatasource>();
 
       final Either<Failure, List<Message>> result = await messengerServerDatasource.getAllMessages();
 
@@ -25,7 +25,7 @@ void main() async {
     });
 
     test('method_sendMessage_test', () async {
-      final MessengerServerDatasource messengerServerDatasource = testServices.get<MessengerServerDatasource>();
+      final MessengerServerDatasource messengerServerDatasource = services.get<MessengerServerDatasource>();
 
       final Either<Failure, Unit> result = await messengerServerDatasource.sendMessage(message: message);
 
