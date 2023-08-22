@@ -41,11 +41,20 @@ class TopicModel extends Topic {
   }
 
   Map<String, dynamic> toMap() {
+    String strLinks = '';
+
+    if (links != null) {
+      links!.forEach((element) {
+        strLinks = strLinks + " " + element;
+      });
+    }
+
     return <String, dynamic>{
-      'id': id,
-      'title': title,
-      'data': data,
-      'links': links,
+      'data': {
+        'title': title,
+        'data': data,
+        'links': strLinks,
+      }
     };
   }
 
