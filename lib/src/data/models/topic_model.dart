@@ -46,10 +46,12 @@ class TopicModel extends Topic {
       str = links!.join(';');
     }
     return <String, dynamic>{
-      'id': id,
-      'title': title,
-      'data': data,
-      'links': str,
+      "data": {
+        'id': id,
+        'title': title,
+        'data': data,
+        'links': str,
+      }
     };
   }
 
