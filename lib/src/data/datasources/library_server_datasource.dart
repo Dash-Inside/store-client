@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:store_client/core/failure/failure.dart';
@@ -40,19 +42,64 @@ class LibraryServerDatasource {
     }
   }
 
-  Future<Either<Failure, List<Topic>>> getAllTopics() async {
+  Future<Either<Failure, Unit>> addSection({required Section section}) async {
+    try {
+      SectionModel sectionModel = SectionModel(
+        title: section.title,
+        id: section.id,
+        topicId: section.topicId,
+      );
+
+      final Response response = await _client.post(
+        _sectionURL,
+        data: <String, dynamic>{
+          'data': {
+            'title': section.title,
+            'topicID': section.topicId,
+            'id': section.id,
+          },
+        },
+      );
+
+      return Right(unit);
+    } catch (_e, stacktrace) {
+      return Left(ServerFailureSendSections(stacktrace));
+    }
+  }
+
+  Future<Either<Failure, Unit>> updateSection({required Section section}) async {
+    try {
+      final Response response2 = await _client.put(
+        ('${_sectionURL}/${section.id}'),
+        data: jsonEncode(
+          <String, dynamic>{
+            'data': {
+              'title': section.title,
+              'topicID': section.topicId,
+            },
+          },
+        ),
+      );
+
+      return Right(unit);
+    } catch (_e, stacktrace) {
+      return Left(ServerFailureSendSections(stacktrace));
+    }
+  }
+
+  Future<Either<Failure, List<TopicModel>>> getAllTopics() async {
     try {
       final Response response = await _client.get(_topicURL);
-      final List<dynamic> lsMap = response.data['data'];
-      List<Topic> lsTopics = [];
+      final List<dynamic> listMap = response.data['data'];
+      List<TopicModel> listTopics = [];
 
-      lsMap.forEach((element) {
-        lsTopics.add(TopicModel.fromMap(element));
+      listMap.forEach((element) {
+        listTopics.add(TopicModel.fromMap(element as Map<String, dynamic>));
       });
-
-      return Right(lsTopics);
-    } catch (_e, stacktrace) {
-      return Left(ServerFailureGetTopics(stacktrace));
+      print(listTopics);
+      return Right(listTopics);
+    } catch (e, stackTrace) {
+      return Left(DataFailure(message: '$e', stackTrace: stackTrace));
     }
   }
 
@@ -64,6 +111,19 @@ class LibraryServerDatasource {
       return Right(topic);
     } catch (_e, stacktrace) {
       return Left(ServerFailureGetTopics(stacktrace));
+    }
+  }
+
+  Future<Either<Failure, Unit>> updateTopic({required TopicModel topic}) async {
+    try {
+      final Response response2 = await _client.put(
+        ('${_topicURL}/${topic.id}'),
+        data: jsonEncode(topic.toMap()),
+      );
+
+      return Right(unit);
+    } catch (_e, stacktrace) {
+      return Left(ServerFailureSendSections(stacktrace));
     }
   }
 
