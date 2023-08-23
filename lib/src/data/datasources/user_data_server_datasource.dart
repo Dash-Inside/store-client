@@ -17,7 +17,8 @@ class UserDataServerDatasource {
 
   Future<Either<Failure, List<UserDataModel>>> getAllUserDataRequest() async {
     try {
-      final Response response = await client.get('http://127.0.0.1:1337/api/user-data/');
+      final Response response =
+          await client.get('http://127.0.0.1:1337/api/user-data/');
       final List<dynamic> listMapAllRequest = response.data['data'];
       final List<UserDataModel> result = [];
       listMapAllRequest.forEach((element) {
@@ -34,7 +35,8 @@ class UserDataServerDatasource {
     required int id,
   }) async {
     try {
-      final Response response = await client.get('http://127.0.0.1:1337/api/user-data/$id');
+      final Response response =
+          await client.get('http://127.0.0.1:1337/api/user-data/$id');
 
       return Right(UserDataModel.fromMap(response.data['data']));
     } catch (e, stackTrace) {
@@ -44,9 +46,9 @@ class UserDataServerDatasource {
 
   Future<Either<Failure, UserDataModel>> putUserDataRequest({
     required int id,
-    required String? userName,
-    required Role? role,
-    required String? avatarUrl,
+    String? userName,
+    Role? role,
+    String? avatarUrl,
   }) async {
     try {
       final Map<String, dynamic> mapParams = {'data': {}};
@@ -77,7 +79,8 @@ class UserDataServerDatasource {
     required String password,
   }) async {
     try {
-      final FlutterSecureStorage flutterSecureStorage = services.get<FlutterSecureStorage>();
+      final FlutterSecureStorage flutterSecureStorage =
+          services.get<FlutterSecureStorage>();
       final Response response = await client.post(
         'http://127.0.0.1:1337/api/auth/local',
         data: <String, dynamic>{
@@ -85,7 +88,8 @@ class UserDataServerDatasource {
           "password": password,
         },
       );
-      await flutterSecureStorage.write(key: _jwtKey, value: response.data['jwt']);
+      await flutterSecureStorage.write(
+          key: _jwtKey, value: response.data['jwt']);
 
       return Right(UserModel.fromMap(response.data['user']));
     } catch (e, stackTrace) {
@@ -99,10 +103,14 @@ class UserDataServerDatasource {
     required String newPasswordConfirmation,
   }) async {
     try {
-      final FlutterSecureStorage flutterSecureStorage = services.get<FlutterSecureStorage>();
+      final FlutterSecureStorage flutterSecureStorage =
+          services.get<FlutterSecureStorage>();
       final Response response = await client.post(
         'http://127.0.0.1:1337/api/auth/change-password',
-        options: Options(headers: {'Authorization': 'Bearer ${await flutterSecureStorage.read(key: _jwtKey)}'}),
+        options: Options(headers: {
+          'Authorization':
+              'Bearer ${await flutterSecureStorage.read(key: _jwtKey)}'
+        }),
         data: jsonEncode(
           <String, dynamic>{
             "currentPassword": currentPassword,
@@ -111,7 +119,8 @@ class UserDataServerDatasource {
           },
         ),
       );
-      await flutterSecureStorage.write(key: _jwtKey, value: response.data['jwt']);
+      await flutterSecureStorage.write(
+          key: _jwtKey, value: response.data['jwt']);
 
       return Right(UserModel.fromMap(response.data['user']));
     } catch (e, stackTrace) {

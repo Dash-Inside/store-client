@@ -31,7 +31,8 @@ class LibraryServerDatasource {
     }
   }
 
-  Future<Either<Failure, SectionModel>> getConcreteSection({required int id}) async {
+  Future<Either<Failure, SectionModel>> getConcreteSection(
+      {required int id}) async {
     try {
       final Response response = await _client.get('${_sectionURL}/$id');
       final Section section = SectionModel.fromMap(response.data['data']);
@@ -43,7 +44,6 @@ class LibraryServerDatasource {
   }
 
   Future<Either<Failure, SectionModel>> addSection({
-    required int id,
     required String title,
     required int topicId,
   }) async {
@@ -111,7 +111,8 @@ class LibraryServerDatasource {
     }
   }
 
-  Future<Either<Failure, TopicModel>> getConcreteTopicByID({required int id}) async {
+  Future<Either<Failure, TopicModel>> getConcreteTopicByID(
+      {required int id}) async {
     try {
       final Response response = await _client.get('${_topicURL}/$id');
       final Topic topic = TopicModel.fromMap(response.data['data']);
@@ -180,7 +181,8 @@ class LibraryServerDatasource {
     }
   }
 
-  Future<Either<Failure, TopicModel>> getConcreteFavorite({required int id}) async {
+  Future<Either<Failure, TopicModel>> getConcreteFavorite(
+      {required int id}) async {
     try {
       final Response response = await _client.get('${_favoriteTopicURL}/$id');
       final Topic favoriteTopic = TopicModel.fromMap(response.data['data']);
@@ -191,7 +193,8 @@ class LibraryServerDatasource {
     }
   }
 
-  Future<Either<Failure, TopicModel>> addFavoriteTopic({required int id}) async {
+  Future<Either<Failure, TopicModel>> addFavoriteTopic(
+      {required int id}) async {
     try {
       final Response response2 = await _client.post(
         _favoriteTopicURL,
@@ -204,9 +207,11 @@ class LibraryServerDatasource {
     }
   }
 
-  Future<Either<Failure, TopicModel>> deleteConcreteFavorite({required int id}) async {
+  Future<Either<Failure, TopicModel>> deleteConcreteFavorite(
+      {required int topicId, required int userId}) async {
     try {
-      final Response response = await _client.delete('${_favoriteTopicURL}/$id');
+      final Response response =
+          await _client.delete('${_favoriteTopicURL}/$id');
 
       return Right(unit);
     } catch (_e, stacktrace) {

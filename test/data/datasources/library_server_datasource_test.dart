@@ -15,7 +15,7 @@ void main() async {
   const int topicId = 1;
   const String data = 'data';
   const List<String> links = ['links'];
-
+  const int userId = 1;
   SectionModel sectionModel = SectionModel(
     id: id,
     title: title,
@@ -32,36 +32,43 @@ void main() async {
   await initTestServices();
   group('library_server_datasource_test', () {
     test('method getAllSections test', () async {
-      final LibraryServerDatasource libraryServerDatasource = services<LibraryServerDatasource>();
+      final LibraryServerDatasource libraryServerDatasource =
+          services<LibraryServerDatasource>();
 
-      final Either<Failure, List<SectionModel>> result = await libraryServerDatasource.getAllSections();
+      final Either<Failure, List<SectionModel>> result =
+          await libraryServerDatasource.getAllSections();
 
       expect(result.isRight(), true);
     });
 
     group('method getConcreteSection test', () {
       test('getConcreteSection true', () async {
-        final LibraryServerDatasource libraryServerDatasource = services<LibraryServerDatasource>();
+        final LibraryServerDatasource libraryServerDatasource =
+            services<LibraryServerDatasource>();
 
-        final Either<Failure, SectionModel> result = await libraryServerDatasource.getConcreteSection(id: id);
+        final Either<Failure, SectionModel> result =
+            await libraryServerDatasource.getConcreteSection(id: id);
 
         expect(result.isRight(), true);
       });
 
       test('getConcreteSection false', () async {
-        final LibraryServerDatasource libraryServerDatasource = services<LibraryServerDatasource>();
+        final LibraryServerDatasource libraryServerDatasource =
+            services<LibraryServerDatasource>();
 
-        final Either<Failure, SectionModel> result = await libraryServerDatasource.getConcreteSection(id: incorrectId);
+        final Either<Failure, SectionModel> result =
+            await libraryServerDatasource.getConcreteSection(id: incorrectId);
 
         expect(result.isLeft(), false);
       });
     });
 
     test('method addSection test', () async {
-      final LibraryServerDatasource libraryServerDatasource = services<LibraryServerDatasource>();
+      final LibraryServerDatasource libraryServerDatasource =
+          services<LibraryServerDatasource>();
 
-      final Either<Failure, SectionModel> result = await libraryServerDatasource.addSection(
-        id: id,
+      final Either<Failure, SectionModel> result =
+          await libraryServerDatasource.addSection(
         title: title,
         topicId: topicId,
       );
@@ -71,9 +78,11 @@ void main() async {
 
     group('method updateSection test', () {
       test('updateSection with params', () async {
-        final LibraryServerDatasource libraryServerDatasource = services<LibraryServerDatasource>();
+        final LibraryServerDatasource libraryServerDatasource =
+            services<LibraryServerDatasource>();
 
-        final Either<Failure, SectionModel> result = await libraryServerDatasource.updateSection(
+        final Either<Failure, SectionModel> result =
+            await libraryServerDatasource.updateSection(
           id: id,
           title: title,
           topicId: topicId,
@@ -83,9 +92,11 @@ void main() async {
       });
 
       test('updateSection without params', () async {
-        final LibraryServerDatasource libraryServerDatasource = services<LibraryServerDatasource>();
+        final LibraryServerDatasource libraryServerDatasource =
+            services<LibraryServerDatasource>();
 
-        final Either<Failure, SectionModel> result = await libraryServerDatasource.updateSection(
+        final Either<Failure, SectionModel> result =
+            await libraryServerDatasource.updateSection(
           id: id,
         );
 
@@ -94,26 +105,32 @@ void main() async {
     });
 
     test('method getAllTopics test', () async {
-      final LibraryServerDatasource libraryServerDatasource = services<LibraryServerDatasource>();
+      final LibraryServerDatasource libraryServerDatasource =
+          services<LibraryServerDatasource>();
 
-      final Either<Failure, List<TopicModel>> result = await libraryServerDatasource.getAllTopics();
+      final Either<Failure, List<TopicModel>> result =
+          await libraryServerDatasource.getAllTopics();
 
       expect(result.isRight(), true);
     });
 
     test('method getConcreteTopicByID test', () async {
-      final LibraryServerDatasource libraryServerDatasource = services<LibraryServerDatasource>();
+      final LibraryServerDatasource libraryServerDatasource =
+          services<LibraryServerDatasource>();
 
-      final Either<Failure, TopicModel> result = await libraryServerDatasource.getConcreteTopicByID(id: id);
+      final Either<Failure, TopicModel> result =
+          await libraryServerDatasource.getConcreteTopicByID(id: id);
 
       expect(result, topicModel);
     });
 
     group('method updateTopic test', () {
       test('method updateTopic with params test ', () async {
-        final LibraryServerDatasource libraryServerDatasource = services<LibraryServerDatasource>();
+        final LibraryServerDatasource libraryServerDatasource =
+            services<LibraryServerDatasource>();
 
-        final Either<Failure, TopicModel> result = await libraryServerDatasource.updateTopic(
+        final Either<Failure, TopicModel> result =
+            await libraryServerDatasource.updateTopic(
           id: id,
           title: title,
           data: data,
@@ -124,9 +141,11 @@ void main() async {
       });
 
       test('method updateTopic with params test', () async {
-        final LibraryServerDatasource libraryServerDatasource = services<LibraryServerDatasource>();
+        final LibraryServerDatasource libraryServerDatasource =
+            services<LibraryServerDatasource>();
 
-        final Either<Failure, TopicModel> result = await libraryServerDatasource.updateTopic(
+        final Either<Failure, TopicModel> result =
+            await libraryServerDatasource.updateTopic(
           id: id,
         );
 
@@ -135,9 +154,11 @@ void main() async {
     });
 
     test('method addTopic test', () async {
-      final LibraryServerDatasource libraryServerDatasource = services<LibraryServerDatasource>();
+      final LibraryServerDatasource libraryServerDatasource =
+          services<LibraryServerDatasource>();
 
-      final Either<Failure, TopicModel> result = await libraryServerDatasource.addTopic(
+      final Either<Failure, TopicModel> result =
+          await libraryServerDatasource.addTopic(
         data: data,
         links: links,
         title: title,
@@ -147,17 +168,21 @@ void main() async {
     });
 
     test('method getAllFavorite test', () async {
-      final LibraryServerDatasource libraryServerDatasource = services<LibraryServerDatasource>();
+      final LibraryServerDatasource libraryServerDatasource =
+          services<LibraryServerDatasource>();
 
-      final Either<Failure, List<TopicModel>> result = await libraryServerDatasource.getAllFavorite();
+      final Either<Failure, List<TopicModel>> result =
+          await libraryServerDatasource.getAllFavorite();
 
       expect(result.isRight(), true);
     });
 
     test('method getConcreteFavorite test', () async {
-      final LibraryServerDatasource libraryServerDatasource = services<LibraryServerDatasource>();
+      final LibraryServerDatasource libraryServerDatasource =
+          services<LibraryServerDatasource>();
 
-      final Either<Failure, TopicModel> result = await libraryServerDatasource.getConcreteFavorite(
+      final Either<Failure, TopicModel> result =
+          await libraryServerDatasource.getConcreteFavorite(
         id: id,
       );
 
@@ -165,17 +190,24 @@ void main() async {
     });
 
     test('method addFavoriteTopic test', () async {
-      final LibraryServerDatasource libraryServerDatasource = services<LibraryServerDatasource>();
+      final LibraryServerDatasource libraryServerDatasource =
+          services<LibraryServerDatasource>();
 
-      final Either<Failure, TopicModel> result = await libraryServerDatasource.addFavoriteTopic(id: id);
+      final Either<Failure, TopicModel> result =
+          await libraryServerDatasource.addFavoriteTopic(id: id);
 
       expect(result, topicModel);
     });
 
     test('method deleteConcreteFavorite test', () async {
-      final LibraryServerDatasource libraryServerDatasource = services<LibraryServerDatasource>();
+      final LibraryServerDatasource libraryServerDatasource =
+          services<LibraryServerDatasource>();
 
-      final Either<Failure, TopicModel> result = await libraryServerDatasource.deleteConcreteFavorite(id: id);
+      final Either<Failure, TopicModel> result =
+          await libraryServerDatasource.deleteConcreteFavorite(
+        topicId: id,
+        userId: userId,
+      );
 
       expect(result, topicModel);
     });
