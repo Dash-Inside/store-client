@@ -32,8 +32,7 @@ Future<void> main() async {
 
   test('log_in_usecase_test', () async {
     // Act.
-    final UserDataRepository userDataRepository =
-        services.get<UserDataRepository>();
+    final UserDataRepository userDataRepository = services.get<UserDataRepository>();
     when(userDataRepository.loginUser(
       email: email,
       password: password,
@@ -43,8 +42,7 @@ Future<void> main() async {
 
     // Arrange.
     final LogInUseCase logInUseCase = LogInUseCase();
-    final FutureOr<Either<Failure, UserData>> result =
-        await logInUseCase.call(logInUseCaseParams);
+    final Either<Failure, UserData> result = await logInUseCase.call(logInUseCaseParams);
 
     // Accert.
     verify(userDataRepository.loginUser(
