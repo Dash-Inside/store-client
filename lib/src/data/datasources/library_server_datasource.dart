@@ -15,7 +15,7 @@ class LibraryServerDatasource {
   final String _topicURL = 'http://127.0.0.1:1337/api/topics';
   final String _favoriteTopicURL = 'http://127.0.0.1:1337/api/favotites';
 
-  Future<Either<Failure, List<Section>>> getAllSections() async {
+  Future<Either<Failure, List<SectionModel>>> getAllSections() async {
     try {
       final Response response = await _client.get(_sectionURL);
       final List<dynamic> listMap = response.data['data'];
@@ -31,7 +31,7 @@ class LibraryServerDatasource {
     }
   }
 
-  Future<Either<Failure, Section>> getConcreteSection({required int id}) async {
+  Future<Either<Failure, SectionModel>> getConcreteSection({required int id}) async {
     try {
       final Response response = await _client.get('${_sectionURL}/$id');
       final Section section = SectionModel.fromMap(response.data['data']);
@@ -42,7 +42,11 @@ class LibraryServerDatasource {
     }
   }
 
-  Future<Either<Failure, Unit>> addSection({required Section section}) async {
+  Future<Either<Failure, SectionModel>> addSection({
+    required int id,
+    required String title,
+    required int topicId,
+  }) async {
     try {
       SectionModel sectionModel = SectionModel(
         title: section.title,
@@ -67,7 +71,11 @@ class LibraryServerDatasource {
     }
   }
 
-  Future<Either<Failure, Unit>> updateSection({required Section section}) async {
+  Future<Either<Failure, SectionModel>> updateSection({
+    required int id,
+    String? title,
+    int? topicId,
+  }) async {
     try {
       final Response response2 = await _client.put(
         ('${_sectionURL}/${section.id}'),
@@ -103,7 +111,7 @@ class LibraryServerDatasource {
     }
   }
 
-  Future<Either<Failure, Topic>> getConcreteTopicByID({required int id}) async {
+  Future<Either<Failure, TopicModel>> getConcreteTopicByID({required int id}) async {
     try {
       final Response response = await _client.get('${_topicURL}/$id');
       final Topic topic = TopicModel.fromMap(response.data['data']);
@@ -114,7 +122,12 @@ class LibraryServerDatasource {
     }
   }
 
-  Future<Either<Failure, Unit>> updateTopic({required TopicModel topic}) async {
+  Future<Either<Failure, TopicModel>> updateTopic({
+    required int id,
+    String? title,
+    String? data,
+    List<String>? links,
+  }) async {
     try {
       final Response response2 = await _client.put(
         ('${_topicURL}/${topic.id}'),
@@ -127,7 +140,11 @@ class LibraryServerDatasource {
     }
   }
 
-  Future<Either<Failure, Unit>> addTopic({required Topic topic}) async {
+  Future<Either<Failure, TopicModel>> addTopic({
+    required String title,
+    required String data,
+    required List<String> links,
+  }) async {
     try {
       TopicModel topicModel = TopicModel(
         id: topic.id,
@@ -147,7 +164,7 @@ class LibraryServerDatasource {
     }
   }
 
-  Future<Either<Failure, List<Topic>>> getAllFavorite() async {
+  Future<Either<Failure, List<TopicModel>>> getAllFavorite() async {
     try {
       final Response response = await _client.get(_favoriteTopicURL);
       final List<dynamic> listMap = response.data['data'];
@@ -163,7 +180,7 @@ class LibraryServerDatasource {
     }
   }
 
-  Future<Either<Failure, Topic>> getConcreteFavorite({required int id}) async {
+  Future<Either<Failure, TopicModel>> getConcreteFavorite({required int id}) async {
     try {
       final Response response = await _client.get('${_favoriteTopicURL}/$id');
       final Topic favoriteTopic = TopicModel.fromMap(response.data['data']);
@@ -174,7 +191,7 @@ class LibraryServerDatasource {
     }
   }
 
-  Future<Either<Failure, Unit>> addFavoriteTopic({required id}) async {
+  Future<Either<Failure, TopicModel>> addFavoriteTopic({required int id}) async {
     try {
       final Response response2 = await _client.post(
         _favoriteTopicURL,
@@ -187,7 +204,7 @@ class LibraryServerDatasource {
     }
   }
 
-  Future<Either<Failure, Unit>> deleteConcreteFavorite({required int id}) async {
+  Future<Either<Failure, TopicModel>> deleteConcreteFavorite({required int id}) async {
     try {
       final Response response = await _client.delete('${_favoriteTopicURL}/$id');
 
