@@ -12,7 +12,7 @@ import 'package:store_client/src/domain/usecases/user_data/change_username_useca
 import '../../injector/services.dart';
 
 Future<void> main() async {
-  await initTestServices();
+  await initMockServices();
   final UserData userData = UserData(
     id: 1,
     username: 'Pencil',
@@ -22,16 +22,14 @@ Future<void> main() async {
 
   final String newUserName = 'newUserName';
 
-  final ChangeUserNameUseCaseParams changeUserNameUseCaseParams =
-      ChangeUserNameUseCaseParams(
+  final ChangeUserNameUseCaseParams changeUserNameUseCaseParams = ChangeUserNameUseCaseParams(
     userData,
     newUserName,
   );
 
   test('change_username_usecase_test', () async {
     // Act.
-    final UserDataRepository userDataRepository =
-        services.get<UserDataRepository>();
+    final UserDataRepository userDataRepository = services.get<UserDataRepository>();
     when(userDataRepository.changeUserName(
       userData: userData,
       newUserName: newUserName,
@@ -41,8 +39,7 @@ Future<void> main() async {
 
     // Arrange.
     final ChangeUserNameUseCase changeUserName = ChangeUserNameUseCase();
-    final Either<Failure, UserData> result =
-        await changeUserName.call(changeUserNameUseCaseParams);
+    final Either<Failure, UserData> result = await changeUserName.call(changeUserNameUseCaseParams);
 
     // Accert.
     verify(userDataRepository.changeUserName(

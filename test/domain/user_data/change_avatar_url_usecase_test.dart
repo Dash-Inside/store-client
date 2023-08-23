@@ -11,7 +11,7 @@ import 'package:store_client/src/domain/usecases/user_data/change_avatar_url_use
 import '../../injector/services.dart';
 
 Future<void> main() async {
-  await initTestServices();
+  await initMockServices();
   final UserData userData = UserData(
     id: 1,
     username: 'Pencil',
@@ -21,16 +21,14 @@ Future<void> main() async {
 
   final String newAvatarUrl = 'newAvatarUrl';
 
-  final ChangeAvatarUrlUseCaseParams changeAvatarUrlUseCaseParams =
-      ChangeAvatarUrlUseCaseParams(
+  final ChangeAvatarUrlUseCaseParams changeAvatarUrlUseCaseParams = ChangeAvatarUrlUseCaseParams(
     userData,
     newAvatarUrl,
   );
 
   test('change_avatar_url_usecase_test', () async {
     // Act.
-    final UserDataRepository userDataRepository =
-        services.get<UserDataRepository>();
+    final UserDataRepository userDataRepository = services.get<UserDataRepository>();
     when(userDataRepository.changeAvatarUrl(
       userData: userData,
       newAvatarUrl: newAvatarUrl,
@@ -40,8 +38,7 @@ Future<void> main() async {
 
     // Arrange.
     final ChangeAvatarUrlUseCase changeAvatarUrl = ChangeAvatarUrlUseCase();
-    final Either<Failure, UserData> result =
-        await changeAvatarUrl.call(changeAvatarUrlUseCaseParams);
+    final Either<Failure, UserData> result = await changeAvatarUrl.call(changeAvatarUrlUseCaseParams);
 
     // Accert.
     verify(userDataRepository.changeAvatarUrl(
