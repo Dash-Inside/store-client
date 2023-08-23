@@ -22,3 +22,7 @@ class ServerFailureGetTopics extends Failure {
 class ServerFailureSendTopics extends Failure {
   ServerFailureSendTopics(StackTrace T) : super(message: "Server error, cant send Topic", stackTrace: T);
 }
+
+class ServerFailureSendSections extends Failure {
+  ServerFailureSendSections(StackTrace T) : super(message: "Server error, cant send Topic", stackTrace: T);
+}
