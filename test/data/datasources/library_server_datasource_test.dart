@@ -59,7 +59,7 @@ void main() async {
         final Either<Failure, SectionModel> result =
             await libraryServerDatasource.getConcreteSection(id: incorrectId);
 
-        expect(result.isLeft(), false);
+        expect(result.isLeft(), true);
       });
     });
 
@@ -81,6 +81,7 @@ void main() async {
         final LibraryServerDatasource libraryServerDatasource =
             services<LibraryServerDatasource>();
 
+        /// создать поля для изменения + добавить updatedSection
         final Either<Failure, SectionModel> result =
             await libraryServerDatasource.updateSection(
           id: id,
@@ -101,6 +102,7 @@ void main() async {
         );
 
         expect(result.isRight(), true);
+        // добавить expect на sectionModel
       });
     });
 
@@ -129,6 +131,7 @@ void main() async {
         final LibraryServerDatasource libraryServerDatasource =
             services<LibraryServerDatasource>();
 
+        /// тоже самое
         final Either<Failure, TopicModel> result =
             await libraryServerDatasource.updateTopic(
           id: id,
@@ -150,6 +153,7 @@ void main() async {
         );
 
         expect(result.isRight(), true);
+        // expect
       });
     });
 
@@ -172,7 +176,7 @@ void main() async {
           services<LibraryServerDatasource>();
 
       final Either<Failure, List<TopicModel>> result =
-          await libraryServerDatasource.getAllFavorite();
+          await libraryServerDatasource.getAllFavorite(userId: userId);
 
       expect(result.isRight(), true);
     });
@@ -183,6 +187,7 @@ void main() async {
 
       final Either<Failure, TopicModel> result =
           await libraryServerDatasource.getConcreteFavorite(
+        userId: userId,
         id: id,
       );
 
@@ -194,7 +199,10 @@ void main() async {
           services<LibraryServerDatasource>();
 
       final Either<Failure, TopicModel> result =
-          await libraryServerDatasource.addFavoriteTopic(id: id);
+          await libraryServerDatasource.addFavoriteTopic(
+        id: id,
+        userId: userId,
+      );
 
       expect(result, topicModel);
     });

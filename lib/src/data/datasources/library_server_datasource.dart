@@ -165,7 +165,8 @@ class LibraryServerDatasource {
     }
   }
 
-  Future<Either<Failure, List<TopicModel>>> getAllFavorite() async {
+  Future<Either<Failure, List<TopicModel>>> getAllFavorite(
+      {required int userId}) async {
     try {
       final Response response = await _client.get(_favoriteTopicURL);
       final List<dynamic> listMap = response.data['data'];
@@ -181,8 +182,10 @@ class LibraryServerDatasource {
     }
   }
 
-  Future<Either<Failure, TopicModel>> getConcreteFavorite(
-      {required int id}) async {
+  Future<Either<Failure, TopicModel>> getConcreteFavorite({
+    required int id,
+    required int userId,
+  }) async {
     try {
       final Response response = await _client.get('${_favoriteTopicURL}/$id');
       final Topic favoriteTopic = TopicModel.fromMap(response.data['data']);
@@ -193,8 +196,10 @@ class LibraryServerDatasource {
     }
   }
 
-  Future<Either<Failure, TopicModel>> addFavoriteTopic(
-      {required int id}) async {
+  Future<Either<Failure, TopicModel>> addFavoriteTopic({
+    required int id,
+    required int userId,
+  }) async {
     try {
       final Response response2 = await _client.post(
         _favoriteTopicURL,
