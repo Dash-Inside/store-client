@@ -31,12 +31,10 @@ Future<void> main() async {
   group('user_data_server_repository_test', () {
     test('method loginUser test', () async {
       // Act.
-      final UserDataServerRepository userDataServerDatasource =
-          services.get<UserDataServerRepository>();
+      final UserDataServerRepository userDataServerDatasource = services.get<UserDataServerRepository>();
 
       // Arrange.
-      final Either<Failure, UserData> result =
-          await userDataServerDatasource.loginUser(
+      final Either<Failure, UserData> result = await userDataServerDatasource.loginUser(
         email: email,
         password: password,
       );
@@ -52,12 +50,10 @@ Future<void> main() async {
 
     test('method restorePasswordUser test', () async {
       // Act.
-      final UserDataServerRepository userDataServerDatasource =
-          services.get<UserDataServerRepository>();
+      final UserDataServerRepository userDataServerDatasource = services.get<UserDataServerRepository>();
 
       // Arrange.
-      final Either<Failure, UserData> result =
-          await userDataServerDatasource.restorePasswordUser(
+      final Either<Failure, UserData> result = await userDataServerDatasource.restorePasswordUser(
         restoreCode: restoreCode,
         password: password,
         comfirmedPassword: comfirmedPassword,
@@ -75,12 +71,10 @@ Future<void> main() async {
 
     test('method changeAvatarUrl test', () async {
       // Act.
-      final UserDataServerRepository userDataServerRepository =
-          services.get<UserDataServerRepository>();
+      final UserDataServerRepository userDataServerRepository = services.get<UserDataServerRepository>();
 
       // Arrange.
-      final Either<Failure, UserData> request =
-          await userDataServerRepository.changeAvatarUrl(
+      final Either<Failure, UserData> request = await userDataServerRepository.changeAvatarUrl(
         userData: userData,
         newAvatarUrl: newAvatarUrl,
       );
@@ -100,12 +94,10 @@ Future<void> main() async {
 
     test('method changeUserName test', () async {
       // Act.
-      final UserDataServerRepository userDataServerRepository =
-          services.get<UserDataServerRepository>();
+      final UserDataServerRepository userDataServerRepository = services.get<UserDataServerRepository>();
 
       // Arrange.
-      final Either<Failure, UserData> request =
-          await userDataServerRepository.changeUserName(
+      final Either<Failure, UserData> request = await userDataServerRepository.changeUserName(
         userData: userData,
         newUserName: newUserName,
       );
@@ -119,6 +111,19 @@ Future<void> main() async {
         userData: userData,
         newUserName: newUserName,
       )).called(1);
+      verifyNoMoreInteractions(userDataServerRepository);
+      expect(request.isRight(), true);
+    });
+
+    test('method checkUserConnectByJWT test', () async {
+      // Act.
+      final UserDataServerRepository userDataServerRepository = services.get<UserDataServerRepository>();
+
+      // Arrange.
+      final Either<Failure, bool> request = await userDataServerRepository.checkUserConnectByJWT();
+
+      // Accert.
+      verify(userDataServerRepository.checkUserConnectByJWT()).called(1);
       verifyNoMoreInteractions(userDataServerRepository);
       expect(request.isRight(), true);
     });
