@@ -5,6 +5,7 @@ import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/src/domain/entities/message.dart';
 import 'package:store_client/src/domain/repository/messenger_repository.dart';
 import 'package:store_client/src/domain/usecases/messenger/fetch_messages_usecase.dart';
+import 'package:store_client/core/services/services.dart';
 
 import '../../injector/services.dart';
 
@@ -19,7 +20,8 @@ Future<void> main() async {
     'fetch_messages_usecase_test',
     () async {
       // Act.
-      final MessengerRepository messengerRepository = testServices.get<MessengerRepository>();
+      final MessengerRepository messengerRepository =
+          services.get<MessengerRepository>();
       when(messengerRepository.fetchMessages()).thenAnswer(
         (_) async {
           return Right(listmess);
@@ -28,7 +30,8 @@ Future<void> main() async {
 
       // Arrange.
       final FetchMessagesUseCase fetchMessagesUseCase = FetchMessagesUseCase();
-      final Either<Failure, List<Message>> result = await fetchMessagesUseCase.call(unit);
+      final Either<Failure, List<Message>> result =
+          await fetchMessagesUseCase.call(unit);
 
       // Assert.
       verify(messengerRepository.fetchMessages()).called(1);

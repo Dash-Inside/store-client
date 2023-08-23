@@ -1,7 +1,8 @@
 import 'dart:async';
 
-import 'package:get_it/get_it.dart';
+import 'package:store_client/core/services/services.dart';
 import 'package:store_client/src/data/datasources/messenger_server_datasource.dart';
+import 'package:store_client/src/data/datasources/user_data_server_datasource.dart';
 import 'package:store_client/src/data/repositories/remote/library_server_repository.dart';
 import 'package:store_client/src/data/repositories/remote/user_data_server_repository.dart';
 import 'package:store_client/src/domain/repository/user_data_repository.dart';
@@ -10,24 +11,20 @@ import 'package:store_client/src/domain/repository/messenger_repository.dart';
 
 import '../domain/test_repositories.mocks.dart';
 
-final GetIt testServices = GetIt.I;
-
 FutureOr<void> initTestServices() {
-  final UserDataServerRepository userDataServerRepository = UserDataServerRepository();
-  testServices.registerLazySingleton<UserDataServerRepository>(() => userDataServerRepository);
+  services.registerLazySingleton<UserDataServerRepository>(() => UserDataServerRepository());
 
-  final UserDataRepository userDataRepository = MockUserDataRepository();
-  testServices.registerLazySingleton<UserDataRepository>(() => userDataRepository);
+  services.registerLazySingleton<LibraryServerRepository>(() => LibraryServerRepository());
 
-  final LibraryRepository libraryRepository = MockLibraryRepository();
-  testServices.registerLazySingleton<LibraryRepository>(() => libraryRepository);
+  services.registerLazySingleton<MessengerServerDatasource>(() => MessengerServerDatasource());
 
-  final MessengerRepository messengerRepository = MockMessengerRepository();
-  testServices.registerLazySingleton<MessengerRepository>(() => messengerRepository);
+  services.registerLazySingleton<UserDataServerDatasource>(() => UserDataServerDatasource());
+}
 
-  final LibraryServerRepository libraryServerRepository = LibraryServerRepository();
-  testServices.registerLazySingleton<LibraryServerRepository>(() => libraryServerRepository);
+FutureOr<void> initMockServices() {
+  services.registerLazySingleton<LibraryRepository>(() => MockLibraryRepository());
 
-  final MessengerServerDatasource messengerServerDatasource = MessengerServerDatasource();
-  testServices.registerLazySingleton<MessengerServerDatasource>(() => messengerServerDatasource);
+  services.registerLazySingleton<UserDataRepository>(() => MockUserDataRepository());
+
+  services.registerLazySingleton<MessengerRepository>(() => MockMessengerRepository());
 }

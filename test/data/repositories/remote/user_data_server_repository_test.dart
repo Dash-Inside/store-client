@@ -5,6 +5,7 @@ import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/src/data/repositories/remote/user_data_server_repository.dart';
 import 'package:store_client/src/domain/entities/role.dart';
 import 'package:store_client/src/domain/entities/user_data.dart';
+import 'package:store_client/core/services/services.dart';
 
 import '../../../injector/services.dart';
 
@@ -30,10 +31,12 @@ Future<void> main() async {
   group('user_data_server_repository_test', () {
     test('method loginUser test', () async {
       // Act.
-      final UserDataServerRepository userDataServerDatasource = testServices.get<UserDataServerRepository>();
+      final UserDataServerRepository userDataServerDatasource =
+          services.get<UserDataServerRepository>();
 
       // Arrange.
-      final Either<Failure, UserData> result = await userDataServerDatasource.loginUser(
+      final Either<Failure, UserData> result =
+          await userDataServerDatasource.loginUser(
         email: email,
         password: password,
       );
@@ -49,10 +52,12 @@ Future<void> main() async {
 
     test('method restorePasswordUser test', () async {
       // Act.
-      final UserDataServerRepository userDataServerDatasource = testServices.get<UserDataServerRepository>();
+      final UserDataServerRepository userDataServerDatasource =
+          services.get<UserDataServerRepository>();
 
       // Arrange.
-      final Either<Failure, UserData> result = await userDataServerDatasource.restorePasswordUser(
+      final Either<Failure, UserData> result =
+          await userDataServerDatasource.restorePasswordUser(
         restoreCode: restoreCode,
         password: password,
         comfirmedPassword: comfirmedPassword,
@@ -70,10 +75,12 @@ Future<void> main() async {
 
     test('method changeAvatarUrl test', () async {
       // Act.
-      final UserDataServerRepository userDataServerRepository = testServices.get<UserDataServerRepository>();
+      final UserDataServerRepository userDataServerRepository =
+          services.get<UserDataServerRepository>();
 
       // Arrange.
-      final Either<Failure, UserData> request = await userDataServerRepository.changeAvatarUrl(
+      final Either<Failure, UserData> request =
+          await userDataServerRepository.changeAvatarUrl(
         userData: userData,
         newAvatarUrl: newAvatarUrl,
       );
@@ -93,10 +100,12 @@ Future<void> main() async {
 
     test('method changeUserName test', () async {
       // Act.
-      final UserDataServerRepository userDataServerRepository = testServices.get<UserDataServerRepository>();
+      final UserDataServerRepository userDataServerRepository =
+          services.get<UserDataServerRepository>();
 
       // Arrange.
-      final Either<Failure, UserData> request = await userDataServerRepository.changeUserName(
+      final Either<Failure, UserData> request =
+          await userDataServerRepository.changeUserName(
         userData: userData,
         newUserName: newUserName,
       );

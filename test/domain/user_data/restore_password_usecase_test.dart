@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:store_client/core/failure/failure.dart';
+import 'package:store_client/core/services/services.dart';
 import 'package:store_client/src/data/repositories/remote/user_data_server_repository.dart';
 import 'package:store_client/src/domain/entities/role.dart';
 import 'package:store_client/src/domain/entities/user_data.dart';
@@ -13,7 +14,7 @@ import 'package:store_client/src/domain/usecases/user_data/restore_password_usec
 import '../../injector/services.dart';
 
 Future<void> main() async {
-  await initTestServices();
+  await initMockServices();
 
   final UserData userData = UserData(
     id: 1,
@@ -33,7 +34,7 @@ Future<void> main() async {
 
   test('restore_password_usecase_test', () async {
     // Act.
-    final UserDataRepository userDataRepository = testServices.get<UserDataRepository>();
+    final UserDataRepository userDataRepository = services.get<UserDataRepository>();
     when(userDataRepository.restorePasswordUser(
       restoreCode: restoreCode,
       password: password,
