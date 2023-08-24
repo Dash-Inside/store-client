@@ -5,9 +5,6 @@ class NavigationBarWidget extends StatelessWidget {
   static const double fontSize = 10.0;
   static const double paddingSymmetric = 10.0;
   static const double fontLetterSpacing = 0.5;
-  void chatOnTap() {}
-  void libraryOnTap() {}
-  void accountOnTap() {}
 
   const NavigationBarWidget({
     super.key,
@@ -17,8 +14,19 @@ class NavigationBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final Color colorSec = colorScheme.secondary;
+    final Color colorTet = colorScheme.tertiary;
+    final colorSurf = colorScheme.surface;
+    void chatOnTap() => Navigator.of(context).pushNamed('/chat');
+    void libraryOnTap() => Navigator.of(context).pushNamed('/library');
+    void accountOnTap() => Navigator.of(context).pushNamed('/account');
 
     return Container(
+      decoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(color: Colors.black26),
+        ),
+        color: colorSurf,
+      ),
       padding: EdgeInsets.symmetric(
         vertical: paddingSymmetric,
       ),
@@ -26,11 +34,12 @@ class NavigationBarWidget extends StatelessWidget {
         children: [
           Expanded(
             child: InkWell(
+              hoverColor: colorTet,
               onTap: chatOnTap,
               child: Column(
                 children: [
                   Icon(
-                    Icons.chat_rounded,
+                    Icons.chat_outlined,
                     size: iconSize,
                     color: colorSec,
                   ),
@@ -49,11 +58,12 @@ class NavigationBarWidget extends StatelessWidget {
           ),
           Expanded(
             child: InkWell(
+              hoverColor: colorTet,
               onTap: libraryOnTap,
               child: Column(
                 children: [
                   Icon(
-                    Icons.menu_book_rounded,
+                    Icons.library_books_outlined,
                     size: iconSize,
                     color: colorSec,
                   ),
@@ -72,6 +82,7 @@ class NavigationBarWidget extends StatelessWidget {
           ),
           Expanded(
             child: InkWell(
+              hoverColor: colorTet,
               onTap: accountOnTap,
               child: Column(
                 children: [

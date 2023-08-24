@@ -11,7 +11,7 @@ class ChatPage extends StatelessWidget {
   static const double iconSize = 24.0;
   static const double textFieldPadding = 8.0;
   final int ourId = 3;
-  List<Message> messageList = [
+  final List<Message> messageList = [
     Message(id: 1, data: "123", senderId: 4),
     Message(id: 2, data: "ghbgt", senderId: 4),
     Message(id: 3, data: "ytrt", senderId: 3),
@@ -23,6 +23,7 @@ class ChatPage extends StatelessWidget {
     Message(id: 2, data: "ghbgt", senderId: 4),
     Message(id: 2, data: "ghbgt", senderId: 4),
   ].reversed.toList();
+
   ChatPage({super.key});
 
   @override
@@ -30,14 +31,16 @@ class ChatPage extends StatelessWidget {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final Color colorSurf = colorScheme.surface;
     final Color colorSec = colorScheme.secondary;
-    final Color colorTet = colorScheme.tertiary;
     final Color colorPr = colorScheme.primary;
+    final Color colorTet = colorScheme.tertiary;
+    void backOnPressed() => Navigator.of(context).pushNamed('/library');
+    void sendOnPressed() {}
 
     return Scaffold(
       backgroundColor: colorSurf,
       appBar: AppBar(
+        elevation: 0.0,
         backgroundColor: colorSurf,
-        shadowColor: colorTet,
         centerTitle: false,
         title: Text(
           'Chat',
@@ -50,9 +53,9 @@ class ChatPage extends StatelessWidget {
           ),
         ),
         leading: IconButton(
-          onPressed: () {},
+          onPressed: backOnPressed,
           icon: Icon(
-            Icons.arrow_back_ios_new_sharp,
+            Icons.arrow_back_ios_new_rounded,
             color: colorSec,
             size: iconSize,
           ),
@@ -117,7 +120,8 @@ class ChatPage extends StatelessWidget {
                     child: TextFieldWidget(text: 'Message'),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    hoverColor: colorTet,
+                    onPressed: sendOnPressed,
                     icon: Icon(
                       Icons.send,
                       color: colorPr,

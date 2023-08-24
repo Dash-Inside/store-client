@@ -6,7 +6,6 @@ import 'package:store_client/src/presentation/widgets/navigation_bar_widget.dart
 class LibraryPage extends StatelessWidget {
   static const double fontSize = 28.0;
   static const double fontLetterSpacing = 0.5;
-  static const int shadowColor = 0x00000000;
   static const double iconSize = 24.0;
   final List<String> sectionList = [
     'Section 1',
@@ -30,11 +29,12 @@ class LibraryPage extends StatelessWidget {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final Color colorSurf = colorScheme.surface;
     final Color colorSec = colorScheme.secondary;
+    void searchOnPressed() {}
 
     return Scaffold(
       backgroundColor: colorSurf,
       appBar: AppBar(
-        shadowColor: Color(shadowColor),
+        elevation: 0.0,
         backgroundColor: colorSurf,
         automaticallyImplyLeading: false,
         title: Text(
@@ -49,7 +49,7 @@ class LibraryPage extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: searchOnPressed,
             icon: Icon(
               Icons.search_rounded,
               size: iconSize,
