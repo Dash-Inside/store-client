@@ -1,50 +1,34 @@
-import 'dart:convert';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:store_client/src/domain/entities/role.dart';
+import 'package:store_client/src/domain/entities/user.dart';
 
-import 'package:equatable/equatable.dart';
-
-class UserModel extends Equatable {
-  final int id;
-  final String userName;
-  final String email;
-
-  @override
-  List<Object> get props => [id, userName, email];
-
+class UserModel extends User {
   UserModel({
-    required this.id,
-    required this.userName,
-    required this.email,
+    required int super.id,
+    required String super.email,
+    required String super.username,
+    required String super.avatarUrl,
+    required Role super.role,
   });
-
-  factory UserModel.fromMap(Map<String, dynamic> map) {
-    return UserModel(
-      id: map['id'] as int,
-      userName: map['username'] as String,
-      email: map['email'] as String,
-    );
-  }
-
-  factory UserModel.fromJson(String source) => UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   UserModel copyWith({
     int? id,
-    String? userName,
     String? email,
+    String? username,
+    String? avatarUrl,
+    Role? role,
   }) {
     return UserModel(
       id: id ?? this.id,
-      userName: userName ?? this.userName,
       email: email ?? this.email,
+      username: username ?? this.username,
+      avatarUrl: avatarUrl ?? this.avatarUrl,
+      role: role ?? this.role,
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'id': id,
-      'userName': userName,
-      'email': email,
-    };
+  @override
+  String toString() {
+    return 'UserModel(id: $id, email: $email, username: $username, avatarUrl: $avatarUrl, role: $role)';
   }
-
-  String toJson() => json.encode(toMap());
 }

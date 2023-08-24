@@ -7,4 +7,6 @@ sealed class AuthState extends Equatable {
   const AuthState();
 }
 
-final class InitAuthState extends AuthState {}
+final class NullAuthState extends AuthState {}
+
+final class DataAuthState extends AuthState {}

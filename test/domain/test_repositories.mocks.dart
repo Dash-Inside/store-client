@@ -11,7 +11,6 @@ import 'package:store_client/core/failure/failure.dart' as _i5;
 import 'package:store_client/src/domain/entities/message.dart' as _i9;
 import 'package:store_client/src/domain/entities/section.dart' as _i6;
 import 'package:store_client/src/domain/entities/topic.dart' as _i7;
-import 'package:store_client/src/domain/entities/user_data.dart' as _i11;
 import 'package:store_client/src/domain/repository/library_repository.dart'
     as _i3;
 import 'package:store_client/src/domain/repository/messenger_repository.dart'
@@ -329,8 +328,8 @@ class MockMessengerRepository extends _i1.Mock
 class MockUserDataRepository extends _i1.Mock
     implements _i10.UserDataRepository {
   @override
-  _i4.Future<_i2.Either<_i5.Failure, _i11.UserData>> changeUserName({
-    required _i11.UserData? userData,
+  _i4.Future<_i2.Either<_i5.Failure, dynamic>> changeUserName({
+    required dynamic userData,
     required String? newUserName,
   }) =>
       (super.noSuchMethod(
@@ -342,8 +341,8 @@ class MockUserDataRepository extends _i1.Mock
             #newUserName: newUserName,
           },
         ),
-        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i11.UserData>>.value(
-            _FakeEither_0<_i5.Failure, _i11.UserData>(
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, dynamic>>.value(
+            _FakeEither_0<_i5.Failure, dynamic>(
           this,
           Invocation.method(
             #changeUserName,
@@ -355,8 +354,8 @@ class MockUserDataRepository extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i4.Future<_i2.Either<_i5.Failure, _i11.UserData>>.value(
-                _FakeEither_0<_i5.Failure, _i11.UserData>(
+            _i4.Future<_i2.Either<_i5.Failure, dynamic>>.value(
+                _FakeEither_0<_i5.Failure, dynamic>(
           this,
           Invocation.method(
             #changeUserName,
@@ -367,10 +366,10 @@ class MockUserDataRepository extends _i1.Mock
             },
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i5.Failure, _i11.UserData>>);
+      ) as _i4.Future<_i2.Either<_i5.Failure, dynamic>>);
   @override
-  _i4.Future<_i2.Either<_i5.Failure, _i11.UserData>> changeAvatarUrl({
-    required _i11.UserData? userData,
+  _i4.Future<_i2.Either<_i5.Failure, dynamic>> changeAvatarUrl({
+    required dynamic userData,
     required String? newAvatarUrl,
   }) =>
       (super.noSuchMethod(
@@ -382,8 +381,8 @@ class MockUserDataRepository extends _i1.Mock
             #newAvatarUrl: newAvatarUrl,
           },
         ),
-        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i11.UserData>>.value(
-            _FakeEither_0<_i5.Failure, _i11.UserData>(
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, dynamic>>.value(
+            _FakeEither_0<_i5.Failure, dynamic>(
           this,
           Invocation.method(
             #changeAvatarUrl,
@@ -395,8 +394,8 @@ class MockUserDataRepository extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i4.Future<_i2.Either<_i5.Failure, _i11.UserData>>.value(
-                _FakeEither_0<_i5.Failure, _i11.UserData>(
+            _i4.Future<_i2.Either<_i5.Failure, dynamic>>.value(
+                _FakeEither_0<_i5.Failure, dynamic>(
           this,
           Invocation.method(
             #changeAvatarUrl,
@@ -407,9 +406,9 @@ class MockUserDataRepository extends _i1.Mock
             },
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i5.Failure, _i11.UserData>>);
+      ) as _i4.Future<_i2.Either<_i5.Failure, dynamic>>);
   @override
-  _i4.Future<_i2.Either<_i5.Failure, _i11.UserData>> loginUser({
+  _i4.Future<_i2.Either<_i5.Failure, dynamic>> loginUser({
     required String? email,
     required String? password,
   }) =>
@@ -422,8 +421,8 @@ class MockUserDataRepository extends _i1.Mock
             #password: password,
           },
         ),
-        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i11.UserData>>.value(
-            _FakeEither_0<_i5.Failure, _i11.UserData>(
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, dynamic>>.value(
+            _FakeEither_0<_i5.Failure, dynamic>(
           this,
           Invocation.method(
             #loginUser,
@@ -435,8 +434,8 @@ class MockUserDataRepository extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i4.Future<_i2.Either<_i5.Failure, _i11.UserData>>.value(
-                _FakeEither_0<_i5.Failure, _i11.UserData>(
+            _i4.Future<_i2.Either<_i5.Failure, dynamic>>.value(
+                _FakeEither_0<_i5.Failure, dynamic>(
           this,
           Invocation.method(
             #loginUser,
@@ -447,9 +446,9 @@ class MockUserDataRepository extends _i1.Mock
             },
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i5.Failure, _i11.UserData>>);
+      ) as _i4.Future<_i2.Either<_i5.Failure, dynamic>>);
   @override
-  _i4.Future<_i2.Either<_i5.Failure, _i11.UserData>> restorePasswordUser({
+  _i4.Future<_i2.Either<_i5.Failure, dynamic>> restorePasswordUser({
     required String? restoreCode,
     required String? password,
     required String? comfirmedPassword,
@@ -464,8 +463,8 @@ class MockUserDataRepository extends _i1.Mock
             #comfirmedPassword: comfirmedPassword,
           },
         ),
-        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i11.UserData>>.value(
-            _FakeEither_0<_i5.Failure, _i11.UserData>(
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, dynamic>>.value(
+            _FakeEither_0<_i5.Failure, dynamic>(
           this,
           Invocation.method(
             #restorePasswordUser,
@@ -478,8 +477,8 @@ class MockUserDataRepository extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i4.Future<_i2.Either<_i5.Failure, _i11.UserData>>.value(
-                _FakeEither_0<_i5.Failure, _i11.UserData>(
+            _i4.Future<_i2.Either<_i5.Failure, dynamic>>.value(
+                _FakeEither_0<_i5.Failure, dynamic>(
           this,
           Invocation.method(
             #restorePasswordUser,
@@ -491,5 +490,5 @@ class MockUserDataRepository extends _i1.Mock
             },
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i5.Failure, _i11.UserData>>);
+      ) as _i4.Future<_i2.Either<_i5.Failure, dynamic>>);
 }

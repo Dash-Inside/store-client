@@ -1,1 +1,4 @@
-enum Role { admin, user }
+enum Role {
+  Authenticated,
+  Public,
+}

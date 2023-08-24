@@ -3,9 +3,6 @@ import 'dart:convert';
 import 'package:store_client/src/domain/entities/section.dart';
 
 class SectionModel extends Section {
-  @override
-  int get hashCode => id.hashCode ^ title.hashCode ^ topicId.hashCode;
-
   SectionModel({
     required super.id,
     required super.title,
@@ -16,7 +13,7 @@ class SectionModel extends Section {
     return SectionModel(
       id: map['id'] as int,
       title: map['attributes']['title'] as String,
-      topicId: map['attributes']['topicID'] as int,
+      topicId: map['attributes']['topicId'] as int,
     );
   }
 
@@ -38,7 +35,7 @@ class SectionModel extends Section {
     return <String, dynamic>{
       'id': id,
       'title': title,
-      'topicID': topicId,
+      'topicId': topicId,
     };
   }
 
@@ -46,11 +43,4 @@ class SectionModel extends Section {
 
   @override
   String toString() => 'SectionModel(id: $id, title: $title, topicId: $topicId)';
-
-  @override
-  bool operator ==(covariant SectionModel other) {
-    if (identical(this, other)) return true;
-
-    return other.id == id && other.title == title && other.topicId == topicId;
-  }
 }

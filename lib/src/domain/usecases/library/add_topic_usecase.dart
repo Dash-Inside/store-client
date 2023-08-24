@@ -9,8 +9,7 @@ import 'package:store_client/src/domain/repository/library_repository.dart';
 class AddTopicUseCase extends UseCase<Unit, AddTopicUseCaseParams> {
   @override
   FutureOr<Either<Failure, Unit>> call(AddTopicUseCaseParams params) async {
-    final LibraryRepository libraryRepository =
-        services.get<LibraryRepository>();
+    final LibraryRepository libraryRepository = services.get<LibraryRepository>();
 
     return libraryRepository.addTopic(
       title: params.title,
