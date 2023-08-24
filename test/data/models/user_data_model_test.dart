@@ -18,78 +18,79 @@ void main() {
           "avatarUrl": 'URL',
         },
       };
-      final UserDataModel userDataModel = UserDataModel(
+      final UserModel UserModel = UserModel(
         id: 1,
         username: 'test1',
         avatarUrl: 'URL',
         role: Role.admin,
       );
 
-      final UserDataModel result = UserDataModel.fromMap(userDataMap);
+      final UserModel result = UserModel.fromMap(userDataMap);
 
-      expect(result, userDataModel);
+      expect(result, UserModel);
     });
 
     test('factory_from_Json', () {
-      const String userDataJson = '{"id": 1,"attributes":{"username": "test1","role": "admin","createdAt": "2023-08-16T12:51:18.834Z","updatedAt": "2023-08-16T12:52:13.231Z","publishedAt": "2023-08-16T12:51:57.388Z","avatarUrl": "URL"}}';
+      const String userDataJson =
+          '{"id": 1,"attributes":{"username": "test1","role": "admin","createdAt": "2023-08-16T12:51:18.834Z","updatedAt": "2023-08-16T12:52:13.231Z","publishedAt": "2023-08-16T12:51:57.388Z","avatarUrl": "URL"}}';
 
-      final UserDataModel userDataModel = UserDataModel(
+      final UserModel UserModel = UserModel(
         id: 1,
         username: 'test1',
         avatarUrl: 'URL',
         role: Role.admin,
       );
 
-      final UserDataModel result = UserDataModel.fromJson(userDataJson);
+      final UserModel result = UserModel.fromJson(userDataJson);
 
-      expect(result, userDataModel);
+      expect(result, UserModel);
     });
     group('method_copy_with', () {
       test('method_copy_with_with_arguments', () {
-        final UserDataModel userDataModel1 = UserDataModel(
+        final UserModel UserModel1 = UserModel(
           id: 2314523452,
           username: 'wqer',
           avatarUrl: 'werqwerqwer',
           role: Role.admin,
         );
 
-        final UserDataModel userDataModel2 = UserDataModel(
+        final UserModel UserModel2 = UserModel(
           id: 2,
           username: 'test2',
           avatarUrl: 'URL',
           role: Role.user,
         );
 
-        final UserDataModel result = userDataModel1.copyWith(
+        final UserModel result = UserModel1.copyWith(
           id: 2,
           username: 'test2',
           avatarUrl: 'URL',
           role: Role.user,
         );
 
-        expect(result, userDataModel2);
+        expect(result, UserModel2);
       });
       test('method_copy_with_without_any _arguments', () {
-        final UserDataModel userDataModel1 = UserDataModel(
+        final UserModel UserModel1 = UserModel(
           id: 0,
           username: '321321',
           avatarUrl: '123443',
           role: Role.user,
         );
 
-        final UserDataModel userDataModel2 = UserDataModel(
+        final UserModel UserModel2 = UserModel(
           id: 0,
           username: '',
           avatarUrl: '',
           role: Role.user,
         );
 
-        UserDataModel result = userDataModel1.copyWith(
+        UserModel result = UserModel1.copyWith(
           username: '',
           avatarUrl: '',
         );
 
-        expect(result, userDataModel2);
+        expect(result, UserModel2);
       });
     });
   });
@@ -101,36 +102,36 @@ void main() {
       'role': 'admin',
     };
 
-    final UserDataModel userDataModel = UserDataModel(
+    final UserModel UserModel = UserModel(
       id: 1,
       username: 'test1',
       avatarUrl: 'URL',
       role: Role.admin,
     );
 
-    final Map<String, dynamic> result = userDataModel.toMap();
+    final Map<String, dynamic> result = UserModel.toMap();
 
     expect(result, userDataMap);
   });
   test('method_to_Json', () {
-    final UserDataModel userDataModelTest = UserDataModel(
+    final UserModel UserModelTest = UserModel(
       id: 1,
       username: 'test1',
       avatarUrl: 'URL',
       role: Role.admin,
     );
 
-    final Map<String, dynamic> dataMap = userDataModelTest.toMap();
+    final Map<String, dynamic> dataMap = UserModelTest.toMap();
     final String userDataJson = json.encode(dataMap);
 
-    final UserDataModel userDataModel = UserDataModel(
+    final UserModel UserModel = UserModel(
       id: 1,
       username: 'test1',
       avatarUrl: 'URL',
       role: Role.admin,
     );
 
-    final String result = userDataModel.toJson();
+    final String result = UserModel.toJson();
 
     expect(result, userDataJson);
   });

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:store_client/src/domain/entities/section.dart';
 import 'package:store_client/src/presentation/widgets/expantiontile_widget.dart';
 import 'package:store_client/src/presentation/widgets/navigation_bar_widget.dart';
 

@@ -24,20 +24,20 @@ Future<void> main() async {
     email: email,
   );
 
-  final UserDataModel userDataModel = UserDataModel(
+  final UserModel UserModel = UserModel(
     id: id,
     username: "dratyti",
     avatarUrl: "534",
     role: Role.user,
   );
-  final List<UserDataModel> listUserDataModel0 = [userDataModel];
+  final List<UserModel> listUserModel0 = [UserModel];
   group(
     'user_data_server_datasource_test',
     () {
       test(
         'put userData',
         () async {
-          final UserDataModel putUserDataModel = UserDataModel(
+          final UserModel putUserModel = UserModel(
             id: id,
             username: "dratyti",
             avatarUrl: "534",
@@ -45,7 +45,7 @@ Future<void> main() async {
           );
           final UserDataServerDatasource userDataServerDatasource = services.get<UserDataServerDatasource>();
 
-          final Either<Failure, UserDataModel> result = await userDataServerDatasource.putUserDataRequest(
+          final Either<Failure, UserModel> result = await userDataServerDatasource.putUserDataRequest(
             avatarUrl: '',
             id: 2,
             role: Role.user,
@@ -57,7 +57,7 @@ Future<void> main() async {
             (right) => right,
           );
           print(result);
-          expect(res, putUserDataModel);
+          expect(res, putUserModel);
         },
       );
       test(
@@ -65,14 +65,14 @@ Future<void> main() async {
         () async {
           final UserDataServerDatasource userDataServerDatasource = services.get<UserDataServerDatasource>();
 
-          final Either<Failure, List<UserDataModel>> userDataModel = await userDataServerDatasource.getAllUserDataRequest();
-          print(userDataModel);
-          final res = userDataModel.fold(
+          final Either<Failure, List<UserModel>> UserModel = await userDataServerDatasource.getAllUserDataRequest();
+          print(UserModel);
+          final res = UserModel.fold(
             (left) => left,
             (right) => right,
           );
           print(res);
-          expect(res, listUserDataModel0);
+          expect(res, listUserModel0);
         },
       );
 
@@ -81,14 +81,14 @@ Future<void> main() async {
         () async {
           final UserDataServerDatasource userDataServerDatasource = services.get<UserDataServerDatasource>();
 
-          final Either<Failure, UserDataModel> waitResult = await userDataServerDatasource.getConcreteUserDataRequest(id: id);
+          final Either<Failure, UserModel> waitResult = await userDataServerDatasource.getConcreteUserDataRequest(id: id);
 
           final result = waitResult.fold(
             (left) => left,
             (right) => right,
           );
 
-          expect(result, userDataModel);
+          expect(result, UserModel);
         },
       );
 

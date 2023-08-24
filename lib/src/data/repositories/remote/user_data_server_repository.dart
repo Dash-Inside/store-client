@@ -1,15 +1,15 @@
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/core/services/services.dart';
-import 'package:store_client/src/data/data_failures/data_failure.dart';
 import 'package:store_client/src/data/datasources/user_data_server_datasource.dart';
 import 'package:store_client/src/data/models/user_model.dart';
-import 'package:store_client/src/domain/entities/user_data.dart';
 
 import 'package:store_client/src/domain/entities/user.dart';
 
 import 'package:store_client/src/domain/repository/user_data_repository.dart';
 
+@Injectable(as: UserDataRepository)
 class UserDataServerRepository implements UserDataRepository {
   final UserDataServerDatasource userDataServerDatasource = services.get<UserDataServerDatasource>();
 
@@ -52,7 +52,7 @@ class UserDataServerRepository implements UserDataRepository {
 
       return Right(authStatus);
     } catch (e, stackTrace) {
-      return Left(DataFailure(message: e.toString(), stackTrace: stackTrace));
+      return Left(Failure(message: e.toString(), stackTrace: stackTrace));
     }
   }
 }

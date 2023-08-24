@@ -9,6 +9,7 @@ import 'package:store_client/core/logger/logger.dart';
 import 'package:store_client/core/services/services.dart';
 import 'package:store_client/src/domain/entities/user.dart';
 import 'package:store_client/src/domain/usecases/user_data/log_in_usecase.dart';
+import 'package:store_client/src/domain/usecases/user_data/recheck_token_usecase.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -23,7 +24,22 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Future<FutureOr<void>> _onRecheckTokenAuthEvent(
     RecheckTokenAuthEvent event,
     Emitter<AuthState> emit,
-  ) async {}
+  ) async {
+    final RecheckTokenUseCase recheckTokenUseCase = services<RecheckTokenUseCase>();
+
+    final Either<Failure, bool> failOrCheckResult = await recheckTokenUseCase.call(unit);
+
+    failOrCheckResult.fold(
+      (fail) => logger.warning('AuthBloc: $fail'),
+      (authResult) {
+        if (authResult) {
+          emit(DataAuthState());
+        } else {
+          emit(NullAuthState());
+        }
+      },
+    );
+  }
 
   FutureOr<void> _onLoginAuthEvent(
     LoginAuthEvent event,
