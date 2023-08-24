@@ -31,4 +31,8 @@ abstract class UserDataRepository {
     required String password,
     required String comfirmedPassword,
   });
+
+  /// [checkUserConnectByJWT] returns Either [Failure] if there is some errors or [bool] if there is no errors.
+  /// [checkUserConnectByJWT] used for authentication account and return status of authentication [bool].
+  Future<Either<Failure, bool>> checkUserConnectByJWT();
 }

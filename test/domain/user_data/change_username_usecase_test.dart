@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:mockito/mockito.dart';
 import 'package:store_client/core/failure/failure.dart';
+import 'package:store_client/core/services/services.dart';
 import 'package:store_client/src/data/repositories/remote/user_data_server_repository.dart';
 import 'package:store_client/src/domain/entities/role.dart';
 import 'package:store_client/src/domain/entities/user.dart';
@@ -21,14 +22,16 @@ Future<void> main() async {
 
   final String newUserName = 'newUserName';
 
-  final ChangeUserNameUseCaseParams changeUserNameUseCaseParams = ChangeUserNameUseCaseParams(
+  final ChangeUserNameUseCaseParams changeUserNameUseCaseParams =
+      ChangeUserNameUseCaseParams(
     userData,
     newUserName,
   );
 
   test('change_username_usecase_test', () async {
     // Act.
-    final UserDataRepository userDataRepository = testServices.get<UserDataRepository>();
+    final UserDataRepository userDataRepository =
+        services.get<UserDataRepository>();
     when(userDataRepository.changeUserName(
       userData: userData,
       newUserName: newUserName,
@@ -39,6 +42,7 @@ Future<void> main() async {
     // Arrange.
     final ChangeUserNameUseCase changeUserName = ChangeUserNameUseCase();
     final Either<Failure, User> result = await changeUserName.call(changeUserNameUseCaseParams);
+
 
     // Accert.
     verify(userDataRepository.changeUserName(

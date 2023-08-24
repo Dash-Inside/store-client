@@ -4,6 +4,8 @@ import 'package:mockito/mockito.dart';
 import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/src/data/repositories/remote/user_data_server_repository.dart';
 import 'package:store_client/src/domain/entities/role.dart';
+import 'package:store_client/src/domain/entities/user_data.dart';
+import 'package:store_client/core/services/services.dart';
 import 'package:store_client/src/domain/entities/user.dart';
 
 import '../../../injector/services.dart';
@@ -30,7 +32,7 @@ Future<void> main() async {
   group('user_data_server_repository_test', () {
     test('method loginUser test', () async {
       // Act.
-      final UserDataServerRepository userDataServerDatasource = testServices.get<UserDataServerRepository>();
+      final UserDataServerRepository userDataServerDatasource = services.get<UserDataServerRepository>();
 
       // Arrange.
       final Either<Failure, User> result = await userDataServerDatasource.loginUser(
@@ -49,7 +51,7 @@ Future<void> main() async {
 
     test('method restorePasswordUser test', () async {
       // Act.
-      final UserDataServerRepository userDataServerDatasource = testServices.get<UserDataServerRepository>();
+      final UserDataServerRepository userDataServerDatasource = services.get<UserDataServerRepository>();
 
       // Arrange.
       final Either<Failure, User> result = await userDataServerDatasource.restorePasswordUser(
@@ -70,7 +72,7 @@ Future<void> main() async {
 
     test('method changeAvatarUrl test', () async {
       // Act.
-      final UserDataServerRepository userDataServerRepository = testServices.get<UserDataServerRepository>();
+      final UserDataServerRepository userDataServerRepository = services.get<UserDataServerRepository>();
 
       // Arrange.
       final Either<Failure, User> request = await userDataServerRepository.changeAvatarUrl(
@@ -93,7 +95,7 @@ Future<void> main() async {
 
     test('method changeUserName test', () async {
       // Act.
-      final UserDataServerRepository userDataServerRepository = testServices.get<UserDataServerRepository>();
+      final UserDataServerRepository userDataServerRepository = services.get<UserDataServerRepository>();
 
       // Arrange.
       final Either<Failure, User> request = await userDataServerRepository.changeUserName(
@@ -110,6 +112,19 @@ Future<void> main() async {
         userData: userData,
         newUserName: newUserName,
       )).called(1);
+      verifyNoMoreInteractions(userDataServerRepository);
+      expect(request.isRight(), true);
+    });
+
+    test('method checkUserConnectByJWT test', () async {
+      // Act.
+      final UserDataServerRepository userDataServerRepository = services.get<UserDataServerRepository>();
+
+      // Arrange.
+      final Either<Failure, bool> request = await userDataServerRepository.checkUserConnectByJWT();
+
+      // Accert.
+      verify(userDataServerRepository.checkUserConnectByJWT()).called(1);
       verifyNoMoreInteractions(userDataServerRepository);
       expect(request.isRight(), true);
     });

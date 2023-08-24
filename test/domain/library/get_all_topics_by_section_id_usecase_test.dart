@@ -6,6 +6,7 @@ import 'package:store_client/src/domain/entities/topic.dart';
 import 'package:store_client/src/domain/repository/library_repository.dart';
 import 'package:store_client/src/domain/usecases/library/get_all_topics_by_section_id_usecase.dart';
 import '../../injector/services.dart';
+import 'package:store_client/core/services/services.dart';
 
 Future<void> main() async {
   const int id = 1;
@@ -22,7 +23,8 @@ Future<void> main() async {
     'get_all_topics_by_section_id_usecase_test',
     () async {
       // Act.
-      final LibraryRepository libraryRepository = testServices.get<LibraryRepository>();
+      final LibraryRepository libraryRepository =
+          services.get<LibraryRepository>();
       when(libraryRepository.getAllTopicsBySectionID(id: id)).thenAnswer(
         (_) async {
           return Right(listTopic);
@@ -30,8 +32,10 @@ Future<void> main() async {
       );
 
       // Arrange.
-      final GetAllTopicsBySectionIDUseCase getAllTopicsBySectionIDUseCase = GetAllTopicsBySectionIDUseCase();
-      final Either<Failure, List<Topic>> result = await getAllTopicsBySectionIDUseCase.call(id);
+      final GetAllTopicsBySectionIDUseCase getAllTopicsBySectionIDUseCase =
+          GetAllTopicsBySectionIDUseCase();
+      final Either<Failure, List<Topic>> result =
+          await getAllTopicsBySectionIDUseCase.call(id);
 
       // Assert.
       verify(libraryRepository.getAllTopicsBySectionID(id: id)).called(1);

@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:store_client/core/failure/failure.dart';
+import 'package:store_client/core/services/services.dart';
 import 'package:store_client/src/domain/entities/role.dart';
 import 'package:store_client/src/domain/entities/user.dart';
 import 'package:store_client/src/domain/repository/user_data_repository.dart';
@@ -20,14 +21,16 @@ Future<void> main() async {
 
   final String newAvatarUrl = 'newAvatarUrl';
 
-  final ChangeAvatarUrlUseCaseParams changeAvatarUrlUseCaseParams = ChangeAvatarUrlUseCaseParams(
+  final ChangeAvatarUrlUseCaseParams changeAvatarUrlUseCaseParams =
+      ChangeAvatarUrlUseCaseParams(
     userData,
     newAvatarUrl,
   );
 
   test('change_avatar_url_usecase_test', () async {
     // Act.
-    final UserDataRepository userDataRepository = testServices.get<UserDataRepository>();
+    final UserDataRepository userDataRepository =
+        services.get<UserDataRepository>();
     when(userDataRepository.changeAvatarUrl(
       userData: userData,
       newAvatarUrl: newAvatarUrl,
