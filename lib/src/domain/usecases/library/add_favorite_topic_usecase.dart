@@ -9,8 +9,7 @@ import 'package:store_client/src/domain/repository/library_repository.dart';
 class AddFavoriteTopicUseCase extends UseCase<Unit, int> {
   @override
   FutureOr<Either<Failure, Unit>> call(int id) {
-    final LibraryRepository libraryRepository =
-        services.get<LibraryRepository>();
+    final LibraryRepository libraryRepository = services.get<LibraryRepository>();
 
     return libraryRepository.addFavoriteTopic(
       id: id,

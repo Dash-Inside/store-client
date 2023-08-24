@@ -12,8 +12,7 @@ class SearchTopicByTitleUseCase extends UseCase<Topic, String> {
 
   @override
   FutureOr<Either<Failure, Topic>> call(String title) {
-    final LibraryRepository libraryRepository =
-        services.get<LibraryRepository>();
+    final LibraryRepository libraryRepository = services.get<LibraryRepository>();
 
     return libraryRepository.searchTopicByTitle(
       title: title,
