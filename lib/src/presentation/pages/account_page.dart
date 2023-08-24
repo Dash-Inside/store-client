@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'package:store_client/src/presentation/widgets/navigation_bar_widget.dart';
 import 'package:store_client/src/presentation/widgets/topic_widget.dart';
 
+@Injectable()
 class AccountPage extends StatelessWidget {
   static const double editIconButtonSize = 16.0;
   static const double widthSizedBox2 = 16.0;
@@ -21,10 +23,7 @@ class AccountPage extends StatelessWidget {
     'Topic #6',
   ];
 
-  editOnTap() {}
-  photoOnPressed() {}
-
-  AccountPage({super.key});
+  AccountPage();
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +31,14 @@ class AccountPage extends StatelessWidget {
     final Color colorSurface = colorScheme.surface;
     final Color colorSecondary = colorScheme.secondary;
     final Color colorPrimary = colorScheme.primary;
+    void editOnPressed() {}
+    void photoOnPressed() {}
+    void topicOnPressed() {}
 
     return Scaffold(
       backgroundColor: colorSurface,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: colorSurface,
         elevation: 0.0,
         title: Text(
@@ -87,7 +90,7 @@ class AccountPage extends StatelessWidget {
                           ),
                           Spacer(),
                           IconButton(
-                            onPressed: editOnTap,
+                            onPressed: editOnPressed,
                             icon: Icon(
                               Icons.mode_edit_outline_outlined,
                               size: editIconButtonSize,
@@ -134,7 +137,10 @@ class AccountPage extends StatelessWidget {
               child: ListView.builder(
                 itemCount: listTopics.length,
                 itemBuilder: (context, index) {
-                  return TopicWidget(text: listTopics[index]);
+                  return TopicWidget(
+                    text: listTopics[index],
+                    topicOnPressed: topicOnPressed,
+                  );
                 },
               ),
             ),

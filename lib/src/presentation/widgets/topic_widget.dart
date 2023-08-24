@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class TopicWidget extends StatelessWidget {
   static const double fontSizeSec = 16.0;
   final String text;
+  final Function()? topicOnPressed;
 
   const TopicWidget({
     super.key,
     required this.text,
+    this.topicOnPressed,
   });
 
   @override
@@ -17,7 +19,7 @@ class TopicWidget extends StatelessWidget {
     return Row(
       children: [
         TextButton(
-          onPressed: () {},
+          onPressed: topicOnPressed,
           child: Text(
             text,
             style: TextStyle(

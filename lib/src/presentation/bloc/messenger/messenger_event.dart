@@ -6,3 +6,11 @@ sealed class MessengerEvent extends Equatable {
 
   const MessengerEvent();
 }
+
+final class SendMessengerEvent extends MessengerEvent {
+  final String message;
+
+  SendMessengerEvent({
+    required this.message,
+  });
+}
