@@ -13,7 +13,7 @@ class UserModel extends User {
       email: map['email'] as String,
       username: map['username'] as String,
       avatarUrl: map['avatarUrl'] as String,
-      role: map['role'] == 'Authenticated' ? Role.Authenticated : Role.Public,
+      role: Role.Public,
     );
   }
 
