@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/src/domain/entities/role.dart';
-import 'package:store_client/src/domain/entities/user_data.dart';
+import 'package:store_client/src/domain/entities/user.dart';
 import 'package:store_client/src/domain/repository/user_data_repository.dart';
 import 'package:store_client/src/domain/usecases/user_data/change_avatar_url_usecase.dart';
 
@@ -11,7 +11,7 @@ import '../../injector/services.dart';
 
 Future<void> main() async {
   await initTestServices();
-  final UserData userData = UserData(
+  final User userData = User(
     id: 1,
     username: 'Pencil',
     avatarUrl: 'avatarUrl',
@@ -37,7 +37,7 @@ Future<void> main() async {
 
     // Arrange.
     final ChangeAvatarUrlUseCase changeAvatarUrl = ChangeAvatarUrlUseCase();
-    final Either<Failure, UserData> result = await changeAvatarUrl.call(changeAvatarUrlUseCaseParams);
+    final Either<Failure, User> result = await changeAvatarUrl.call(changeAvatarUrlUseCaseParams);
 
     // Accert.
     verify(userDataRepository.changeAvatarUrl(

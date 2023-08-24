@@ -8,14 +8,11 @@ class MessageModel extends Message {
   final String data;
   final int senderId;
 
-  @override
-  int get hashCode => id.hashCode ^ data.hashCode ^ senderId.hashCode;
-
   factory MessageModel.fromMap(Map<String, dynamic> map) {
     return MessageModel(
       id: map['id'] as int,
       data: map['attributes']['data'] as String,
-      senderId: map['attributes']['senderID'] as int,
+      senderId: map['attributes']['senderId'] as int,
     );
   }
 
@@ -47,7 +44,7 @@ class MessageModel extends Message {
     return <String, dynamic>{
       'data': {
         'data': data,
-        'senderID': senderId,
+        'senderId': senderId,
       },
     };
   }
@@ -56,11 +53,4 @@ class MessageModel extends Message {
 
   @override
   String toString() => 'MessageModel(id: $id, data: $data, senderId: $senderId)';
-
-  @override
-  bool operator ==(covariant MessageModel other) {
-    if (identical(this, other)) return true;
-
-    return other.id == id && other.data == data && other.senderId == senderId;
-  }
 }

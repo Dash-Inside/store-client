@@ -6,7 +6,7 @@ import 'package:mockito/mockito.dart';
 import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/src/data/repositories/remote/user_data_server_repository.dart';
 import 'package:store_client/src/domain/entities/role.dart';
-import 'package:store_client/src/domain/entities/user_data.dart';
+import 'package:store_client/src/domain/entities/user.dart';
 import 'package:store_client/src/domain/repository/user_data_repository.dart';
 import 'package:store_client/src/domain/usecases/user_data/restore_password_usecase.dart';
 
@@ -15,7 +15,7 @@ import '../../injector/services.dart';
 Future<void> main() async {
   await initTestServices();
 
-  final UserData userData = UserData(
+  final User userData = User(
     id: 1,
     username: 'username',
     avatarUrl: 'avatarUrl',
@@ -44,7 +44,7 @@ Future<void> main() async {
 
     // Arrange.
     final RestorePasswordUseCase restorePasswordUseCase = RestorePasswordUseCase();
-    final FutureOr<Either<Failure, UserData>> result = await restorePasswordUseCase.call(restorePasswordUseCaseParams);
+    final FutureOr<Either<Failure, User>> result = await restorePasswordUseCase.call(restorePasswordUseCaseParams);
 
     // Accert.
     verify(userDataRepository.restorePasswordUser(

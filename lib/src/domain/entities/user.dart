@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 
 import 'package:store_client/src/domain/entities/role.dart';
 
-class UserData extends Equatable {
+class User extends Equatable {
   final int id;
   final String email;
   final String username;
@@ -11,9 +11,9 @@ class UserData extends Equatable {
   final Role role;
 
   @override
-  List<Object?> get props => [id, username];
+  List<Object?> get props => [id];
 
-  UserData({
+  User({
     required this.id,
     required this.email,
     required this.username,

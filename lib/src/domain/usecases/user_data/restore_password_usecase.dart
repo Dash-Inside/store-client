@@ -4,12 +4,12 @@ import 'package:dartz/dartz.dart';
 import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/core/services/services.dart';
 import 'package:store_client/core/usecases/usecases.dart';
-import 'package:store_client/src/domain/entities/user_data.dart';
+import 'package:store_client/src/domain/entities/user.dart';
 import 'package:store_client/src/domain/repository/user_data_repository.dart';
 
-class RestorePasswordUseCase extends UseCase<UserData, RestorePasswordUseCaseParams> {
+class RestorePasswordUseCase extends UseCase<User, RestorePasswordUseCaseParams> {
   @override
-  FutureOr<Either<Failure, UserData>> call(RestorePasswordUseCaseParams params) {
+  FutureOr<Either<Failure, User>> call(RestorePasswordUseCaseParams params) {
     final UserDataRepository userDataRepository = services.get<UserDataRepository>();
 
     return userDataRepository.restorePasswordUser(
