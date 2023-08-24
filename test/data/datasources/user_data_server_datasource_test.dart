@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:store_client/core/failure/failure.dart';
+import 'package:store_client/core/services/services.dart';
 import 'package:store_client/src/data/datasources/user_data_server_datasource.dart';
 import 'package:store_client/src/data/models/user_data_model.dart';
 import 'package:store_client/src/data/models/user_model.dart';
@@ -42,7 +43,7 @@ Future<void> main() async {
             avatarUrl: "534",
             role: Role.user,
           );
-          final UserDataServerDatasource userDataServerDatasource = testServices.get<UserDataServerDatasource>();
+          final UserDataServerDatasource userDataServerDatasource = services.get<UserDataServerDatasource>();
 
           final Either<Failure, UserDataModel> result = await userDataServerDatasource.putUserDataRequest(
             avatarUrl: '',
@@ -62,7 +63,7 @@ Future<void> main() async {
       test(
         'get_all_userData_Request',
         () async {
-          final UserDataServerDatasource userDataServerDatasource = testServices.get<UserDataServerDatasource>();
+          final UserDataServerDatasource userDataServerDatasource = services.get<UserDataServerDatasource>();
 
           final Either<Failure, List<UserDataModel>> userDataModel = await userDataServerDatasource.getAllUserDataRequest();
           print(userDataModel);
@@ -78,7 +79,7 @@ Future<void> main() async {
       test(
         'get Concrete UserData Request',
         () async {
-          final UserDataServerDatasource userDataServerDatasource = testServices.get<UserDataServerDatasource>();
+          final UserDataServerDatasource userDataServerDatasource = services.get<UserDataServerDatasource>();
 
           final Either<Failure, UserDataModel> waitResult = await userDataServerDatasource.getConcreteUserDataRequest(id: id);
 
@@ -94,7 +95,7 @@ Future<void> main() async {
       test(
         'password login method',
         () async {
-          final UserDataServerDatasource userDataServerDatasource = testServices.get<UserDataServerDatasource>();
+          final UserDataServerDatasource userDataServerDatasource = services.get<UserDataServerDatasource>();
 
           final Either<Failure, UserModel> result = await userDataServerDatasource.loginUserDataRequest(
             login: email,
@@ -113,7 +114,7 @@ Future<void> main() async {
       test(
         'change password method',
         () async {
-          final UserDataServerDatasource userDataServerDatasource = testServices.get<UserDataServerDatasource>();
+          final UserDataServerDatasource userDataServerDatasource = services.get<UserDataServerDatasource>();
 
           final Either<Failure, UserModel> result = await userDataServerDatasource.changePasswordUserDataRequest(
             currentPassword: currentPassword,
