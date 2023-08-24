@@ -1,32 +1,32 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/core/services/services.dart';
 import 'package:store_client/core/usecases/usecases.dart';
-import 'package:store_client/src/domain/entities/user_data.dart';
-import 'package:store_client/src/domain/repository/user_data_repository.dart';
+import 'package:store_client/src/domain/entities/user.dart';
+import 'package:store_client/src/domain/repository/user_repository.dart';
 
-class ChangeUserNameUseCase
-    extends UseCase<UserData, ChangeUserNameUseCaseParams> {
+@Injectable()
+class ChangeUserNameUseCase extends UseCase<User, ChangeUserNameUseCaseParams> {
   @override
-  FutureOr<Either<Failure, UserData>> call(ChangeUserNameUseCaseParams params) {
-    final UserDataRepository userDataRepository =
-        services.get<UserDataRepository>();
+  FutureOr<Either<Failure, User>> call(ChangeUserNameUseCaseParams params) {
+    final UserRepository userRepository = services.get<UserRepository>();
 
-    return userDataRepository.changeUserName(
-      userData: params.userData,
+    return userRepository.changeUserName(
+      user: params.user,
       newUserName: params.newUserName,
     );
   }
 }
 
 class ChangeUserNameUseCaseParams {
-  final UserData userData;
+  final User user;
   final String newUserName;
 
   ChangeUserNameUseCaseParams(
-    this.userData,
+    this.user,
     this.newUserName,
   );
 }

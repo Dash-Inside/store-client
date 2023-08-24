@@ -1,33 +1,32 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/core/services/services.dart';
 import 'package:store_client/core/usecases/usecases.dart';
-import 'package:store_client/src/domain/entities/user_data.dart';
-import 'package:store_client/src/domain/repository/user_data_repository.dart';
+import 'package:store_client/src/domain/entities/user.dart';
+import 'package:store_client/src/domain/repository/user_repository.dart';
 
-class ChangeAvatarUrlUseCase
-    extends UseCase<UserData, ChangeAvatarUrlUseCaseParams> {
+@Injectable()
+class ChangeAvatarUrlUseCase extends UseCase<User, ChangeAvatarUrlUseCaseParams> {
   @override
-  FutureOr<Either<Failure, UserData>> call(
-      ChangeAvatarUrlUseCaseParams params) {
-    final UserDataRepository userDataRepository =
-        services.get<UserDataRepository>();
+  FutureOr<Either<Failure, User>> call(ChangeAvatarUrlUseCaseParams params) {
+    final UserRepository userRepository = services.get<UserRepository>();
 
-    return userDataRepository.changeAvatarUrl(
-      userData: params.userData,
+    return userRepository.changeAvatarUrl(
+      user: params.user,
       newAvatarUrl: params.newAvatarUrl,
     );
   }
 }
 
 class ChangeAvatarUrlUseCaseParams {
-  final UserData userData;
+  final User user;
   final String newAvatarUrl;
 
   ChangeAvatarUrlUseCaseParams(
-    this.userData,
+    this.user,
     this.newAvatarUrl,
   );
 }

@@ -6,7 +6,7 @@ class Section extends Equatable {
   final int topicId;
 
   @override
-  List<Object?> get props => [id, title];
+  List<Object?> get props => [id];
 
   Section({
     required this.id,

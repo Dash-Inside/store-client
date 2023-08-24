@@ -1,25 +1,30 @@
+//ignore_for_file: prefer-static-class, avoid-ignoring-return-values
+
 import 'dart:async';
 
-import 'package:get_it/get_it.dart';
-import 'package:store_client/src/data/datasources/messenger_server_datasource.dart';
-import 'package:store_client/src/data/repositories/remote/messenger_server_repository.dart';
-import 'package:store_client/src/data/repositories/remote/user_data_server_repository.dart';
-import 'package:store_client/src/data/repositories/remote/library_server_repository.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:store_client/src/domain/repository/library_repository.dart';
-import 'package:store_client/src/domain/repository/messenger_repository.dart';
-import 'package:store_client/src/domain/repository/user_data_repository.dart';
+import 'package:get_it/get_it.dart';
+import 'package:injectable/injectable.dart';
+import 'package:store_client/src/presentation/bloc/auth/auth_bloc.dart';
+
+import 'services.config.dart';
 
 final GetIt services = GetIt.I;
 
+@InjectableInit(initializerName: 'generate')
 FutureOr<void> initServices() {
-  services.registerLazySingleton<FlutterSecureStorage>(() => FlutterSecureStorage());
+  services.generate();
 
-  services.registerLazySingleton<MessengerServerDatasource>(() => MessengerServerDatasource());
+  services<AuthBloc>().add(RecheckTokenAuthEvent());
+}
 
-  services.registerLazySingleton<MessengerRepository>(() => MessengerServerRepository());
+@injectable
+class DioModule {
+  Dio get client => Dio();
+}
 
-  services.registerLazySingleton<UserDataRepository>(() => UserDataServerRepository());
-
-  services.registerLazySingleton<LibraryRepository>(() => LibraryServerRepository());
+@injectable
+class SecureModule {
+  FlutterSecureStorage get storage => FlutterSecureStorage();
 }

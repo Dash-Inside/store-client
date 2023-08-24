@@ -1,10 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/src/data/models/message_model.dart';
 import 'package:store_client/src/domain/entities/message.dart';
 import 'package:store_client/src/failures/trace_failures.dart';
 
+@Injectable()
 class MessengerServerDatasource {
   final Dio _client = Dio();
   static const String _baseUri = 'http://127.0.0.1:1337/api/message';
@@ -12,7 +14,7 @@ class MessengerServerDatasource {
   Future<Either<Failure, List<Message>>> getAllMessages() async {
     try {
       final Response response = await _client.get(_baseUri);
-      final List<dynamic> listMap = response.data['data'];
+      final List listMap = response.data['data'];
       List<Message> listMessage = [];
 
       listMap.forEach(
