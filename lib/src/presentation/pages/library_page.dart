@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'package:store_client/src/presentation/widgets/expantiontile_widget.dart';
 import 'package:store_client/src/presentation/widgets/navigation_bar_widget.dart';
 
+@Injectable()
 class LibraryPage extends StatelessWidget {
   static const double fontSize = 28.0;
   static const double fontLetterSpacing = 0.5;
@@ -21,7 +23,7 @@ class LibraryPage extends StatelessWidget {
     'Topic #5',
   ];
 
-  LibraryPage({super.key});
+  LibraryPage();
 
   @override
   Widget build(BuildContext context) {

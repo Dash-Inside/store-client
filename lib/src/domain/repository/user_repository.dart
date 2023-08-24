@@ -2,18 +2,18 @@ import 'package:dartz/dartz.dart';
 import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/src/domain/entities/user.dart';
 
-abstract class UserDataRepository {
+abstract class UserRepository {
   /// [changeUserName] returns Either [Failure] if there is some errors or [User] if there is no errors.
-  /// [changeUserName] takes [userData], [newUserName] that used for change userName by [userData] and get [User].
+  /// [changeUserName] takes [User], [newUserName] that used for change userName by [User] and get [User].
   Future<Either<Failure, User>> changeUserName({
-    required User userData,
+    required User user,
     required String newUserName,
   });
 
   /// [changeAvatarUrl] returns Either [Failure] if there is some errors or [User] if there is no errors.
-  /// [changeAvatarUrl] takes [userData], [newAvatarUrl] that used for change avatarUrl by [userData] and get [User].
+  /// [changeAvatarUrl] takes [User], [newAvatarUrl] that used for change avatarUrl by [User] and get [User].
   Future<Either<Failure, User>> changeAvatarUrl({
-    required User userData,
+    required User user,
     required String newAvatarUrl,
   });
 

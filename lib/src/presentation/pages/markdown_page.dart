@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:injectable/injectable.dart';
 
+@Injectable()
 class MarkdownPage extends StatelessWidget {
   static const double fontSizeLight = 20.0;
   static const double marginContainer = 16.0;
   static const double fontSize = 28.0;
   final String topicName = 'Topic';
 
-  const MarkdownPage({super.key});
+  const MarkdownPage();
 
   @override
   Widget build(BuildContext context) {

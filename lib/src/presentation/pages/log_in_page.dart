@@ -1,24 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
+import 'package:store_client/src/presentation/bloc/auth/auth_bloc.dart';
 import 'package:store_client/src/presentation/widgets/filled_button_widget.dart';
 import 'package:store_client/src/presentation/widgets/text_button_widget.dart';
 import 'package:store_client/src/presentation/widgets/text_field_widget.dart';
 
+@Injectable()
 class LoginPage extends StatelessWidget {
   static const int flex = 3;
   static const double sizedBoxHeight = 8.0;
   static const double letterSpacing = 0.5;
   static const double edgeInsetsAll = 16.0;
-  static const double fontSizeThin = 16.0;
-  static const double fontSizeHeaders = 28.0;
 
-  const LoginPage({super.key});
+  final AuthBloc authBloc;
+
+  const LoginPage({
+    required this.authBloc,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
+
+    final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final Color colorSurf = colorScheme.surface;
-    void textButtonOnPressed() => Navigator.of(context).pushNamed('/restore');
-    void filledButtonOnPressed() => Navigator.of(context).pushNamed('/library');
+
+    void recoveryPressed() => Navigator.of(context).pushNamed('/restore');
+    void loginPressed() {
+      authBloc.add(
+        LoginAuthEvent(
+          email: emailController.text,
+          password: passwordController.text,
+        ),
+      );
+    }
 
     return Scaffold(
       backgroundColor: colorSurf,
@@ -30,36 +47,42 @@ class LoginPage extends StatelessWidget {
             Spacer(),
             Text(
               'Dash Inside',
-              style: TextStyle(
-                fontSize: fontSizeHeaders,
-                fontWeight: FontWeight.w500,
-                letterSpacing: letterSpacing,
+              style: textTheme.displaySmall?.copyWith(
+                color: Colors.black,
               ),
             ),
             Text(
               'Non-Profit Organization',
-              style: TextStyle(
-                fontSize: fontSizeThin,
-                fontWeight: FontWeight.w300,
+              style: textTheme.labelSmall?.copyWith(
+                color: Colors.black,
               ),
             ),
             Spacer(
               flex: flex,
             ),
-            TextFieldWidget(text: 'Email'),
-            SizedBox(height: sizedBoxHeight),
-            TextFieldWidget(text: 'Password'),
+            TextFieldWidget(
+              controller: emailController,
+              hintText: 'Email',
+            ),
+            SizedBox(
+              height: sizedBoxHeight,
+            ),
+            TextFieldWidget(
+              controller: passwordController,
+              hintText: 'Password',
+              obscureText: true,
+            ),
             Spacer(),
             TextButtonWidget(
               text: 'Restore Account',
-              textButtonOnPressed: textButtonOnPressed,
+              onPressed: recoveryPressed,
             ),
             SizedBox(
               height: sizedBoxHeight,
             ),
             FilledButtonWidget(
               hintText: 'Log in',
-              filledButtonOnPressed: filledButtonOnPressed,
+              onPressed: loginPressed,
             ),
           ],
         ),

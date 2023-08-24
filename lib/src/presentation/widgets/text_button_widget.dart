@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class TextButtonWidget extends StatelessWidget {
   static const double fontSize = 16.0;
   final String text;
-  final Function() textButtonOnPressed;
+  final Function() onPressed;
 
   const TextButtonWidget({
     super.key,
     required this.text,
-    required this.textButtonOnPressed,
+    required this.onPressed,
   });
 
   @override
@@ -16,7 +16,7 @@ class TextButtonWidget extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: TextButton(
-        onPressed: textButtonOnPressed,
+        onPressed: onPressed,
         child: Text(
           text,
           style: TextStyle(

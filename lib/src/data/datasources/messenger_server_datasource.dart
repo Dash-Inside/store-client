@@ -14,7 +14,7 @@ class MessengerServerDatasource {
   Future<Either<Failure, List<Message>>> getAllMessages() async {
     try {
       final Response response = await _client.get(_baseUri);
-      final List<dynamic> listMap = response.data['data'];
+      final List listMap = response.data['data'];
       List<Message> listMessage = [];
 
       listMap.forEach(

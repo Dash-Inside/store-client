@@ -6,15 +6,15 @@ import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/core/services/services.dart';
 import 'package:store_client/core/usecases/usecases.dart';
 import 'package:store_client/src/domain/entities/user.dart';
-import 'package:store_client/src/domain/repository/user_data_repository.dart';
+import 'package:store_client/src/domain/repository/user_repository.dart';
 
 @Injectable()
 class LogInUseCase extends UseCase<User, LogInUseCaseParams> {
   @override
   FutureOr<Either<Failure, User>> call(LogInUseCaseParams params) {
-    final UserDataRepository userDataRepository = services.get<UserDataRepository>();
+    final UserRepository userRepository = services.get<UserRepository>();
 
-    return userDataRepository.loginUser(
+    return userRepository.loginUser(
       email: params.email,
       password: params.password,
     );

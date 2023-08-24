@@ -3,47 +3,57 @@ import 'package:flutter/material.dart';
 class TextFieldWidget extends StatelessWidget {
   static const double fontSizeThin = 16.0;
   static const double contentPadding = 8.0;
-  static const double cirRad = 8.0;
-  final String text;
+  static const double borderRadius = 8.0;
+
+  final TextEditingController controller;
+  final String hintText;
+  final bool obscureText;
 
   TextFieldWidget({
     super.key,
-    required this.text,
+    required this.controller,
+    required this.hintText,
+    this.obscureText = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    final Color colorPr = Theme.of(context).colorScheme.primary;
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    final Color borderColor = Theme.of(context).colorScheme.primary;
 
-    OutlineInputBorder outlineBord = OutlineInputBorder(
+    OutlineInputBorder outlineBorder = OutlineInputBorder(
       borderRadius: BorderRadius.all(
-        Radius.circular(cirRad),
+        Radius.circular(borderRadius),
       ),
       borderSide: BorderSide(
-        color: colorPr,
+        color: borderColor,
         width: 1.0,
       ),
     );
-    OutlineInputBorder outlineBord1 = OutlineInputBorder(
+    OutlineInputBorder enabledBorder = OutlineInputBorder(
       borderRadius: BorderRadius.all(
-        Radius.circular(cirRad),
+        Radius.circular(borderRadius),
       ),
       borderSide: BorderSide(
-        color: colorPr,
+        color: borderColor,
         width: 1.0,
       ),
     );
 
     return TextField(
+      controller: controller,
+      obscureText: obscureText,
+      style: textTheme.labelSmall?.copyWith(
+        color: Colors.black,
+      ),
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.all(contentPadding),
         isDense: true,
-        focusedBorder: outlineBord,
-        enabledBorder: outlineBord1,
-        hintText: text,
-        hintStyle: TextStyle(
-          fontSize: fontSizeThin,
-          fontWeight: FontWeight.w300,
+        contentPadding: EdgeInsets.all(contentPadding),
+        focusedBorder: outlineBorder,
+        enabledBorder: enabledBorder,
+        hintText: hintText,
+        hintStyle: textTheme.labelSmall?.copyWith(
+          color: Colors.grey,
         ),
       ),
     );

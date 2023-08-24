@@ -10,15 +10,21 @@ import 'package:store_client/src/data/models/user_model.dart';
 import 'package:store_client/src/domain/entities/role.dart';
 
 @Injectable()
-class UserDataServerDatasource {
-  final Dio client = Dio();
+class UserServerDatasource {
+  final SecureModule secureModule;
+  final DioModule dioModule;
 
   static const String _jwtKey = 'JWT';
 
-  Future<Either<Failure, List<UserModel>>> getAllUserDataRequest() async {
+  UserServerDatasource({
+    required this.dioModule,
+    required this.secureModule,
+  });
+
+  Future<Either<Failure, List<UserModel>>> getAllUserRequest() async {
     try {
-      final Response response = await client.get('http://127.0.0.1:1337/api/user-data/');
-      final List<dynamic> listMapAllRequest = response.data['data'];
+      final Response response = await dioModule.client.get('http://127.0.0.1:1337/api/user-data/');
+      final List listMapAllRequest = response.data['data'];
       final List<UserModel> result = [];
       listMapAllRequest.forEach((element) {
         result.add(UserModel.fromMap(element as Map<String, dynamic>));
@@ -30,11 +36,11 @@ class UserDataServerDatasource {
     }
   }
 
-  Future<Either<Failure, UserModel>> getConcreteUserDataRequest({
+  Future<Either<Failure, UserModel>> getConcreteUserRequest({
     required int id,
   }) async {
     try {
-      final Response response = await client.get('http://127.0.0.1:1337/api/user-data/$id');
+      final Response response = await dioModule.client.get('http://127.0.0.1:1337/api/user-data/$id');
 
       return Right(UserModel.fromMap(response.data['data']));
     } catch (e, stackTrace) {
@@ -42,7 +48,7 @@ class UserDataServerDatasource {
     }
   }
 
-  Future<Either<Failure, UserModel>> putUserDataRequest({
+  Future<Either<Failure, UserModel>> putUserRequest({
     required int id,
     required String? userName,
     required Role? role,
@@ -61,7 +67,7 @@ class UserDataServerDatasource {
         mapParams['data']['avatarUrl'] = avatarUrl;
       }
 
-      final Response response = await client.put(
+      final Response response = await dioModule.client.put(
         'http://127.0.0.1:1337/api/user-data/$id',
         data: mapParams,
       );
@@ -72,20 +78,20 @@ class UserDataServerDatasource {
     }
   }
 
-  Future<Either<Failure, UserModel>> loginUserDataRequest({
+  Future<Either<Failure, UserModel>> loginUserRequest({
     required String login,
     required String password,
   }) async {
     try {
-      final FlutterSecureStorage flutterSecureStorage = services.get<FlutterSecureStorage>();
-      final Response response = await client.post(
+      final Response response = await dioModule.client.post(
         'http://127.0.0.1:1337/api/auth/local',
         data: <String, dynamic>{
           "identifier": login,
           "password": password,
         },
       );
-      await flutterSecureStorage.write(key: _jwtKey, value: response.data['jwt']);
+
+      await secureModule.storage.write(key: _jwtKey, value: response.data['jwt']);
 
       return Right(UserModel.fromMap(response.data['user']));
     } catch (e, stackTrace) {
@@ -93,14 +99,14 @@ class UserDataServerDatasource {
     }
   }
 
-  Future<Either<Failure, UserModel>> changePasswordUserDataRequest({
+  Future<Either<Failure, UserModel>> changePasswordUserRequest({
     required String currentPassword,
     required String newPassword,
     required String newPasswordConfirmation,
   }) async {
     try {
       final FlutterSecureStorage flutterSecureStorage = services.get<FlutterSecureStorage>();
-      final Response response = await client.post(
+      final Response response = await dioModule.client.post(
         'http://127.0.0.1:1337/api/auth/change-password',
         options: Options(headers: {'Authorization': 'Bearer ${await flutterSecureStorage.read(key: _jwtKey)}'}),
         data: jsonEncode(
@@ -119,10 +125,10 @@ class UserDataServerDatasource {
     }
   }
 
-  Future<Either<Failure, UserModel>> authMeUserDataRequest() async {
+  Future<Either<Failure, UserModel>> authMeUserRequest() async {
     try {
       final FlutterSecureStorage flutterSecureStorage = services.get<FlutterSecureStorage>();
-      final Response response = await client.get(
+      final Response response = await dioModule.client.get(
         'http://127.0.0.1:1337/api/users/me',
         options: Options(
           headers: {'Authorization': 'Bearer ${await flutterSecureStorage.read(key: _jwtKey)}'},

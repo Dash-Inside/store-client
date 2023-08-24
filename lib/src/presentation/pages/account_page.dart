@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'package:store_client/src/presentation/widgets/navigation_bar_widget.dart';
 import 'package:store_client/src/presentation/widgets/topic_widget.dart';
 
+@Injectable()
 class AccountPage extends StatelessWidget {
   static const double editIconButtonSize = 16.0;
   static const double widthSizedBox2 = 16.0;
@@ -21,7 +23,7 @@ class AccountPage extends StatelessWidget {
     'Topic #6',
   ];
 
-  AccountPage({super.key});
+  AccountPage();
 
   @override
   Widget build(BuildContext context) {

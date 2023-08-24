@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'package:store_client/src/presentation/widgets/filled_button_widget.dart';
 import 'package:store_client/src/presentation/widgets/text_field_widget.dart';
 
+@Injectable()
 class RestorePage extends StatelessWidget {
   static const double sizedboxHeight = 8.0;
   static const double edgeInsetsContainer = 16.0;
   static const double fontSizeHeaders = 28.0;
   static const int flex = 2;
 
-  RestorePage({super.key});
+  RestorePage();
 
   @override
   Widget build(BuildContext context) {
@@ -45,17 +47,26 @@ class RestorePage extends StatelessWidget {
             Spacer(),
             Column(
               children: [
-                TextFieldWidget(text: 'Restore code'),
+                TextFieldWidget(
+                  controller: TextEditingController(),
+                  hintText: 'Restore code',
+                ),
                 SizedBox(height: sizedboxHeight),
-                TextFieldWidget(text: 'New password'),
+                TextFieldWidget(
+                  controller: TextEditingController(),
+                  hintText: 'New password',
+                ),
                 SizedBox(height: sizedboxHeight),
-                TextFieldWidget(text: 'New password'),
+                TextFieldWidget(
+                  controller: TextEditingController(),
+                  hintText: 'New password',
+                ),
               ],
             ),
             Spacer(flex: flex),
             FilledButtonWidget(
               hintText: 'Restore',
-              filledButtonOnPressed: filledButtonOnPressed,
+              onPressed: filledButtonOnPressed,
             ),
           ],
         ),
