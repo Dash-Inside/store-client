@@ -1,9 +1,31 @@
-//ignore_for_file: prefer-static-class, avoid-top-level-members-in-tests, no-empty-block
-
 import 'dart:async';
 
-import 'package:get_it/get_it.dart';
+import 'package:store_client/core/services/services.dart';
+import 'package:store_client/src/data/datasources/messenger_server_datasource.dart';
+import 'package:store_client/src/data/repositories/remote/library_server_repository.dart';
+import 'package:store_client/src/data/repositories/remote/user_data_server_repository.dart';
+import 'package:store_client/src/domain/repository/user_data_repository.dart';
+import 'package:store_client/src/domain/repository/library_repository.dart';
+import 'package:store_client/src/domain/repository/messenger_repository.dart';
 
-final GetIt testServices = GetIt.I;
+import '../domain/test_repositories.mocks.dart';
 
-FutureOr<void> initTestServices() {}
+FutureOr<void> initTestServices() {
+  services.registerLazySingleton<UserDataServerRepository>(
+      () => UserDataServerRepository());
+
+  services.registerLazySingleton<UserDataRepository>(
+      () => MockUserDataRepository());
+
+  services
+      .registerLazySingleton<LibraryRepository>(() => MockLibraryRepository());
+
+  services.registerLazySingleton<MessengerRepository>(
+      () => MockMessengerRepository());
+
+  services.registerLazySingleton<LibraryServerRepository>(
+      () => LibraryServerRepository());
+
+  services.registerLazySingleton<MessengerServerDatasource>(
+      () => MessengerServerDatasource());
+}
