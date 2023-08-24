@@ -7,4 +7,14 @@ sealed class MessengerState extends Equatable {
   const MessengerState();
 }
 
-final class InitMessengerState extends MessengerState {}
+final class EmptyMessengerState extends MessengerState {}
+
+final class DataMessengerState extends MessengerState {
+  final User me;
+  final List<Message> messages;
+
+  DataMessengerState({
+    required this.me,
+    required this.messages,
+  });
+}

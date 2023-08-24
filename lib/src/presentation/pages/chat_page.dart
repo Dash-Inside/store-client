@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:store_client/src/domain/entities/message.dart';
+import 'package:store_client/src/presentation/bloc/messenger/messenger_bloc.dart';
 import 'package:store_client/src/presentation/widgets/incoming_message_widget.dart';
 import 'package:store_client/src/presentation/widgets/no_avatar_incoming_message_widget.dart';
 import 'package:store_client/src/presentation/widgets/outcoming_message_widget.dart';
@@ -26,17 +28,27 @@ class ChatPage extends StatelessWidget {
     Message(id: 2, data: "ghbgt", senderId: 4),
   ].reversed.toList();
 
-  ChatPage();
+  final MessengerBloc messengerBloc;
+
+  ChatPage({
+    required this.messengerBloc,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController textEditingController = TextEditingController();
+
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final Color colorSurf = colorScheme.surface;
     final Color colorSec = colorScheme.secondary;
     final Color colorPr = colorScheme.primary;
     final Color colorTet = colorScheme.tertiary;
+
     void backOnPressed() => Navigator.of(context).pushNamed('/library');
-    void sendOnPressed() {}
+
+    void sendOnPressed() {
+      messengerBloc.add(SendMessengerEvent(message: textEditingController.text));
+    }
 
     return Scaffold(
       backgroundColor: colorSurf,
@@ -63,77 +75,89 @@ class ChatPage extends StatelessWidget {
           ),
         ),
       ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView.builder(
-                itemCount: messageList.length,
-                reverse: true,
-                itemBuilder: (context, index) {
-                  final int messageListIndex = messageList[index].senderId;
+      body: BlocBuilder<MessengerBloc, MessengerState>(
+        bloc: messengerBloc,
+        builder: (context, state) {
+          switch (state) {
+            case EmptyMessengerState():
+            // TODO: Handle this case.
+            case DataMessengerState():
+              final List<Message> messages = (state as DataMessengerState).messages;
 
-                  if (index == 0) {
-                    if (messageListIndex == ourId) {
-                      return OutcomingMessageWidget(
-                        text: messageList[index].data,
-                      );
-                    }
+              return SafeArea(
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: messages.length,
+                        reverse: true,
+                        itemBuilder: (context, index) {
+                          final int senderId = messages[index].senderId;
 
-                    if (messageListIndex != ourId) {
-                      return IncomingMessageWidget(
-                        text: messageList[index].data,
-                      );
-                    }
-                  } else {
-                    final int messageListIndexOne = messageList[index - 1].senderId;
-                    if (messageListIndex != messageListIndexOne && messageListIndex != ourId) {
-                      return IncomingMessageWidget(
-                        text: messageList[index].data,
-                      );
-                    }
-                    if (messageListIndex == messageListIndexOne && messageListIndex != ourId) {
-                      return NoAvatarIncomingMessageWidget(
-                        text: messageList[index].data,
-                      );
-                    }
-                    if (messageListIndex == ourId) {
-                      return OutcomingMessageWidget(
-                        text: messageList[index].data,
-                      );
-                    }
-                  }
+                          if (index == 0) {
+                            if (senderId == ourId) {
+                              return OutcomingMessageWidget(
+                                text: messageList[index].data,
+                              );
+                            }
 
-                  return Center(
-                    child: Text('Check internet connection'),
-                  );
-                },
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.all(textFieldPadding),
-              width: double.infinity,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextFieldWidget(
-                      controller: TextEditingController(),
-                      hintText: 'Message',
+                            if (senderId != ourId) {
+                              return IncomingMessageWidget(
+                                text: messageList[index].data,
+                              );
+                            }
+                          } else {
+                            final int messageListIndexOne = messages[index - 1].senderId;
+                            if (senderId != messageListIndexOne && senderId != ourId) {
+                              return IncomingMessageWidget(
+                                text: messageList[index].data,
+                              );
+                            }
+                            if (senderId == messageListIndexOne && senderId != ourId) {
+                              return NoAvatarIncomingMessageWidget(
+                                text: messageList[index].data,
+                              );
+                            }
+                            if (senderId == ourId) {
+                              return OutcomingMessageWidget(
+                                text: messageList[index].data,
+                              );
+                            }
+                          }
+
+                          return Center(
+                            child: Text('Check internet connection'),
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                  IconButton(
-                    hoverColor: colorTet,
-                    onPressed: sendOnPressed,
-                    icon: Icon(
-                      Icons.send,
-                      color: colorPr,
+                    Container(
+                      padding: EdgeInsets.all(textFieldPadding),
+                      width: double.infinity,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: TextFieldWidget(
+                              controller: textEditingController,
+                              hintText: 'Message',
+                            ),
+                          ),
+                          IconButton(
+                            hoverColor: colorTet,
+                            onPressed: sendOnPressed,
+                            icon: Icon(
+                              Icons.send,
+                              color: colorPr,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+                  ],
+                ),
+              );
+          }
+        },
       ),
     );
   }
