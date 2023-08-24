@@ -46,3 +46,4 @@ dart_code_metrics:
     - arguments-ordering: false
     - avoid-late-keyword: false
     - prefer-correct-identifier-length: false
+    - format-comment: false
