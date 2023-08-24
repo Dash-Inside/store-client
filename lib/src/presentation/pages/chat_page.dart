@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:store_client/src/domain/entities/message.dart';
+import 'package:store_client/src/domain/entities/user.dart';
 import 'package:store_client/src/presentation/bloc/messenger/messenger_bloc.dart';
 import 'package:store_client/src/presentation/widgets/incoming_message_widget.dart';
 import 'package:store_client/src/presentation/widgets/no_avatar_incoming_message_widget.dart';
@@ -14,19 +15,6 @@ class ChatPage extends StatelessWidget {
   static const double fontLetterSpacing = 0.5;
   static const double iconSize = 24.0;
   static const double textFieldPadding = 8.0;
-  final int ourId = 3;
-  final List<Message> messageList = [
-    Message(id: 1, data: "123", senderId: 4),
-    Message(id: 2, data: "ghbgt", senderId: 4),
-    Message(id: 3, data: "ytrt", senderId: 3),
-    Message(id: 2, data: "ghbgt", senderId: 4),
-    Message(id: 3, data: "ytrt", senderId: 3),
-    Message(id: 3, data: "ytrt", senderId: 3),
-    Message(id: 3, data: "ytrt", senderId: 3),
-    Message(id: 2, data: "ghbgt", senderId: 4),
-    Message(id: 2, data: "ghbgt", senderId: 4),
-    Message(id: 2, data: "ghbgt", senderId: 4),
-  ].reversed.toList();
 
   final MessengerBloc messengerBloc;
 
@@ -80,10 +68,40 @@ class ChatPage extends StatelessWidget {
         builder: (context, state) {
           switch (state) {
             case EmptyMessengerState():
-            // TODO: Handle this case.
+              return Column(
+                children: [
+                  Expanded(
+                    child: Center(
+                      child: Text('no messeges'),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(textFieldPadding),
+                    width: double.infinity,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: TextFieldWidget(
+                            controller: textEditingController,
+                            hintText: 'Message',
+                          ),
+                        ),
+                        IconButton(
+                          hoverColor: colorTet,
+                          onPressed: sendOnPressed,
+                          icon: Icon(
+                            Icons.send,
+                            color: colorPr,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              );
             case DataMessengerState():
-              final List<Message> messages = (state as DataMessengerState).messages;
-
+              final List<Message> messages = (state).messages;
+              final User me = (state).me;
               return SafeArea(
                 child: Column(
                   children: [
@@ -95,38 +113,38 @@ class ChatPage extends StatelessWidget {
                           final int senderId = messages[index].senderId;
 
                           if (index == 0) {
-                            if (senderId == ourId) {
+                            if (senderId == me.id) {
                               return OutcomingMessageWidget(
-                                text: messageList[index].data,
+                                text: messages[index].data,
                               );
                             }
 
-                            if (senderId != ourId) {
+                            if (senderId != me.id) {
                               return IncomingMessageWidget(
-                                text: messageList[index].data,
+                                text: messages[index].data,
                               );
                             }
                           } else {
                             final int messageListIndexOne = messages[index - 1].senderId;
-                            if (senderId != messageListIndexOne && senderId != ourId) {
+                            if (senderId != messageListIndexOne && senderId != me.id) {
                               return IncomingMessageWidget(
-                                text: messageList[index].data,
+                                text: messages[index].data,
                               );
                             }
-                            if (senderId == messageListIndexOne && senderId != ourId) {
+                            if (senderId == messageListIndexOne && senderId != me.id) {
                               return NoAvatarIncomingMessageWidget(
-                                text: messageList[index].data,
+                                text: messages[index].data,
                               );
                             }
-                            if (senderId == ourId) {
+                            if (senderId == me.id) {
                               return OutcomingMessageWidget(
-                                text: messageList[index].data,
+                                text: messages[index].data,
                               );
                             }
                           }
 
                           return Center(
-                            child: Text('Check internet connection'),
+                            child: CircularProgressIndicator(),
                           );
                         },
                       ),
