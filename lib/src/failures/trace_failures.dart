@@ -21,3 +21,27 @@ class ServerFailure extends Failure {
           stackTrace: T,
         );
 }
+
+class BadRequestFailure extends Failure {
+  BadRequestFailure(StackTrace T)
+      : super(
+          message: 'Bad Request Error',
+          stackTrace: T,
+        );
+}
+
+class UnauthorizedFailure extends Failure {
+  UnauthorizedFailure(StackTrace T)
+      : super(
+          message: 'Bad Request Error',
+          stackTrace: T,
+        );
+}
+
+class ExtraFailure extends Failure {
+  ExtraFailure(StackTrace T)
+      : super(
+          message: 'Bad Request Error',
+          stackTrace: T,
+        );
+}
