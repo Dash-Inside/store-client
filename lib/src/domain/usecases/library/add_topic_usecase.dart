@@ -26,9 +26,9 @@ class AddTopicUseCaseParams {
   final String data;
   final List<String> links;
 
-  AddTopicUseCaseParams(
-    this.title,
-    this.data,
-    this.links,
-  );
+  AddTopicUseCaseParams({
+    required this.title,
+    required this.data,
+    required this.links,
+  });
 }
