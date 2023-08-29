@@ -11,11 +11,11 @@ import 'package:store_client/src/domain/repository/library_repository.dart';
 @Injectable()
 class GetAllTopicsBySectionIDUseCase extends UseCase<List<Topic>, int> {
   @override
-  FutureOr<Either<Failure, List<Topic>>> call(int id) {
+  FutureOr<Either<Failure, List<Topic>>> call(int sectionId) {
     final LibraryRepository libraryRepository = services.get<LibraryRepository>();
 
     return libraryRepository.getAllTopicsBySectionID(
-      id: id,
+      id: sectionId,
     );
   }
 }

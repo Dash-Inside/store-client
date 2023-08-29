@@ -11,7 +11,7 @@ import 'package:store_client/src/domain/repository/library_repository.dart';
 @Injectable()
 class GetAllSectionsUseCase extends UseCase<List<Section>, Unit> {
   @override
-  FutureOr<Either<Failure, List<Section>>> call(Unit) {
+  FutureOr<Either<Failure, List<Section>>> call(Unit unit) {
     final LibraryRepository libraryRepository = services.get<LibraryRepository>();
 
     return libraryRepository.getAllSections();
