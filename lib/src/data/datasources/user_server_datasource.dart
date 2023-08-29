@@ -1,12 +1,13 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:core';
 
-import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
-import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/core/services/services.dart';
 import 'package:store_client/src/data/models/user_model.dart';
+import 'package:store_client/src/data/utils/status_code_handler.dart';
 import 'package:store_client/src/domain/entities/role.dart';
 
 @Injectable()
@@ -21,34 +22,37 @@ class UserServerDatasource {
     required this.secureModule,
   });
 
-  Future<Either<Failure, List<UserModel>>> getAllUserRequest() async {
+  Future<List<UserModel>> getAllUserRequest() async {
     try {
       final Response response = await dioModule.client.get('http://127.0.0.1:1337/api/user-data/');
+      StatusCodeHandler.check(response.statusCode.toString());
+
       final List listMapAllRequest = response.data['data'];
       final List<UserModel> result = [];
       listMapAllRequest.forEach((element) {
         result.add(UserModel.fromMap(element as Map<String, dynamic>));
       });
 
-      return Right(result);
-    } catch (e, stackTrace) {
-      return Left(Failure(message: '$e', stackTrace: stackTrace));
+      return result;
+    } catch (e) {
+      rethrow;
     }
   }
 
-  Future<Either<Failure, UserModel>> getConcreteUserRequest({
+  Future<UserModel> getConcreteUserRequest({
     required int id,
   }) async {
     try {
       final Response response = await dioModule.client.get('http://127.0.0.1:1337/api/user-data/$id');
+      StatusCodeHandler.check(response.statusCode.toString());
 
-      return Right(UserModel.fromMap(response.data['data']));
-    } catch (e, stackTrace) {
-      return Left(Failure(message: '$e', stackTrace: stackTrace));
+      return UserModel.fromMap(response.data['data']);
+    } catch (e) {
+      rethrow;
     }
   }
 
-  Future<Either<Failure, UserModel>> putUserRequest({
+  Future<UserModel> putUserRequest({
     required int id,
     required String? userName,
     required Role? role,
@@ -71,14 +75,15 @@ class UserServerDatasource {
         'http://127.0.0.1:1337/api/user-data/$id',
         data: mapParams,
       );
+      StatusCodeHandler.check(response.statusCode.toString());
 
-      return Right(UserModel.fromMap(response.data['data']));
-    } catch (e, stackTrace) {
-      return Left(Failure(message: '$e', stackTrace: stackTrace));
+      return UserModel.fromMap(response.data['data']);
+    } catch (e) {
+      rethrow;
     }
   }
 
-  Future<Either<Failure, UserModel>> loginUserRequest({
+  Future<UserModel> loginUserRequest({
     required String login,
     required String password,
   }) async {
@@ -90,16 +95,17 @@ class UserServerDatasource {
           "password": password,
         },
       );
+      StatusCodeHandler.check(response.statusCode.toString());
 
       await secureModule.storage.write(key: _jwtKey, value: response.data['jwt']);
 
-      return Right(UserModel.fromMap(response.data['user']));
-    } catch (e, stackTrace) {
-      return Left(Failure(message: '$e', stackTrace: stackTrace));
+      return UserModel.fromMap(response.data['user']);
+    } catch (e) {
+      rethrow;
     }
   }
 
-  Future<Either<Failure, UserModel>> changePasswordUserRequest({
+  Future<UserModel> changePasswordUserRequest({
     required String currentPassword,
     required String newPassword,
     required String newPasswordConfirmation,
@@ -117,15 +123,16 @@ class UserServerDatasource {
           },
         ),
       );
+      StatusCodeHandler.check(response.statusCode.toString());
       await flutterSecureStorage.write(key: _jwtKey, value: response.data['jwt']);
 
-      return Right(UserModel.fromMap(response.data['user']));
-    } catch (e, stackTrace) {
-      return Left(Failure(message: '$e', stackTrace: stackTrace));
+      return UserModel.fromMap(response.data['user']);
+    } catch (e) {
+      rethrow;
     }
   }
 
-  Future<Either<Failure, UserModel>> authMeUserRequest() async {
+  FutureOr<UserModel> authMeUserRequest() async {
     try {
       final FlutterSecureStorage flutterSecureStorage = services.get<FlutterSecureStorage>();
       final Response response = await dioModule.client.get(
@@ -135,9 +142,9 @@ class UserServerDatasource {
         ),
       );
 
-      return Right(UserModel.fromMap(response.data));
-    } catch (e, stackTrace) {
-      return Left(Failure(message: e.toString(), stackTrace: stackTrace));
+      return UserModel.fromMap(response.data);
+    } catch (e) {
+      rethrow;
     }
   }
 }
