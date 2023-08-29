@@ -7,9 +7,22 @@ import 'package:store_client/src/domain/entities/message.dart';
 import 'package:store_client/src/domain/repository/messenger_repository.dart';
 import 'package:store_client/src/domain/usecases/messenger/send_message_usecase.dart';
 
-void main() {
-  final Message correctMessage = Message(id: 1, data: "data", senderId: 3);
-  final Message incorrectMessage = Message(id: -1, data: "data", senderId: 3);
+import '../../../injector/services.dart';
+
+void main() async {
+  final Message correctMessage = Message(
+    id: 1,
+    data: "data",
+    senderId: 3,
+  );
+
+  final Message incorrectMessage = Message(
+    id: -1,
+    data: "data",
+    senderId: 3,
+  );
+
+  await initMockServices();
   group('send message usecase test', () {
     test('correct send message test', () async {
       //Act.
