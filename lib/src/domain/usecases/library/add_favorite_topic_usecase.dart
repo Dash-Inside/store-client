@@ -10,11 +10,11 @@ import 'package:store_client/src/domain/repository/library_repository.dart';
 @Injectable()
 class AddFavoriteTopicUseCase extends UseCase<Unit, int> {
   @override
-  FutureOr<Either<Failure, Unit>> call(int id) {
+  FutureOr<Either<Failure, Unit>> call(int topicId) {
     final LibraryRepository libraryRepository = services.get<LibraryRepository>();
 
     return libraryRepository.addFavoriteTopic(
-      id: id,
+      id: topicId,
     );
   }
 }
