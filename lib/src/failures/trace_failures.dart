@@ -9,7 +9,7 @@ class UnhandledFailure extends Failure {
 class ParamsFailure extends Failure {
   ParamsFailure(StackTrace T)
       : super(
-          message: 'Invalid params',
+          message: 'Invalid params failure',
           stackTrace: T,
         );
 }
@@ -33,7 +33,7 @@ class BadRequestFailure extends Failure {
 class UnauthorizedFailure extends Failure {
   UnauthorizedFailure(StackTrace T)
       : super(
-          message: 'Bad Request Error',
+          message: 'Unauthorized Failure ',
           stackTrace: T,
         );
 }
@@ -41,7 +41,7 @@ class UnauthorizedFailure extends Failure {
 class ExtraFailure extends Failure {
   ExtraFailure(StackTrace T)
       : super(
-          message: 'Bad Request Error',
+          message: 'Extra Failure',
           stackTrace: T,
         );
 }
