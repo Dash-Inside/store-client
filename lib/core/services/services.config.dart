@@ -100,7 +100,7 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i18.MarkdownPage>(() => const _i18.MarkdownPage());
     gh.singleton<_i19.MessengerBloc>(_i19.MessengerBloc());
     gh.factory<_i20.MessengerServerDatasource>(
-        () => _i20.MessengerServerDatasource());
+        () => _i20.MessengerServerDatasource(dioModule: gh<_i8.DioModule>()));
     gh.factory<_i21.RemoveFavoriteTopicUseCase>(
         () => _i21.RemoveFavoriteTopicUseCase());
     gh.factory<_i22.RestorePage>(() => _i22.RestorePage());
