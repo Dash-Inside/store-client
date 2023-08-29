@@ -50,11 +50,22 @@ class MessengerServerRepository implements MessengerRepository {
 
       return Right(result);
     } on BadRequestError {
-      return Left(BadRequestFailure(StackTrace.empty));
+      return Left(
+        BadRequestFailure(StackTrace.empty),
+      );
     } on UnauthorizedError {
-      return Left(UnauthorizedFailure(StackTrace.empty));
-    } on (ForbiddenError, NotFoundError, InternalServerError, UndefiendError) {
-      return Left(ExtraFailure(StackTrace.empty));
+      return Left(
+        UnauthorizedFailure(StackTrace.empty),
+      );
+    } on (
+      ForbiddenError,
+      NotFoundError,
+      InternalServerError,
+      UndefiendError,
+    ) {
+      return Left(
+        ExtraFailure(StackTrace.empty),
+      );
     } catch (_) {
       rethrow;
     }

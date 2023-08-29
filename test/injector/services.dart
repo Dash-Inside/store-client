@@ -1,19 +1,19 @@
 import 'dart:async';
 
+import 'package:dartz/dartz.dart';
+import 'package:mockito/mockito.dart';
 import 'package:store_client/core/services/services.dart';
 import 'package:store_client/src/domain/repository/library_repository.dart';
 import 'package:store_client/src/domain/repository/messenger_repository.dart';
 import 'package:store_client/src/domain/repository/user_repository.dart';
 
 import '../domain/usecase/test_repositories.mocks.dart';
+import 'arrange/mock_messenger_repo.dart';
 
-FutureOr<void> initTestServices() {
-  final MessengerRepository messengerRepository = MockMessengerRepository();
-  services.registerLazySingleton<MessengerRepository>(() => messengerRepository);
+FutureOr<void> initMockServices() {
+  services.registerLazySingleton<MessengerRepository>(() => arrangeMockMessengerRepository());
 
-  final LibraryRepository libraryRepository = MockLibraryRepository();
-  services.registerLazySingleton<LibraryRepository>(() => libraryRepository);
+  services.registerLazySingleton<LibraryRepository>(() => MockLibraryRepository());
 
-  final UserRepository userRepository = MockUserRepository();
-  services.registerLazySingleton<UserRepository>(() => userRepository);
+  services.registerLazySingleton<UserRepository>(() => MockUserRepository());
 }
