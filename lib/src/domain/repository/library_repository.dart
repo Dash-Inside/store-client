@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:store_client/core/failure/failure.dart';
+import 'package:store_client/src/domain/entities/actions/add_topic_action_params.dart';
 import 'package:store_client/src/domain/entities/section.dart';
 import 'package:store_client/src/domain/entities/topic.dart';
 
@@ -18,11 +19,7 @@ abstract class LibraryRepository {
 
   /// [addTopic] takes [title],[data],[links] to add new [Topic]
   /// [addTopic] add new [Topic].
-  Future<Either<Failure, Unit>> addTopic({
-    required String title,
-    required String data,
-    required List<String> links,
-  });
+  Future<Either<Failure, Unit>> addTopic({required AddTopicActionParams addTopicActionParams});
 
   /// [getAllSections] returns Either [Failure] if there is some errors or [List<Section>] if there is no errors
   /// [getAllSections] return all Sections.
