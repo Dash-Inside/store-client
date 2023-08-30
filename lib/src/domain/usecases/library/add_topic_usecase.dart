@@ -5,35 +5,20 @@ import 'package:injectable/injectable.dart';
 import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/core/services/services.dart';
 import 'package:store_client/core/usecases/usecases.dart';
+import 'package:store_client/src/domain/entities/actions/add_topic_action_params.dart';
 import 'package:store_client/src/domain/repository/library_repository.dart';
 import 'package:store_client/src/domain/validators/add_topic_validator.dart';
 import 'package:store_client/src/failures/trace_failures.dart';
 
 @Injectable()
-class AddTopicUseCase extends UseCase<Unit, AddTopicUseCaseParams> {
+class AddTopicUseCase extends UseCase<Unit, AddTopicActionParams> {
   @override
-  FutureOr<Either<Failure, Unit>> call(AddTopicUseCaseParams params) async {
+  FutureOr<Either<Failure, Unit>> call(AddTopicActionParams addTopicActionParams) async {
     final LibraryRepository libraryRepository = services.get<LibraryRepository>();
-    if (!(await AddTopicValidator().validate(params))) {
+    if (!(await AddTopicValidator().validate(addTopicActionParams))) {
       return Left(IncorrectTopicParamsFailure(StackTrace.empty));
     }
 
-    return libraryRepository.addTopic(
-      title: params.title,
-      data: params.data,
-      links: params.links,
-    );
+    return libraryRepository.addTopic(addTopicActionParams: addTopicActionParams);
   }
-}
-
-class AddTopicUseCaseParams {
-  final String title;
-  final String data;
-  final List<String> links;
-
-  AddTopicUseCaseParams({
-    required this.title,
-    required this.data,
-    required this.links,
-  });
 }
