@@ -10,7 +10,7 @@ import 'package:store_client/src/failures/trace_failures.dart';
 import '../services/arrange/mock_library_repository.dart';
 import '../services/services.dart';
 
-void main() async {
+Future<void> main() async {
   await initMockService();
 
   group('Add Topic Use Case', () {
