@@ -38,6 +38,10 @@ final AddTopicActionParams incorrectTopicParams = AddTopicActionParams(
   links: <String>[''],
 );
 
+const String correctTitle = 'test';
+
+const String incorrectTitle = '';
+
 MockLibraryRepository arrangeMockLibraryRepository() {
   final mock = MockLibraryRepository();
 
@@ -108,13 +112,13 @@ MockLibraryRepository arrangeMockLibraryRepository() {
   );
 
   when(
-    mock.searchTopicByTitle(title: 'title'),
+    mock.searchTopicByTitle(title: correctTitle),
   ).thenAnswer(
     (_) async => Right([correctTopic]),
   );
 
   when(
-    mock.searchTopicByTitle(title: ''),
+    mock.searchTopicByTitle(title: incorrectTitle),
   ).thenAnswer(
     (_) async => Left(IncorrectTopicTitleFailure(StackTrace.empty)),
   );
