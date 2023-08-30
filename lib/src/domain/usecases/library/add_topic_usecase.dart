@@ -6,12 +6,17 @@ import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/core/services/services.dart';
 import 'package:store_client/core/usecases/usecases.dart';
 import 'package:store_client/src/domain/repository/library_repository.dart';
+import 'package:store_client/src/domain/validators/add_topic_validator.dart';
+import 'package:store_client/src/failures/trace_failures.dart';
 
 @Injectable()
 class AddTopicUseCase extends UseCase<Unit, AddTopicUseCaseParams> {
   @override
   FutureOr<Either<Failure, Unit>> call(AddTopicUseCaseParams params) async {
     final LibraryRepository libraryRepository = services.get<LibraryRepository>();
+    if (!(await AddTopicValidator().validate(params))) {
+      return Left(IncorrectTopicParamsFailure(StackTrace.empty));
+    }
 
     return libraryRepository.addTopic(
       title: params.title,
