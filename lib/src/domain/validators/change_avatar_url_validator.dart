@@ -6,7 +6,7 @@ import 'package:store_client/src/domain/usecases/user_data/change_avatar_url_use
 class ChangeAvatarUrlValidator extends Validator<ChangeAvatarUrlUseCaseParams> {
   @override
   FutureOr<bool> validate(ChangeAvatarUrlUseCaseParams params) {
-    if (params.user.avatarUrl != params.newAvatarUrl) return false;
+    if (params.user.avatarUrl == params.newAvatarUrl) return false;
 
     return true;
   }
