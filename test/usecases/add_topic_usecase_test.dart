@@ -20,7 +20,7 @@ void main() async {
       final AddTopicUseCase addTopicUseCase = services<AddTopicUseCase>();
 
       // Arrange
-      final failOrResult = await addTopicUseCase.call(correctTopicParams);
+      final Either<Failure, Unit> failOrResult = await addTopicUseCase.call(correctTopicParams);
       // Assert
       expect(failOrResult.isRight(), true);
       verify(libraryRepository.addTopic(addTopicActionParams: correctTopicParams)).called(1);
@@ -32,7 +32,7 @@ void main() async {
       final LibraryRepository libraryRepository = services<LibraryRepository>();
       final AddTopicUseCase addTopicUseCase = services<AddTopicUseCase>();
       // Arrange
-      final failOrResult = await addTopicUseCase.call(incorrectTopicParams);
+      final Either<Failure, Unit> failOrResult = await addTopicUseCase.call(incorrectTopicParams);
       final bool assertResult = failOrResult.fold(
         (Failure failure) {
           return (failure is IncorrectTopicParamsFailure);
