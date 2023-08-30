@@ -2,6 +2,7 @@
 
 import 'package:dartz/dartz.dart';
 import 'package:mockito/mockito.dart';
+import 'package:store_client/src/domain/entities/actions/add_topic_action_params.dart';
 import 'package:store_client/src/domain/entities/section.dart';
 import 'package:store_client/src/domain/entities/topic.dart';
 import 'package:store_client/src/failures/trace_failures.dart';
@@ -25,6 +26,18 @@ final Topic incorrectTopic = Topic(
   links: [''],
 );
 
+final AddTopicActionParams correctTopicParams = AddTopicActionParams(
+  title: 'title',
+  data: 'data',
+  links: <String>['links', 'links'],
+);
+
+final AddTopicActionParams incorrectTopicParams = AddTopicActionParams(
+  title: '',
+  data: '',
+  links: <String>[''],
+);
+
 MockLibraryRepository arrangeMockLibraryRepository() {
   final mock = MockLibraryRepository();
 
@@ -40,19 +53,15 @@ MockLibraryRepository arrangeMockLibraryRepository() {
     (_) async => Left(IncorrectTopicIdFailure(StackTrace.empty)),
   );
 
-  when(mock.addTopic(
-    title: correctTopic.title,
-    data: correctTopic.data,
-    links: correctTopic.links,
-  )).thenAnswer(
+  when(
+    mock.addTopic(addTopicActionParams: correctTopicParams),
+  ).thenAnswer(
     (realInvocation) async => Right(unit),
   );
 
-  when(mock.addTopic(
-    title: incorrectTopic.title,
-    data: incorrectTopic.data,
-    links: incorrectTopic.links,
-  )).thenAnswer(
+  when(
+    mock.addTopic(addTopicActionParams: incorrectTopicParams),
+  ).thenAnswer(
     (realInvocation) async => Left(IncorrectTopicParamsFailure(StackTrace.empty)),
   );
 
@@ -60,13 +69,13 @@ MockLibraryRepository arrangeMockLibraryRepository() {
     mock.getAllSections(),
   ).thenAnswer(
     (_) async => Right([Section(id: 1, title: 'title', topicId: 1)]),
-  ); //абобус х2
+  );
 
   when(
     mock.getAllTopicsBySectionID(id: correctId),
   ).thenAnswer(
     (_) async => Right([correctTopic]),
-  ); //абобус
+  );
 
   when(
     mock.getAllTopicsBySectionID(id: incorrectId),
