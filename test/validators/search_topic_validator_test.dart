@@ -1,11 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:store_client/src/domain/validators/search_topic_validator.dart';
 
+import '../services/arrange/mock_library_repository.dart';
+
 void main() {
-  const String correctTitle = 'test';
-
-  const String incorrectTitle = '';
-
   group('Search Topic Validator', () {
     final SearchTopicValidator searchTopicValidator = SearchTopicValidator();
     test('Correct input test', () async {
