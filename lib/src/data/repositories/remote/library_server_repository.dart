@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:store_client/core/failure/failure.dart';
+import 'package:store_client/src/domain/entities/actions/add_topic_action_params.dart';
 import 'package:store_client/src/domain/entities/section.dart';
 import 'package:store_client/src/domain/entities/topic.dart';
 import 'package:store_client/src/domain/repository/library_repository.dart';
@@ -14,7 +15,7 @@ class LibraryServerRepository implements LibraryRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> addTopic({required String title, required String data, required List<String> links}) {
+  Future<Either<Failure, Unit>> addTopic({required AddTopicActionParams addTopicActionParams}) {
     // TODO: implement addTopic
     throw UnimplementedError();
   }
