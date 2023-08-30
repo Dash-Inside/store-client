@@ -3,7 +3,7 @@ import 'package:mockito/mockito.dart';
 import 'package:store_client/src/domain/entities/user.dart';
 import 'package:store_client/src/failures/trace_failures.dart';
 
-import '../../domain/usecase/test_repositories.mocks.dart';
+import '../../domain/usecase/mock/test_repositories.mocks.dart';
 
 //! for 1 'when' correct ChangeAvatarUrl
 const String newAvatarUrl = 'newAvatarUrl';

@@ -3,7 +3,7 @@ import 'package:mockito/mockito.dart';
 import 'package:store_client/src/domain/entities/message.dart';
 import 'package:store_client/src/failures/trace_failures.dart';
 
-import '../../domain/usecase/test_repositories.mocks.dart';
+import '../../domain/usecase/mock/test_repositories.mocks.dart';
 
 final Message message = Message(id: 1, data: "data", senderId: 3);
 final Message incorrectMessage = Message(id: -1, data: "data", senderId: 3);

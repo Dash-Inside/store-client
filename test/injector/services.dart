@@ -7,7 +7,7 @@ import 'package:store_client/src/domain/repository/user_repository.dart';
 import 'package:store_client/src/domain/usecases/messenger/fetch_messages_usecase.dart';
 import 'package:store_client/src/domain/usecases/messenger/send_message_usecase.dart';
 
-import '../domain/usecase/test_repositories.mocks.dart';
+import '../domain/usecase/mock/test_repositories.mocks.dart';
 import 'arrange/mock_messenger_repo.dart';
 import 'arrange/mock_user_data_repo.dart';
 
