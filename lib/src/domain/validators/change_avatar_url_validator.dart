@@ -7,7 +7,10 @@ class ChangeAvatarUrlValidator extends Validator<ChangeAvatarUrlUseCaseParams> {
   @override
   FutureOr<bool> validate(ChangeAvatarUrlUseCaseParams params) {
     if (params.user.avatarUrl == params.newAvatarUrl) return false;
+    if (params.newAvatarUrl.isEmpty) return false;
 
-    return true;
+    return RegExp(
+      r'(http|ftp|https):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])',
+    ).hasMatch(params.user.avatarUrl);
   }
 }
