@@ -11,6 +11,7 @@ import '../../../injector/services.dart';
 
 void main() async {
   await initMockServices();
+  await initUseCaseServices();
   group('method fetchMessages test', () {
     test('correct fetchMessages test', () async {
       // Act.

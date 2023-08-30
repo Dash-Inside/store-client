@@ -23,6 +23,7 @@ void main() async {
   );
 
   await initMockServices();
+  await initUseCaseServices();
   group('send message usecase test', () {
     test('correct send message test', () async {
       //Act.
