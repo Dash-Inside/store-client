@@ -45,3 +45,43 @@ class ExtraFailure extends Failure {
           stackTrace: T,
         );
 }
+
+class IncorrectTopicIdFailure extends Failure {
+  IncorrectTopicIdFailure(StackTrace T)
+      : super(
+          message: 'Invalid Topic Id',
+          stackTrace: T,
+        );
+}
+
+class IncorrectSectionIdFailure extends Failure {
+  IncorrectSectionIdFailure(StackTrace T)
+      : super(
+          message: 'Invalid Section Id',
+          stackTrace: T,
+        );
+}
+
+class IncorrectFavoriteIdFailure extends Failure {
+  IncorrectFavoriteIdFailure(StackTrace T)
+      : super(
+          message: 'Invalid Favorite Id',
+          stackTrace: T,
+        );
+}
+
+class IncorrectTopicTitleFailure extends Failure {
+  IncorrectTopicTitleFailure(StackTrace T)
+      : super(
+          message: 'Invalid Topic Title',
+          stackTrace: T,
+        );
+}
+
+class IncorrectTopicParamsFailure extends Failure {
+  IncorrectTopicParamsFailure(StackTrace T)
+      : super(
+          message: 'Invalid Topic Parameters',
+          stackTrace: T,
+        );
+}
