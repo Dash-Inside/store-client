@@ -42,7 +42,7 @@ abstract class LibraryRepository {
 
   /// [searchTopicByTitle] returns Either [Failure] if there is some errors or [Topic] if there is no errors
   /// [searchTopicByTitle] takes [title] to return the [Topic].
-  Future<Either<Failure, Topic>> searchTopicByTitle({
+  Future<Either<Failure, List<Topic>>> searchTopicByTitle({
     required String title,
   });
 }
