@@ -6,6 +6,10 @@ import 'package:store_client/src/domain/repository/messenger_repository.dart';
 import 'package:store_client/src/domain/repository/user_repository.dart';
 import 'package:store_client/src/domain/usecases/messenger/fetch_messages_usecase.dart';
 import 'package:store_client/src/domain/usecases/messenger/send_message_usecase.dart';
+import 'package:store_client/src/domain/usecases/user_data/change_avatar_url_usecase.dart';
+import 'package:store_client/src/domain/usecases/user_data/change_username_usecase.dart';
+import 'package:store_client/src/domain/usecases/user_data/log_in_usecase.dart';
+import 'package:store_client/src/domain/usecases/user_data/restore_password_usecase.dart';
 
 import '../domain/usecase/mock/test_repositories.mocks.dart';
 import 'arrange/mock_messenger_repo.dart';
@@ -23,4 +27,14 @@ FutureOr<void> initUseCaseServices() {
   services.registerLazySingleton<FetchMessagesUseCase>(() => FetchMessagesUseCase());
 
   services.registerLazySingleton<SendMessageUsecase>(() => SendMessageUsecase());
+
+  services.registerLazySingleton<ChangeAvatarUrlUseCase>(() => ChangeAvatarUrlUseCase());
+
+  services.registerLazySingleton<ChangeUserNameUseCase>(() => ChangeUserNameUseCase());
+
+  services.registerLazySingleton<LogInUseCase>(() => LogInUseCase());
+
+  // services.registerLazySingleton<RecheckTokenUseCase>(() => RecheckTokenUseCase());
+
+  services.registerLazySingleton<RestorePasswordUseCase>(() => RestorePasswordUseCase());
 }
