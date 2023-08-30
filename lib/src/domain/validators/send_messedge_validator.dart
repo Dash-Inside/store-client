@@ -7,6 +7,5 @@ class SendMessedgeValidator extends Validator<Message> {
   @override
   FutureOr<bool> validate(Message t) {
     if (t.id < 0 && t.senderId < 0) return false;
-    return 
   }
 }
