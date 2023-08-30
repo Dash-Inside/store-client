@@ -10,9 +10,9 @@ class UserModel extends User {
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
       id: map['id'] as int,
-      email: map['email'] as String,
-      username: map['username'] as String,
-      avatarUrl: map['avatarUrl'] as String,
+      email: map['attributes']['email'] as String,
+      username: map['attributes']['username'] as String,
+      avatarUrl: map['attributes']['avatarUrl'] as String,
       role: Role.Public,
     );
   }
