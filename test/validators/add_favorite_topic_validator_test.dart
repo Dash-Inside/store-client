@@ -8,14 +8,14 @@ void main() {
     final AddFavoriteTopicValidator addFavoriteTopicValidator = AddFavoriteTopicValidator();
     test('Correct Input Validator', () async {
       // Arrange
-      final result = await addFavoriteTopicValidator.validate(correctId);
+      final bool result = await addFavoriteTopicValidator.validate(correctId);
       // Assert
       expect(result, true);
     });
 
     test('Incorrect Input Validator', () async {
       // Arrange
-      final result = await addFavoriteTopicValidator.validate(incorrectId);
+      final bool result = await addFavoriteTopicValidator.validate(incorrectId);
       // Assert
       expect(result, false);
     });

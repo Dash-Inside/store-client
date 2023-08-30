@@ -31,28 +31,28 @@ void main() {
     final AddTopicValidator addTopicValidator = AddTopicValidator();
     test('Correct Input Validator', () async {
       // Arrange
-      final result = await addTopicValidator.validate(correctAddTopicActionParams);
+      final bool result = await addTopicValidator.validate(correctAddTopicActionParams);
       // Assert
       expect(result, true);
     });
 
     test('Incorrect Input Title Validator', () async {
       // Arrange
-      final result = await addTopicValidator.validate(incorrectAddTopicActionParams1);
+      final bool result = await addTopicValidator.validate(incorrectAddTopicActionParams1);
       // Assert
       expect(result, false);
     });
 
     test('Incorrect Input Data Validator', () async {
       // Arrange
-      final result = await addTopicValidator.validate(incorrectAddTopicActionParams2);
+      final bool result = await addTopicValidator.validate(incorrectAddTopicActionParams2);
       // Assert
       expect(result, false);
     });
 
     test('Incorrect Input Links Validator', () async {
       // Arrange
-      final result = await addTopicValidator.validate(incorrectAddTopicActionParams3);
+      final bool result = await addTopicValidator.validate(incorrectAddTopicActionParams3);
       // Assert
       expect(result, false);
     });
