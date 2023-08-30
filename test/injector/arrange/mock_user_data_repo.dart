@@ -53,6 +53,10 @@ final User incorrectChangeUserNameUser = User(
 //! for 3 'when' correct Log In
 const String email = 'email@email.com';
 const String password = 'password';
+const String incorrectEmail = '--@--.--';
+const String incorrectPassword = '----';
+const String incorrectUserName = '----0-0----';
+const String incorrectAvatarUrl = '----';
 
 MockUserRepository arangeMockUserRepository() {
   final MockUserRepository mockUserRepository = MockUserRepository();
@@ -64,7 +68,7 @@ MockUserRepository arangeMockUserRepository() {
     },
   );
   //! incorrect ChangeAvatarUrl//
-  when(mockUserRepository.changeAvatarUrl(user: user, newAvatarUrl: newAvatarUrl)).thenAnswer(
+  when(mockUserRepository.changeAvatarUrl(user: user, newAvatarUrl: incorrectAvatarUrl)).thenAnswer(
     (_) async {
       return Left(ExtraFailure(StackTrace.empty));
     },
@@ -77,7 +81,7 @@ MockUserRepository arangeMockUserRepository() {
     },
   );
   //! incorrect ChangeUserName
-  when(mockUserRepository.changeUserName(user: user, newUserName: newUserName)).thenAnswer(
+  when(mockUserRepository.changeUserName(user: user, newUserName: incorrectUserName)).thenAnswer(
     (_) async {
       return Left(ExtraFailure(StackTrace.empty));
     },
@@ -89,8 +93,20 @@ MockUserRepository arangeMockUserRepository() {
       return Right(user);
     },
   );
-  //! incorrect Log In
-  when(mockUserRepository.loginUser(email: email, password: password)).thenAnswer(
+  //! incorrectEmail Log In
+  when(mockUserRepository.loginUser(email: incorrectEmail, password: password)).thenAnswer(
+    (_) async {
+      return Left(ExtraFailure(StackTrace.empty));
+    },
+  );
+  //! incorrectPassword Log In
+  when(mockUserRepository.loginUser(email: email, password: incorrectPassword)).thenAnswer(
+    (_) async {
+      return Left(ExtraFailure(StackTrace.empty));
+    },
+  );
+  //! incorrectEmail and incorrectPassword Log In
+  when(mockUserRepository.loginUser(email: incorrectEmail, password: incorrectPassword)).thenAnswer(
     (_) async {
       return Left(ExtraFailure(StackTrace.empty));
     },
