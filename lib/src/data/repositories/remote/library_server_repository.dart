@@ -44,7 +44,7 @@ class LibraryServerRepository implements LibraryRepository {
   }
 
   @override
-  Future<Either<Failure, Topic>> searchTopicByTitle({required String title}) {
+  Future<Either<Failure, List<Topic>>> searchTopicByTitle({required String title}) {
     // TODO: implement searchTopicByTitle
     throw UnimplementedError();
   }
