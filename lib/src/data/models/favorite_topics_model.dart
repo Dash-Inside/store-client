@@ -4,9 +4,6 @@ import 'dart:convert';
 import 'package:store_client/src/domain/entities/favorite_topics.dart';
 
 class FavoriteTopicsModel extends FavoriteTopics {
-  @override
-  int get hashCode => userID.hashCode ^ topicID.hashCode;
-
   factory FavoriteTopicsModel.fromJson(String source) => FavoriteTopicsModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   factory FavoriteTopicsModel.fromMap(Map<String, dynamic> map) {
@@ -44,11 +41,4 @@ class FavoriteTopicsModel extends FavoriteTopics {
 
   @override
   String toString() => 'FavoriteTopicsModel(userID: $userID, topicID: $topicID)';
-
-  @override
-  bool operator ==(covariant FavoriteTopicsModel other) {
-    if (identical(this, other)) return true;
-
-    return other.userID == userID && other.topicID == topicID;
-  }
 }
