@@ -30,7 +30,7 @@ void main() {
 
         // assert
         // expect(model, FavoriteTopicsModel(userID: 1, topicID: 1));
-        expect(datasource(), FavoriteTopicsModel(userID: 1, topicID: 1));
+        expect(datasource(), FavoriteTopicsModel(favoritTopicId: 1, userID: 1, topicID: 1));
       });
 
       test('incorrect test', () async {
@@ -78,7 +78,7 @@ void main() {
           }
         };
 
-        expect(datasource(), FavoriteTopicsModel(userID: 1, topicID: 1));
+        expect(datasource(), FavoriteTopicsModel(favoritTopicId: 1, userID: 1, topicID: 1));
       });
 
       test('incorrect test', () {
@@ -105,7 +105,7 @@ void main() {
 
     test('toMap test', () {
       // act
-      FavoriteTopicsModel model = FavoriteTopicsModel(userID: 1, topicID: 1);
+      FavoriteTopicsModel model = FavoriteTopicsModel(favoritTopicId: 1, userID: 1, topicID: 1);
       final Map<String, dynamic> correctData = {
         "id": 1,
         "data": {
@@ -123,7 +123,7 @@ void main() {
 
     test('toJson test', () {
       // act
-      FavoriteTopicsModel model = FavoriteTopicsModel(userID: 1, topicID: 1);
+      FavoriteTopicsModel model = FavoriteTopicsModel(favoritTopicId: 1, userID: 1, topicID: 1);
       String correctData = jsonEncode({
         "id": 1,
         "data": {

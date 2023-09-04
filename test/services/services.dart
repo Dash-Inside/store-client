@@ -3,6 +3,7 @@
 import 'dart:async';
 
 import 'package:store_client/core/services/services.dart';
+import 'package:store_client/src/data/datasources/library_server_datasource.dart';
 import 'package:store_client/src/domain/repository/library_repository.dart';
 import 'package:store_client/src/domain/usecases/library/add_favorite_topic_usecase.dart';
 import 'package:store_client/src/domain/usecases/library/add_topic_usecase.dart';
@@ -15,10 +16,17 @@ import 'package:store_client/src/domain/usecases/library/search_topic_by_title_u
 import 'arrange/mock_library_repository.dart';
 
 FutureOr<void> initMockService() async {
-  // Repository
+  //! Repository
   services.registerLazySingleton<LibraryRepository>(() => arrangeMockLibraryRepository());
 
-  // Use Case
+  //! DioModule
+  late final DioModule dioModule = DioModule();
+  services.registerLazySingleton<DioModule>(() => DioModule());
+
+  //! Datasource
+  services.registerLazySingleton<LibraryServerDatasource>(() => LibraryServerDatasource(dioModule));
+
+  //! Use Case
   services.registerLazySingleton<AddFavoriteTopicUseCase>(() => AddFavoriteTopicUseCase());
 
   services.registerLazySingleton<AddTopicUseCase>(() => AddTopicUseCase());

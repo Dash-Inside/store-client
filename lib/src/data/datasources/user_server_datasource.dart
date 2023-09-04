@@ -8,6 +8,7 @@ import 'package:store_client/core/failure/failure.dart';
 import 'package:store_client/core/services/services.dart';
 import 'package:store_client/src/data/models/user_model.dart';
 import 'package:store_client/src/domain/entities/role.dart';
+import 'package:store_client/src/failures/trace_failures.dart';
 
 @Injectable()
 class UserServerDatasource {
@@ -32,7 +33,7 @@ class UserServerDatasource {
 
       return Right(result);
     } catch (e, stackTrace) {
-      return Left(Failure(message: '$e', stackTrace: stackTrace));
+      return Left(UnauthorizedFailure(StackTrace.empty));
     }
   }
 
@@ -44,7 +45,7 @@ class UserServerDatasource {
 
       return Right(UserModel.fromMap(response.data['data']));
     } catch (e, stackTrace) {
-      return Left(Failure(message: '$e', stackTrace: stackTrace));
+      return Left(UnauthorizedFailure(StackTrace.empty));
     }
   }
 
@@ -74,7 +75,7 @@ class UserServerDatasource {
 
       return Right(UserModel.fromMap(response.data['data']));
     } catch (e, stackTrace) {
-      return Left(Failure(message: '$e', stackTrace: stackTrace));
+      return Left(UnauthorizedFailure(StackTrace.empty));
     }
   }
 
@@ -95,7 +96,7 @@ class UserServerDatasource {
 
       return Right(UserModel.fromMap(response.data['user']));
     } catch (e, stackTrace) {
-      return Left(Failure(message: '$e', stackTrace: stackTrace));
+      return Left(UnauthorizedFailure(StackTrace.empty));
     }
   }
 
@@ -121,7 +122,7 @@ class UserServerDatasource {
 
       return Right(UserModel.fromMap(response.data['user']));
     } catch (e, stackTrace) {
-      return Left(Failure(message: '$e', stackTrace: stackTrace));
+      return Left(UnauthorizedFailure(StackTrace.empty));
     }
   }
 
@@ -137,7 +138,7 @@ class UserServerDatasource {
 
       return Right(UserModel.fromMap(response.data));
     } catch (e, stackTrace) {
-      return Left(Failure(message: e.toString(), stackTrace: stackTrace));
+      return Left(UnauthorizedFailure(StackTrace.empty));
     }
   }
 }

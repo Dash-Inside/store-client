@@ -27,7 +27,7 @@ Future<void> main() async {
       verifyNoMoreInteractions(libraryRepository);
     });
 
-    test('Correct call test', () async {
+    test('Incorrect call test', () async {
       // Act
       final LibraryRepository libraryRepository = services<LibraryRepository>();
       final AddTopicUseCase addTopicUseCase = services<AddTopicUseCase>();

@@ -7,6 +7,7 @@ import 'package:store_client/src/data/models/user_model.dart';
 import 'package:store_client/src/domain/entities/user.dart';
 
 import 'package:store_client/src/domain/repository/user_repository.dart';
+import 'package:store_client/src/failures/trace_failures.dart';
 
 @Injectable(as: UserRepository)
 class UserServerRepository implements UserRepository {
@@ -25,11 +26,11 @@ class UserServerRepository implements UserRepository {
       );
 
       return failOrUser.fold(
-        (fail) => Left(Failure(message: 'Failed Login', stackTrace: StackTrace.empty)),
+        (fail) => Left(UnauthorizedFailure(StackTrace.empty)),
         (user) => Right(user),
       );
     } catch (e, stackTrace) {
-      return Left(Failure(message: e.toString(), stackTrace: stackTrace));
+      return Left(UnauthorizedFailure(StackTrace.empty));
     }
   }
 
@@ -63,7 +64,7 @@ class UserServerRepository implements UserRepository {
         return Right(user);
       }
     } catch (e, stackTrace) {
-      return Left(Failure(message: e.toString(), stackTrace: stackTrace));
+      return Left(UnauthorizedFailure(StackTrace.empty));
     }
   }
 
@@ -91,7 +92,7 @@ class UserServerRepository implements UserRepository {
 
       return Right(user);
     } catch (e, stackTrace) {
-      return Left(Failure(message: e.toString(), stackTrace: stackTrace));
+      return Left(UnauthorizedFailure(StackTrace.empty));
     }
   }
 
@@ -102,7 +103,7 @@ class UserServerRepository implements UserRepository {
 
       return Right(userModel.fold((_) => false, (_) => true));
     } catch (e, stackTrace) {
-      return Left(Failure(message: e.toString(), stackTrace: stackTrace));
+      return Left(UnauthorizedFailure(StackTrace.empty));
     }
   }
 }

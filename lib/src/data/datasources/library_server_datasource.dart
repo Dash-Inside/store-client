@@ -1,5 +1,7 @@
 //ignore_for_file: avoid-ignoring-return-values
 
+import 'dart:convert';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -12,22 +14,45 @@ import 'package:store_client/src/data/utils/status_code_handler.dart';
 @Injectable()
 class LibraryServerDatasource {
   final DioModule dioModule;
-  final String _favoritUri = 'http://127.0.0.1:1337/api/favorites';
+  final String _favoritUri = 'http://192.168.1.42:1337/api/favorites';
   final String _sectiontUri = 'http://127.0.0.1:1337/api/sections';
   final String _topictUri = 'http://127.0.0.1:1337/api/topics';
 
   LibraryServerDatasource(this.dioModule);
 
-  Future<Unit> addFavoritTopicDatasource({required int id}) async {
+  Future<List<FavoriteTopicsModel>> getAllFavoriteTopic() async {
     try {
-      FavoriteTopicsModel favoriteTopicModel = FavoriteTopicsModel(userID: 1, topicID: id);
-
-      final Response response = await dioModule.client.post(
-        _favoritUri,
-        data: favoriteTopicModel.toMap(),
-      );
+      final Response response = await dioModule.client.get(_favoritUri);
 
       StatusCodeHandler.check(response.statusCode.toString());
+
+      List listData = response.data['data'];
+      List<FavoriteTopicsModel> list = [];
+
+      listData.forEach((element) {
+        list.add(FavoriteTopicsModel.fromMap(element));
+      });
+
+      return list;
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  Future<Unit> cleanFavoriteTopic() async {
+    //подумать
+    //я того рот ебал не понимаю нихуя что где почему для чего 
+    
+    try {
+      final Response responseGetAllTopics = await dioModule.client.get(_favoritUri);
+
+      StatusCodeHandler.check(responseGetAllTopics.statusCode.toString());
+
+      List listData = responseGetAllTopics.data['data'];
+
+      listData.forEach((element) {
+        dioModule.client.delete(_favoritUri + '/${element['id']}');
+      });
 
       return unit;
     } catch (_) {
@@ -35,7 +60,27 @@ class LibraryServerDatasource {
     }
   }
 
-  Future<Unit> addTopicDatasouce({
+  Future<FavoriteTopicsModel> addFavoritTopic({required int id}) async {
+    try {
+      final Response response = await dioModule.client.post(
+        _favoritUri,
+        data: jsonEncode(<String, dynamic>{
+          'data': {
+            'userID': 1,
+            'topicID': id,
+          },
+        }),
+      );
+
+      StatusCodeHandler.check(response.statusCode.toString());
+
+      return FavoriteTopicsModel.fromMap(response.data['data']);
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  Future<Unit> addTopic({
     required String title,
     required String data,
     required List<String> links,
@@ -57,7 +102,7 @@ class LibraryServerDatasource {
     }
   }
 
-  Future<List<SectionModel>> getAllSectionDatasource() async {
+  Future<List<SectionModel>> getAllSection() async {
     try {
       final Response response = await dioModule.client.get(_sectiontUri);
 
@@ -76,7 +121,7 @@ class LibraryServerDatasource {
     }
   }
 
-  Future<List<int>> getAllTopicsIdBySectionIdDatasource({required int sectionId}) async {
+  Future<List<int>> getAllTopicsIdBySectionId({required int sectionId}) async {
     try {
       final Response response = await dioModule.client.get(_sectiontUri + '/$sectionId');
 
@@ -91,7 +136,7 @@ class LibraryServerDatasource {
     }
   }
 
-  Future<List<TopicModel>> getAllTopicByListIdDatasource({required List<int> listTopicsId}) async {
+  Future<List<TopicModel>> getAllTopicByListId({required List<int> listTopicsId}) async {
     try {
       Map<String, dynamic> filters = {};
 
@@ -116,7 +161,7 @@ class LibraryServerDatasource {
     }
   }
 
-  Future<TopicModel> getTopicDataByIDDatasource({required int topicId}) async {
+  Future<TopicModel> getTopicDataByID({required int topicId}) async {
     try {
       final Response response = await dioModule.client.get(_topictUri + '/$topicId');
 
@@ -128,7 +173,7 @@ class LibraryServerDatasource {
     }
   }
 
-  Future<Unit> removeFavoriteTopicDatasource({required int favoriteId}) async {
+  Future<Unit> removeFavoriteTopic({required int favoriteId}) async {
     try {
       final Response response = await dioModule.client.delete(_favoritUri + '/$favoriteId');
 
@@ -140,7 +185,7 @@ class LibraryServerDatasource {
     }
   }
 
-  Future<List<TopicModel>> searchTopicByTitleDatasource({required String topicTitle}) async {
+  Future<List<TopicModel>> searchTopicByTitle({required String topicTitle}) async {
     try {
       final Response response = await dioModule.client.get(_topictUri, queryParameters: {'filters[title][\$contains]': topicTitle});
 
