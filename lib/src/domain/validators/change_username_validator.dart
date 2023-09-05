@@ -6,7 +6,7 @@ import 'package:store_client/src/domain/usecases/user_data/change_username_useca
 class ChangeUserNameValidator extends Validator<ChangeUserNameUseCaseParams> {
   @override
   FutureOr<bool> validate(ChangeUserNameUseCaseParams params) {
-    if (params.user.username == params.newUserName) return false;
+    if (params.newUserName.isEmpty) return false;
 
     return true;
   }

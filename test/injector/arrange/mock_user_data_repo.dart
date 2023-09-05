@@ -41,19 +41,20 @@ final User incorrectChangeAvatarUser = User(
 
 //! for 2 'when' correct ChangeUserName
 const String newUserName = 'newUserName';
+const String incorrectUserName = '';
 final User correctChangeUserNameUser = User(
   id: user.id,
   email: user.email,
   username: newUserName,
-  avatarUrl: '---',
+  avatarUrl: user.avatarUrl,
   role: user.role,
 );
 //! for uncorect ChangeUserName
 final User incorrectChangeUserNameUser = User(
   id: user.id,
   email: user.email,
-  username: user.username,
-  avatarUrl: '---',
+  username: incorrectUserName,
+  avatarUrl: user.avatarUrl,
   role: user.role,
 );
 
@@ -62,7 +63,6 @@ const String email = 'email@email.com';
 const String password = 'password';
 const String incorrectEmail = '--@--.--';
 const String incorrectPassword = '----';
-const String incorrectUserName = '----0-0----';
 const String incorrectAvatarUrl = '----';
 
 MockUserRepository arangeMockUserRepository() {

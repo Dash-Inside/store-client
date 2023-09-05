@@ -119,12 +119,7 @@ class UserServerRepository implements UserRepository {
 
         return Right(await userServerDatasource.getConcreteUserRequest(id: user.id));
       } else {
-        final UserModel userModel = await userServerDatasource.putUserRequest(
-          id: user.id,
-          userName: user.username,
-          role: user.role,
-          avatarUrl: user.avatarUrl,
-        );
+        final UserModel userModel = await userServerDatasource.getConcreteUserRequest(id: user.id);
 
         return Right(userModel);
       }
