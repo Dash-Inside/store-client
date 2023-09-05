@@ -4,29 +4,21 @@ import 'dart:convert';
 import 'package:store_client/src/domain/entities/message.dart';
 
 class MessageModel extends Message {
-  final int id;
-  final String data;
-  final int senderId;
-
   factory MessageModel.fromMap(Map<String, dynamic> map) {
     return MessageModel(
       id: map['id'] as int,
       data: map['attributes']['data'] as String,
-      senderId: map['attributes']['senderId'] as int,
+      senderId: map['attributes']['senderID'] as int,
     );
   }
 
   factory MessageModel.fromJson(String source) => MessageModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   MessageModel({
-    required this.id,
-    required this.data,
-    required this.senderId,
-  }) : super(
-          id: id,
-          data: data,
-          senderId: senderId,
-        );
+    required super.id,
+    required super.data,
+    required super.senderId,
+  });
 
   MessageModel copyWith({
     int? id,
@@ -42,6 +34,7 @@ class MessageModel extends Message {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'id': id,
       'data': {
         'data': data,
         'senderId': senderId,
