@@ -1,1 +1,8 @@
-{}
+{
+    "id": 2,
+    "attributes": {
+        "username": "test",
+        "role": "user",
+        "avatarUrl": "http://localhost:1337/uploads/fitness_free_app_ui_kit_for_figma_5f4cc12078.jpg"
+    }
+}
