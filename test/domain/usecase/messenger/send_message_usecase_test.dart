@@ -22,8 +22,8 @@ void main() async {
     senderId: 3,
   );
 
-  await initMockServices();
-  await initUseCaseServices();
+  await initMockServicesTest();
+  await initUseCaseServicesTest();
   group('send message usecase test', () {
     test('correct send message test', () async {
       //Act.

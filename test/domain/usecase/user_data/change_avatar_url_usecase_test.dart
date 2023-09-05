@@ -29,8 +29,8 @@ final ChangeAvatarUrlUseCaseParams incorrectChangeAvatarUrlUseCaseParams = Chang
   incorrectAvatarUrl,
 );
 void main() async {
-  await initMockServices();
-  await initUseCaseServices();
+  await initMockServicesTest();
+  await initUseCaseServicesTest();
   group('ChangeAvatarUrl usecase test', () {
     test('correct test', () async {
       //Act.

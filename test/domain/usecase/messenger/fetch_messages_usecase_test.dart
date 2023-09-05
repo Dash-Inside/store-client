@@ -10,8 +10,8 @@ import 'package:store_client/src/domain/usecases/messenger/fetch_messages_usecas
 import '../../../injector/services.dart';
 
 void main() async {
-  await initMockServices();
-  await initUseCaseServices();
+  await initMockServicesTest();
+  await initUseCaseServicesTest();
   group('method fetchMessages test', () {
     test('correct fetchMessages test', () async {
       // Act.

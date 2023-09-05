@@ -33,8 +33,8 @@ final ChangeUserNameUseCaseParams incorrectChangeUserNameUseCaseParams = ChangeU
 );
 
 void main() async {
-  await initMockServices();
-  await initUseCaseServices();
+  await initMockServicesTest();
+  await initUseCaseServicesTest();
   group('ChangeUserName usecase test', () {
     test('correct test', () async {
       //Act.
